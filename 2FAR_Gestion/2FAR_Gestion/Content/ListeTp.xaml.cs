@@ -21,6 +21,7 @@ namespace _2FAR_Gestion
         public ListeTp()
         {
             InitializeComponent();
+            content.Children.Add(new NavBar());
         }
     }
 }

@@ -9,9 +9,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListeTp">
 
-    <Grid Background="White">
+    <Grid Background="White" x:Name="content">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100px"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="8*"/>
             <ColumnDefinition Width="2*"/>
@@ -20,7 +20,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" Background="#5e17eb">
+        <!--<Grid Grid.Column="0" Background="#5e17eb">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="2.5*"/>
@@ -50,7 +50,7 @@
             <Button Grid.Row="9" Background="#5e17eb" BorderThickness="0">
                 <iconPacks:PackIconModern Width="30" Height="30" Kind="Power" Foreground="White"></iconPacks:PackIconModern>
             </Button>
-        </Grid>
+        </Grid>-->
 
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
