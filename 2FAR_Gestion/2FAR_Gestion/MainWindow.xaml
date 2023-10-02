@@ -8,7 +8,7 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="2Far - Gestion" Height="450" Width="800"
         Background="White">
 
 </mah:MetroWindow>
