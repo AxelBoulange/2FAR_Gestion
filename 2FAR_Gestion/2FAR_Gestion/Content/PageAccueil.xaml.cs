@@ -33,6 +33,35 @@ namespace _2FAR_Gestion
                 mw.Content = new CreationTP();
             }
         }
+        private void VoirTpPage (object sender, RoutedEventArgs e)
+        {
+            if(this.Parent is MainWindow mw)
+            {
+                mw.Content = new ListeTp();
+            }
+        }
+        private void VoirElevePage (object sender, RoutedEventArgs e)
+        {
+            if(this.Parent is MainWindow mw)
+            {
+                mw.Content = new VoirEleve();
+            }
+        }
+        private void VoirPromosPage ( object sender, RoutedEventArgs e)
+        {
+            if(this.Parent is MainWindow mw)
+            {
+                mw.Content = new VoirPromos();
+            }
+        }
+        private void DemandeValidationPage ( object sender, RoutedEventArgs e)
+        {
+            if(this.Parent is MainWindow mw)
+            {
+                mw.Content = new DemandeValidation();
+            }
+        }
+
 
     }
 }

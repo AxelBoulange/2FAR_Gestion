@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace _2FAR_Gestion
 {
-    public partial class ListeTp : Page
+    public partial class VoirEleve : Page
     {
-        public ListeTp()
+        public VoirEleve()
         {
             InitializeComponent();
         }

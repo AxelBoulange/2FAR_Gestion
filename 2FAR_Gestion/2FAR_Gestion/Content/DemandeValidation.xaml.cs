@@ -15,9 +15,10 @@ using System.Windows.Shapes;
 
 namespace _2FAR_Gestion
 {
-    public partial class ListeTp : Page
+
+    public partial class DemandeValidation : Page
     {
-        public ListeTp()
+        public DemandeValidation()
         {
             InitializeComponent();
         }
