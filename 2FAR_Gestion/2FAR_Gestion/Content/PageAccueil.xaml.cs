@@ -60,7 +60,5 @@ namespace _2FAR_Gestion
                 mw.Content = new DemandeValidation();
             }
         }
-
-
     }
 }
