@@ -9,7 +9,160 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListeTp">
 
-    <Grid>
-        
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100px"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Background="#5e17eb">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="1" Background="#5e17eb" BorderThickness="0">
+                <iconPacks:PackIconModern Width="40" Height="40" Kind="PageAdd" Foreground="White"></iconPacks:PackIconModern>
+            </Button>
+            <Button Grid.Row="3" Background="#5e17eb" BorderThickness="0">
+                <iconPacks:PackIconModern Width="30" Height="30" Kind="List" Foreground="White" ></iconPacks:PackIconModern>
+            </Button>
+            <Button Grid.Row="5" Background="#5e17eb" BorderThickness="0">
+                <iconPacks:PackIconModern Width="30" Height="30" Kind="PeopleMultiple" Foreground="White"></iconPacks:PackIconModern>
+            </Button>
+            <Button Grid.Row="7" Background="#5e17eb" BorderThickness="0">
+                <iconPacks:PackIconModern Width="30" Height="30" Kind="Check" Foreground="White"></iconPacks:PackIconModern>
+            </Button>
+            <Button Grid.Row="9" Background="#5e17eb" BorderThickness="0">
+                <iconPacks:PackIconModern Width="30" Height="30" Kind="Power" Foreground="White"></iconPacks:PackIconModern>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.2*"/>
+
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Liste des TP"/>
+
+            <Border BorderBrush="Black" BorderThickness="0.5" CornerRadius="20" Padding="3" Grid.Row="1">
+                <!-- Grid contents here -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="1" Fill="#5e17eb" RadiusX="10" RadiusY="10"/>
+                    <Grid Grid.Column="1" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titre" TextBlock.Foreground="White"/>
+                        <Label Grid.Row="1" Content="Nb tâche" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"/>
+                        <Label Grid.Row="2" Content="13/01/24" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"/>
+
+                    </Grid>
+
+
+                    <Label Grid.Column="3" Content="Description" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Grid Grid.Column="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="1"  Content="Consulter" Background="#5e17eb" TextBlock.Foreground="White"/>
+                        <Button Grid.Row="3"  Content="Modifier" Background="#5e17eb" TextBlock.Foreground="White"/>
+                        <Button Grid.Row="5"  Content="Supprimer" Background="Red" TextBlock.Foreground="white"/>
+
+                    </Grid>
+                </Grid>
+            </Border>
+
+
+
+            <Border BorderBrush="Black" BorderThickness="0.5" CornerRadius="20" Padding="3" Grid.Row="3">
+                <!-- Grid contents here -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="1" Fill="#5e17eb" RadiusX="10" RadiusY="10"/>
+                    <Grid Grid.Column="1" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Titre" TextBlock.Foreground="White"/>
+                        <Label Grid.Row="1" Content="Nb tâche" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"/>
+                        <Label Grid.Row="2" Content="12/09/23" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White"/>
+
+                    </Grid>
+
+
+                    <Label Grid.Column="3" Content="Description" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Grid Grid.Column="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="1"  Content="Consulter" Background="#5e17eb" TextBlock.Foreground="White"/>
+                        <Button Grid.Row="3"  Content="Modifier" Background="#5e17eb" TextBlock.Foreground="White"/>
+                        <Button Grid.Row="5"  Content="Supprimer" Background="Red" TextBlock.Foreground="white"/>
+
+                    </Grid>
+                </Grid>
+            </Border>
+
+
+
+        </Grid>
+
     </Grid>
+
 </Page>
