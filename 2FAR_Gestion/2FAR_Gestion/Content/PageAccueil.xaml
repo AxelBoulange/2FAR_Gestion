@@ -8,10 +8,10 @@
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageAccueil">
+      Title="PageAccueil" Background="#F8F8F8">
 
     <Grid Margin="50,70">
-
+    
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
