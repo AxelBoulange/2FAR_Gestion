@@ -32,6 +32,14 @@ namespace _2FAR_Gestion
                 mw.Content = new CreationTP();
             }
         }
+        private void VoirTpPage (object sender, RoutedEventArgs e)
+        {
+            if(this.Parent is MainWindow mw)
+            {
+                mw.Content = new ListeTp();
+            }
+        }
+
 
     }
 }
