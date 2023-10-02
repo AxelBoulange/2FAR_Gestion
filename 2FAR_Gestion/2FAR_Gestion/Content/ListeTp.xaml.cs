@@ -13,11 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace _2FAR_Gestion.Content
+namespace _2FAR_Gestion
 {
-    /// <summary>
-    /// Logique d'interaction pour ListeTp.xaml
-    /// </summary>
     public partial class ListeTp : Page
     {
         public ListeTp()
