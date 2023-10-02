@@ -27,7 +27,7 @@
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="Purple" Grid.Column="0" Grid.RowSpan="5"/>
+        <Rectangle Fill="#5e17eb" Grid.Column="0" Grid.RowSpan="5"/>
 
         <Button Grid.Column="0" Grid.Row="1" Background="Transparent">
             <iconPacks:PackIconModern Kind="CabinetFiles" />
@@ -74,10 +74,10 @@
                 <TextBox Grid.Row="6" Grid.Column="2"/>
 
                 <Button Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0">
-                    <iconPacks:PackIconModern Kind="Add" Padding="5" Background="Purple"/>
+                    <iconPacks:PackIconModern Kind="Add" Padding="5" Background="#5e17eb"/>
                 </Button>
 
-                <Border Grid.Column="3" Grid.RowSpan="8" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20" Background="purple" CornerRadius="100" >
+                <Border Grid.Column="3" Grid.RowSpan="8" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20" Background="#5e17eb" CornerRadius="100" >
                     <Button Background="Transparent" BorderThickness="0" Padding="10" Click="Show2">
                         <iconPacks:PackIconModern Kind="ArrowRight" />
                     </Button>
@@ -127,7 +127,7 @@
                     </Button>
                 </Border>
 
-                <Border Grid.Column="4" Grid.RowSpan="8" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20" Background="purple" CornerRadius="100" >
+                <Border Grid.Column="4" Grid.RowSpan="8" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20" Background="#5e17eb" CornerRadius="100" >
                     <Button Background="Transparent" BorderThickness="0" Padding="10">
                         <iconPacks:PackIconModern Kind="Check" />
                     </Button>
