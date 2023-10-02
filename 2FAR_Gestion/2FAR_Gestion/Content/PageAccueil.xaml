@@ -33,27 +33,27 @@
             </Style>
         </Grid.Resources>
 
-        <Button Grid.Column="0" Grid.Row="0" Background="Purple" Click="CreationTpPage">
+        <Button Grid.Column="0" Grid.Row="0" Background="#5e17eb" Click="CreationTpPage">
             <iconPacks:PackIconModern Kind="CabinetFiles" />
         </Button>
         <Label Content="Création TP" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Center" />
 
-        <Button Grid.Column="2" Grid.Row="0" Background="Purple">
+        <Button Grid.Column="2" Grid.Row="0" Background="#5e17eb">
             <iconPacks:PackIconModern Kind="CabinetFilesVariant" />
         </Button>
         <Label Content="Voir TP" Grid.Column="2" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Center"/>
 
-        <Button Grid.Column="4" Grid.Row="0" Background="Purple">
+        <Button Grid.Column="4" Grid.Row="0" Background="#5e17eb">
             <iconPacks:PackIconModern Kind="PeopleMultiple" />
         </Button>
         <Label Content="Voir Promos" Grid.Column="4" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Center"/>
 
-        <Button Grid.Column="1" Grid.Row="2" Background="Purple">
+        <Button Grid.Column="1" Grid.Row="2" Background="#5e17eb">
             <iconPacks:PackIconModern Kind="Check" />
         </Button>
         <Label Content="Création TP" Grid.Column="1" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Center"/>
 
-        <Button Grid.Column="3" Grid.Row="2" Background="Purple">
+        <Button Grid.Column="3" Grid.Row="2" Background="#5e17eb">
             <iconPacks:PackIconModern Kind="Power" />
         </Button>
         <Label Content="Création TP" Grid.Column="3" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Center"/>
