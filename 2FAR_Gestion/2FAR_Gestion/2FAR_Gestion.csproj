@@ -13,4 +13,14 @@
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\2FAR_Library\2FAR_Library.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="2FAR_Library">
+      <HintPath>..\2FAR_Library\bin\Debug\net7.0-windows\2FAR_Library.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
