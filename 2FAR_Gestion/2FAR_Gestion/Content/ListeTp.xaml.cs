@@ -17,46 +17,6 @@ using _2FAR_Library;
 
 namespace _2FAR_Gestion
 {
-    public class TP
-    {
-        public int idTP {  get; set; }
-        public string nomTP { get; set; }
-        public string descriptionTP { get; set; }
-
-        List<Tache> listTaches = new List<Tache>();
-
-        public TP(int idtp, string nomtp, string descriptiontp, List<Tache> listtaches)
-        {
-            this.idTP = idtp;
-            this.nomTP = nomtp;
-            this.descriptionTP = descriptiontp;
-            this.listTaches = listtaches;
-        }
-    }
-    public class Tache
-    {
-        public int idTache { get; set; }
-        public bool isCheckpoint {  get; set; }
-        public bool isActif {  get; set; }
-        public bool isBonus { get; set; }
-        public string descriptionTache { get; set; }
-        public int ordreTache { get; set; }
-        public double pointTache { get; set; }
-        public int etatTache { get; set; }
-
-
-        public Tache(int idtache,bool ischeckpoint, bool isactif, bool isbonus, string descriptiontache,int ordretache,int pointtache, int etattache) 
-        { 
-            this.idTache= idtache;
-            this.isCheckpoint = ischeckpoint;
-            this.isActif = isactif;
-            this.isBonus = isbonus;
-            this.descriptionTache = descriptiontache;
-            this.ordreTache = ordretache;
-            this.pointTache = pointtache;
-            this.etatTache = etattache;
-        }
-    }
     public partial class ListeTp : Page
     {
         List<Tache> tacheListTp1 = new List<Tache>();

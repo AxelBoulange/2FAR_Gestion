@@ -14,4 +14,5 @@ namespace _2FAR_Gestion
     public partial class App : Application
     {
     }
+
 }
