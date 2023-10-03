@@ -17,14 +17,13 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="16*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="16*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="16*"/>
+                <RowDefinition Height="8*"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="1" Content="Liste des promotions" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+            <ScrollViewer x:Name="cartes" Grid.Row="1" Grid.Column="1" >
+                <Grid x:Name="listCartes"/>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Page>
