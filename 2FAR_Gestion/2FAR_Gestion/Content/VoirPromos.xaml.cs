@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _2FAR_Library;
 
 namespace _2FAR_Gestion
 {
@@ -20,6 +21,9 @@ namespace _2FAR_Gestion
         public VoirPromos()
         {
             InitializeComponent();
+            listCartes.Children.Add(new Carte("bts SIO 2", "Classe de bts sio 2"));
+            Margin = new Thickness(0, 0, 50, 0);
+            listCartes.Children.Add(new Carte("bts SIO 1", "Classe de bts sio 1"));
         }
     }
 }
