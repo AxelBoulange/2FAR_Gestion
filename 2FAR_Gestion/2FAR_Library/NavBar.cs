@@ -8,11 +8,12 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.IconPacks;
 
 
+
 namespace _2FAR_Library
 {
     public class NavBar : StackPanel
     {
-        public NavBar()
+        public NavBar(Action PageCreateTp, Action PageListTP, Action PageVoirEleves, Action PageVoirPromos, Action DemandeValidation)
         {
             Grid.SetColumn(this, 0);
 
@@ -20,18 +21,18 @@ namespace _2FAR_Library
             var brush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
             this.Background = brush;
             this.Width = 100;
-            this.Children.Add(new Btn("CabinetFiles", 60, 60));
-            this.Children.Add(new Btn("CabinetFilesVariant", 60, 60));
-            this.Children.Add(new Btn("People", 60, 60));
-            this.Children.Add(new Btn("PeopleMultiple", 60, 60));
-            this.Children.Add(new Btn("Check", 60, 60));
-
-
+            this.Children.Add(new Btn("CabinetFiles", 60, 60, PageCreateTp));
+            this.Children.Add(new Btn("CabinetFilesVariant", 60, 60, PageListTP));
+            this.Children.Add(new Btn("People", 60, 60, PageVoirEleves));
+            this.Children.Add(new Btn("PeopleMultiple", 60, 60, PageVoirPromos));
+            this.Children.Add(new Btn("Check", 60, 60, DemandeValidation));
         }
+
     }
+
     public class Btn : Button
     {
-        public Btn(string name, int SizeWidth ,int SizeHeight)
+        public Btn(string name, int SizeWidth ,int SizeHeight, Action click)
         {
             this.Width = SizeWidth;
             this.Height = SizeHeight;
@@ -41,14 +42,16 @@ namespace _2FAR_Library
                 Kind = (PackIconModernKind)Enum.Parse(typeof(PackIconModernKind), name),
                 Height = SizeHeight/1.75,
                 Width = SizeWidth/1.75,
-                
             };
             this.BorderThickness = new Thickness(0);
             this.Foreground = Brushes.White;
             this.Background = Brushes.Transparent;
             this.FontSize = SizeHeight;
             this.Margin = new Thickness(0, 20, 0, 0);
+            this.Click += (sender, e) => click.Invoke();
         }
+
+
     }
 
         

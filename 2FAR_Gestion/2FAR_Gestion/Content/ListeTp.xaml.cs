@@ -88,7 +88,42 @@ namespace _2FAR_Gestion
 
 
             InitializeComponent();
-            content.Children.Add(new NavBar());
+            content.Children.Add(new NavBar(CreateTP, ListTP, VoirEleve, VoirPromos, DemandeValidation));
+        }
+        private void CreateTP()
+        {
+            if (this.Parent is MainWindow mw)
+            {
+                mw.Content = new CreationTP();
+            }
+        }
+        private void ListTP()
+        {
+            if (this.Parent is MainWindow mw)
+            {
+                mw.Content = new ListeTp();
+            }
+        }
+        private void VoirEleve()
+        {
+            if (this.Parent is MainWindow mw)
+            {
+                mw.Content = new VoirEleve();
+            }
+        }
+        private void VoirPromos()
+        {
+            if (this.Parent is MainWindow mw)
+            {
+                mw.Content = new VoirPromos();
+            }
+        }
+        private void DemandeValidation()
+        {
+            if (this.Parent is MainWindow mw)
+            {
+                mw.Content = new DemandeValidation();
+            }
         }
     }
 }
