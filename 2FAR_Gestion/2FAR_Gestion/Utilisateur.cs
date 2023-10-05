@@ -8,7 +8,7 @@ namespace _2FAR_Gestion
 {
     public class Utilisateur
     {
-        public int fkIdPromo { get; set; }
+        Promo promoUtilisateur { get; set; }
         public int idUtilisateur { get; set; }
         public string nomUtilisateur { get; set; }
         public string prenomUtilisateur { get; set; }
@@ -16,9 +16,9 @@ namespace _2FAR_Gestion
         public string mdpUtilisateur { get; set; }
         public bool isAdmin { get; set; }
 
-        public Utilisateur(int fkidpromo, int idutilisateur, string nomutilisateur, string prenomutilisateur, string mailutilisateur, string mdputilisateur, bool isadmin)
+        public Utilisateur(Promo promoutilisateur, int idutilisateur, string nomutilisateur, string prenomutilisateur, string mailutilisateur, string mdputilisateur, bool isadmin)
         {
-            this.fkIdPromo = fkidpromo;
+            this.promoUtilisateur = promoutilisateur;
             this.idUtilisateur = idutilisateur;
             this.nomUtilisateur = nomutilisateur;
             this.prenomUtilisateur = prenomutilisateur;

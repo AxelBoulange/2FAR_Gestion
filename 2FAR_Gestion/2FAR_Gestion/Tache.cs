@@ -8,7 +8,7 @@ namespace _2FAR_Gestion
 {
     public class Tache
     {
-        public int fkIdTP { get; set; }
+        public TP tpTache { get; set; }
         public int idTache { get; set; }
         public string descriptionTache { get; set; }
         public bool isCheckpoint { get; set; }
@@ -20,9 +20,9 @@ namespace _2FAR_Gestion
 
 
 
-        public Tache(int fkidtp, int idtache, string descriptiontache, bool ischeckpoint, int ordretache, int pointtache, int etattache, bool isbonus, bool isactif)
+        public Tache(TP tptache, int idtache, string descriptiontache, bool ischeckpoint, int ordretache, int pointtache, int etattache, bool isbonus, bool isactif)
         {
-            this.fkIdTP = fkidtp;
+            this.tpTache = tptache;
             this.idTache = idtache;
             this.descriptionTache = descriptiontache;
             this.isCheckpoint = ischeckpoint;
