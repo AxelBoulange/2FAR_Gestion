@@ -8,13 +8,13 @@ namespace _2FAR_Gestion
 {
     public class Attendre_Validation
     {
-        public int fkIdTache { get; set; }
-        public int fkIdUtilisateur { get; set; }
+        public Tache tache { get; set; }
+        public Utilisateur utilisateur { get; set; }
         public DateTime dteDemande { get; set; }
-        public Attendre_Validation(int fkidtache, int fkidutilisateur, DateTime dtedemande)
+        public Attendre_Validation(Tache latache, Utilisateur leutilisateur, DateTime dtedemande)
         {
-            this.fkIdTache = fkidtache;
-            this.fkIdUtilisateur = fkidutilisateur;
+            this.tache = latache;
+            this.utilisateur = leutilisateur;
             this.dteDemande = dtedemande;
         }
     }
