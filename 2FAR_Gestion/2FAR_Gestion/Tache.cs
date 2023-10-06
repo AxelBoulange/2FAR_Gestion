@@ -23,6 +23,7 @@ namespace _2FAR_Gestion
         public Tache(TP tptache, int idtache, string descriptiontache, bool ischeckpoint, int ordretache, int pointtache, int etattache, bool isbonus, bool isactif)
         {
             this.tpTache = tptache;
+            this.tpTache.tacheList.Add(this);
             this.idTache = idtache;
             this.descriptionTache = descriptiontache;
             this.isCheckpoint = ischeckpoint;
