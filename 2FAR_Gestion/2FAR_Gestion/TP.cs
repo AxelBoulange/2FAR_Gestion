@@ -8,7 +8,7 @@ namespace _2FAR_Gestion
 {
     public class TP
     {
-        List<Tache> tacheList {  get; set; }
+       public List<Tache> tacheList {  get; set; }
         public int idTP { get; set; }
         public string nomTP { get; set; }
         public string descriptionTP { get; set; }
