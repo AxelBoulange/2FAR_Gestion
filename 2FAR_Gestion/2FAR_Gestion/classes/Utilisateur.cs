@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2FAR_Gestion
+namespace _2FAR_Gestion.classes
 {
     public class Utilisateur
     {
-        Promo promoUtilisateur { get; set; }
+        public Promo promoUtilisateur { get; set; }
+        public List<Valider> validerList { get; set; }
         public int idUtilisateur { get; set; }
         public string nomUtilisateur { get; set; }
         public string prenomUtilisateur { get; set; }
@@ -18,13 +19,14 @@ namespace _2FAR_Gestion
 
         public Utilisateur(Promo promoutilisateur, int idutilisateur, string nomutilisateur, string prenomutilisateur, string mailutilisateur, string mdputilisateur, bool isadmin)
         {
-            this.promoUtilisateur = promoutilisateur;
-            this.idUtilisateur = idutilisateur;
-            this.nomUtilisateur = nomutilisateur;
-            this.prenomUtilisateur = prenomutilisateur;
-            this.mailUtilisateur = mailutilisateur;
-            this.mdpUtilisateur = mdputilisateur;
-            this.isAdmin = isadmin;
+            promoUtilisateur = promoutilisateur;
+            promoUtilisateur.utilisateurList.Add(this);
+            idUtilisateur = idutilisateur;
+            nomUtilisateur = nomutilisateur;
+            prenomUtilisateur = prenomutilisateur;
+            mailUtilisateur = mailutilisateur;
+            mdpUtilisateur = mdputilisateur;
+            isAdmin = isadmin;
         }
     }
 }

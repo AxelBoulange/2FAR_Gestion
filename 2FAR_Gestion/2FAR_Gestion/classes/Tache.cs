@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2FAR_Gestion
+namespace _2FAR_Gestion.classes
 {
     public class Tache
     {
@@ -22,16 +22,16 @@ namespace _2FAR_Gestion
 
         public Tache(TP tptache, int idtache, string descriptiontache, bool ischeckpoint, int ordretache, int pointtache, int etattache, bool isbonus, bool isactif)
         {
-            this.tpTache = tptache;
-            this.tpTache.tacheList.Add(this);
-            this.idTache = idtache;
-            this.descriptionTache = descriptiontache;
-            this.isCheckpoint = ischeckpoint;
-            this.ordreTache = ordretache;
-            this.pointTache = pointtache;
-            this.etatTache = etattache;
-            this.isBonus = isbonus;
-            this.isActif = isactif;
+            tpTache = tptache;
+            tpTache.tacheList.Add(this);
+            idTache = idtache;
+            descriptionTache = descriptiontache;
+            isCheckpoint = ischeckpoint;
+            ordreTache = ordretache;
+            pointTache = pointtache;
+            etatTache = etattache;
+            isBonus = isbonus;
+            isActif = isactif;
         }
     }
 }
