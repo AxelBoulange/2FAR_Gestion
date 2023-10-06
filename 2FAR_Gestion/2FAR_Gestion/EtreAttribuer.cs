@@ -8,14 +8,14 @@ namespace _2FAR_Gestion
 {
     public class EtreAttribuer
     {
-        public int fkIdPromo { get; set; }
-        public int fkIdTP { get; set; }
+        public Promo promo { get; set; }
+        public TP tp { get; set; }
         public DateTime dteFin { get; set; }
         public bool isActif { get; set; }
-        public EtreAttribuer(int fkidpromo, int fkidtp, DateTime dtefin, bool isactif)
+        public EtreAttribuer(Promo lapromo, TP letp, DateTime dtefin, bool isactif)
         {
-            this.fkIdPromo = fkidpromo;
-            this.fkIdTP = fkidtp;
+            this.promo = lapromo;
+            this.tp = letp;
             this.dteFin = dtefin;
             this.isActif = isactif;
         }
