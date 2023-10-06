@@ -21,9 +21,17 @@ namespace _2FAR_Gestion
         public VoirPromos()
         {
             InitializeComponent();
+            this.listCartes.Children.Add(new Carte("BTS", "Bts2555"));
             listCartes.Children.Add(new Carte("bts SIO 2", "Classe de bts sio 2"));
-            Margin = new Thickness(0, 0, 50, 0);
-            listCartes.Children.Add(new Carte("bts SIO 1", "Classe de bts sio 1"));
+            listCartes.Children.Add(new Carte("bts SIO 2", "Classe de bts sio 2"));
+            listCartes.Children.Add(new Carte("bts SIO 2", "Classe de bts sio 2"));
+            listCartes.Children.Add(new Carte("bts SIO 2", "Classe de bts sio 2"));
+            listCartes.Children.Add(new Carte("bts SIO 2", "Classe de bts sio 2"));
+            listCartes.Children.Add(new Carte("bts SIO 2", "Classe de bts sio 2"));
+            listCartes.Children.Add(new Carte("bts SIO 2", "Classe de bts sio 2"));
+
+
+            //listCartes.Children.Add(new Carte("bts SIO 1", "Classe de bts sio 1"));
         }
     }
 }

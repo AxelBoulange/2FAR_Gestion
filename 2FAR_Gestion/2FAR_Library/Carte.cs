@@ -13,14 +13,15 @@ namespace _2FAR_Library
     {
         public Carte(string title, string content)
         {
-            Grid.SetColumn(this, 1);
+            //Grid.SetColumn(this, 1);
+            Grid.SetRow(this, 1);
             this.Height = 100;
-            this.Width = 500;
+            //this.Width = 500;
             this.Background = Brushes.Brown;
             this.Children.Add(new title_Carte(title));
             this.Children.Add(new content_Carte(content));
             this.Children.Add(new btn_Carte("Consulter"));
-            this.Margin = new Thickness(0, 0, 100, 0);
+            this.Margin = new Thickness(0, 0, 0, 20);
         }
     }
     public class btn_Carte: Button
@@ -28,7 +29,7 @@ namespace _2FAR_Library
         public btn_Carte(string name)
         {
             HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-            VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            VerticalAlignment = System.Windows.VerticalAlignment.Top;
             this.Margin = new Thickness(0, 0, 20, 0);
             this.Content = name;
             this.Width = 80;
