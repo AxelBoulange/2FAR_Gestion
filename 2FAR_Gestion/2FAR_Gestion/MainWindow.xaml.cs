@@ -23,12 +23,13 @@ namespace _2FAR_Gestion
         {
             InitializeComponent();
             this.Content = new PageAccueil();
-        }
-        private void MainWindow_Closing()
-        {
             this.MinWidth = 800;
             this.MinHeight = 450;
 
         }
+        //private void MainWindow_Closing()
+        //{
+
+        //}
     }
 }
