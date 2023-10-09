@@ -26,6 +26,8 @@ namespace _2FAR_Gestion
         }
         private void MainWindow_Closing()
         {
+            this.MinWidth = 800;
+            this.MinHeight = 450;
 
         }
     }
