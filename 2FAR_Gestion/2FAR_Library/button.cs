@@ -34,7 +34,7 @@ namespace _2FAR_Library
 
     public class Btn : Button
     {
-        public Btn(string name)
+        public Btn(string name, Action click)
         {
             HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             VerticalAlignment = System.Windows.VerticalAlignment.Center;

@@ -15,7 +15,7 @@ namespace _2FAR_Library
         {
             //Grid.SetColumn(this, 1);
             Grid.SetRow(this, 1);
-            this.Height = 100;
+            this.Height = 150;
             //this.Width = 500;
             this.Background = Brushes.Brown;
             this.Children.Add(new title_Carte(title));
