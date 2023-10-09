@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using _2FAR_Gestion.Content;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,35 +30,36 @@ namespace _2FAR_Gestion
         {
             if (this.Parent is MainWindow mw)
             {
-                mw.Content = new CreationTP();
+                mw.Content = new FrameContent(new CreationTP());
+                
             }
         }
-        private void VoirTpPage (object sender, RoutedEventArgs e)
+        private void ListTpPage (object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new ListeTp();
+                mw.Content = new FrameContent(new ListeTp());
             }
         }
         private void VoirElevePage (object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new VoirEleve();
+                mw.Content = new FrameContent(new VoirEleve());
             }
         }
         private void VoirPromosPage ( object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new VoirPromos();
+                mw.Content = new FrameContent(new VoirPromos());
             }
         }
         private void DemandeValidationPage ( object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new DemandeValidation();
+                mw.Content = new FrameContent(new DemandeValidation());
             }
         }
     }

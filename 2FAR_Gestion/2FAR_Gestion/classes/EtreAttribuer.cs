@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2FAR_Gestion
+namespace _2FAR_Gestion.classes
 {
     public class EtreAttribuer
     {
@@ -15,6 +15,7 @@ namespace _2FAR_Gestion
         public EtreAttribuer(Promo lapromo, TP letp, DateTime dtefin, bool isactif)
         {
             this.promo = lapromo;
+            promo.etreAttribuersList.Add(this);
             this.tp = letp;
             this.dteFin = dtefin;
             this.isActif = isactif;
