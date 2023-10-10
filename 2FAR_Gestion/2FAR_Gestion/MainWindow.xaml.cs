@@ -24,9 +24,9 @@ namespace _2FAR_Gestion
             InitializeComponent();
             this.Content = new PageAccueil();
         }
-        private void MainWindow_Closing()
-        {
+        //private void MainWindow_Closing()
+        //{
 
-        }
+        //}
     }
 }
