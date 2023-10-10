@@ -27,7 +27,7 @@ namespace _2FAR_Library
 
             Connexion connexion = new Connexion();
             SqlConnection conn = connexion.GetConn();
-            
+
             //DataTable dtPromo = new DataTable();
             //String sqlPromo = "SELECT * FROM promotion;";
             //SqlCommand queryPromo = new SqlCommand(sqlPromo, conn);
@@ -52,11 +52,11 @@ namespace _2FAR_Library
                 idUtilisateur = row.Field<int>("id_utilisateur"),
                 nomUtilisateur = row.Field<string>("nom_utilisateur"),
                 prenomUtilisateur = row.Field<string>("prenom_utilisateur"),
-                mailUtilisateur =row.Field<string>("mail_utilisateur"),
-                mdpUtilisateur =row.Field<string>("mdp_utilisateur"),
+                mailUtilisateur = row.Field<string>("mail_utilisateur"),
+                mdpUtilisateur = row.Field<string>("mdp_utilisateur"),
                 isAdmin = row.Field<Boolean>("is_admin")
             });
-   
+
 
             DataTable dtTP = new DataTable();
             String sqlTP = "SELECT * FROM tp;";
@@ -74,10 +74,10 @@ namespace _2FAR_Library
             conn.Open();
             dapTache.Fill(dtTache);
             conn.Close();
-                
-
-        }
 
 
-    }
-}
+//        }
+
+
+//    }
+//}
