@@ -10,36 +10,47 @@ using System.Windows.Media;
 namespace _2FAR_Library
 {
     public class Carte : Grid
-    {
-        
+    {   
         public Carte(string title, string content, List <Action> actionButtons)
         {
-            var brush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("white"));
+            var brush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
             Border border = new Border();
+            Grid container = new Grid();
+            StackPanel stackPanel = new StackPanel();
+            this.Children.Add(border);
             border.BorderThickness = new Thickness(1);
             border.BorderBrush = brush;
-            StackPanel stackPanel = new StackPanel();
-            this.Height = 150;
-            this.Children.Add(stackPanel);
+            border.Child = container;
+            border.Height =130;
+            border.Width = 600;
+            container.Children.Add(new title_Carte(title));
+            container.Children.Add(new content_Carte(content));
+            container.Children.Add(stackPanel);
             stackPanel.HorizontalAlignment = HorizontalAlignment.Right;
             stackPanel.VerticalAlignment = VerticalAlignment.Center;
             stackPanel.Children.Add(new Btn("consulter", actionButtons[0]));
             stackPanel.Children.Add(new Btn("modifier", actionButtons[1]));
             stackPanel.Children.Add(new Btn("supprimer", actionButtons[2]));
-            this.Children.Add(new title_Carte(title));
-            this.Children.Add(new content_Carte(content));
             this.Margin = new Thickness(0, 0, 0, 20);
         }
         public Carte (string title, string content, Action actionButton)
         {
-            this.Height = 100;
+            var brush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
+            Border border = new Border();
+            Grid container = new Grid();
             StackPanel stackPanel = new StackPanel();
-            this.Children.Add(stackPanel);
-            stackPanel.HorizontalAlignment= HorizontalAlignment.Right;
-            stackPanel.VerticalAlignment= VerticalAlignment.Center;
+            this.Children.Add(border);
+            border.BorderThickness = new Thickness(1);
+            border.BorderBrush = brush;
+            border.Child = container;
+            border.Height = 130;
+            border.Width = 600;
+            container.Children.Add(new title_Carte(title));
+            container.Children.Add(new content_Carte(content));
+            container.Children.Add(stackPanel);
+            stackPanel.HorizontalAlignment = HorizontalAlignment.Right;
+            stackPanel.VerticalAlignment = VerticalAlignment.Center;
             stackPanel.Children.Add(new Btn("consulter", actionButton));
-            this.Children.Add(new title_Carte (title));
-            this.Children.Add(new content_Carte (content));
             this.Margin = new Thickness(0, 0, 0, 20);
         }
     }
@@ -67,7 +78,9 @@ namespace _2FAR_Library
         {
             HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
             this.Content=content;
+            Height = 100;
 
         }
     }
