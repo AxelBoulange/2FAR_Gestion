@@ -35,7 +35,7 @@
 
         <!--<Button Grid.Column="2" Grid.Row="1"> </Button>-->
 
-        <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" CanUserResizeColumns="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" CanUserResizeColumns="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="datagrid">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -48,7 +48,7 @@
             
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Nomgrid" Header="Nom" Width="*" Binding="{Binding utilisateur}" />
-                <DataGridTextColumn Header="Prénom" Width="*"/>
+                <DataGridTextColumn Header="Prénom" Width="*" Binding="{Binding prenom}"/>
                 <DataGridTextColumn Header="Promo" Width="*"/>
                 <DataGridTextColumn Header="Mail" Width="*" />
             </DataGrid.Columns>

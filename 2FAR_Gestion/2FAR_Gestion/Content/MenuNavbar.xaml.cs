@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using _2FAR_Library;
+using _2FAR_Library.Graphique;
 
 namespace _2FAR_Gestion.Content
 {

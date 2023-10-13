@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-using _2FAR_Gestion;
 
 namespace _2FAR_Library
 {
