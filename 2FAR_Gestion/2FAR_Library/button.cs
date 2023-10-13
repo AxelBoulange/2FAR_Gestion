@@ -43,6 +43,7 @@ namespace _2FAR_Library
             this.Width = 80;
             this.Height = 25;
             this.Background = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
+            this.Click += (sender, e) => click.Invoke();
 
         }
     }
