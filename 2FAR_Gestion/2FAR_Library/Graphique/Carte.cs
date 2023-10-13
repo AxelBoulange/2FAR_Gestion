@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2FAR_Library.Graphique;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,57 +8,68 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace _2FAR_Library.Graphique
+namespace _2FAR_Library
 {
     public class Carte : Grid
     {
-
         public Carte(string title, string content, List<Action> actionButtons)
         {
-            var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("white"));
+            var brush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
             Border border = new Border();
+            Grid container = new Grid();
+            StackPanel stackPanel = new StackPanel();
+            this.Children.Add(border);
             border.BorderThickness = new Thickness(1);
             border.BorderBrush = brush;
-            StackPanel stackPanel = new StackPanel();
-            Height = 150;
-            Children.Add(stackPanel);
+            border.Child = container;
+            border.Height = 130;
+            border.Width = 600;
+            container.Children.Add(new title_Carte(title));
+            container.Children.Add(new content_Carte(content));
+            container.Children.Add(stackPanel);
             stackPanel.HorizontalAlignment = HorizontalAlignment.Right;
             stackPanel.VerticalAlignment = VerticalAlignment.Center;
             stackPanel.Children.Add(new Btn("consulter", actionButtons[0]));
             stackPanel.Children.Add(new Btn("modifier", actionButtons[1]));
             stackPanel.Children.Add(new Btn("supprimer", actionButtons[2]));
-            Children.Add(new title_Carte(title));
-            Children.Add(new content_Carte(content));
-            Margin = new Thickness(0, 0, 0, 20);
+            this.Margin = new Thickness(0, 0, 0, 20);
         }
         public Carte(string title, string content, Action actionButton)
         {
-            Height = 100;
+            var brush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
+            Border border = new Border();
+            Grid container = new Grid();
             StackPanel stackPanel = new StackPanel();
-            Children.Add(stackPanel);
+            this.Children.Add(border);
+            border.BorderThickness = new Thickness(1);
+            border.BorderBrush = brush;
+            border.Child = container;
+            border.Height = 130;
+            border.Width = 600;
+            container.Children.Add(new title_Carte(title));
+            container.Children.Add(new content_Carte(content));
+            container.Children.Add(stackPanel);
             stackPanel.HorizontalAlignment = HorizontalAlignment.Right;
             stackPanel.VerticalAlignment = VerticalAlignment.Center;
             stackPanel.Children.Add(new Btn("consulter", actionButton));
-            Children.Add(new title_Carte(title));
-            Children.Add(new content_Carte(content));
-            Margin = new Thickness(0, 0, 0, 20);
+            this.Margin = new Thickness(0, 0, 0, 20);
         }
     }
     public class title_Carte : Label
     {
         public title_Carte(string content)
         {
-            var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("white"));
-            HorizontalAlignment = HorizontalAlignment.Left;
-            HorizontalContentAlignment = HorizontalAlignment.Center;
-            VerticalContentAlignment = VerticalAlignment.Center;
-            VerticalAlignment = VerticalAlignment.Center;
+            var brush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("white"));
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            this.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            this.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            VerticalAlignment = System.Windows.VerticalAlignment.Center;
             Height = 100;
             Width = 80;
-            Margin = new Thickness(10);
-            Content = content;
-            Foreground = brush;
-            Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5e17eb"));
+            this.Margin = new Thickness(10);
+            this.Content = content;
+            this.Foreground = brush;
+            this.Background = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
 
         }
     }
@@ -65,9 +77,11 @@ namespace _2FAR_Library.Graphique
     {
         public content_Carte(string content)
         {
-            HorizontalAlignment = HorizontalAlignment.Center;
-            VerticalAlignment = VerticalAlignment.Center;
-            Content = content;
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            this.Content = content;
+            Height = 100;
 
         }
     }
