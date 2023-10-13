@@ -1,4 +1,6 @@
-﻿using System;
+﻿using _2FAR_Gestion.classes;
+using _2FAR_Library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _2FAR_Library;
 
 namespace _2FAR_Gestion
 {
@@ -20,6 +23,16 @@ namespace _2FAR_Gestion
         public VoirEleve()
         {
             InitializeComponent();
+            cbb_promo.Items.Add("Promo");
+            cbb_promo.SelectedItem = "Promo";
+
         }
+
+
+        public void titrePromo(object sender, EventArgs e)
+        {
+                cbb_promo.Items.Remove("Promo");
+        }        
+
     }
 }

@@ -8,7 +8,7 @@ namespace _2FAR_Library
 {
     public class Utilisateur
     {
-        Promo promoUtilisateur { get; set; }
+        Promo? promoUtilisateur { get; set; }
         public int idUtilisateur { get; set; }
         public string nomUtilisateur { get; set; }
         public string prenomUtilisateur { get; set; }

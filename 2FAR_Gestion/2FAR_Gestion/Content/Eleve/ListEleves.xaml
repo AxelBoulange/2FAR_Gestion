@@ -10,6 +10,48 @@
       Title="VoirEleve">
 
     <Grid>
-                
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Content="Liste des éleves" Grid.ColumnSpan="4"/>
+        <Rectangle Fill="#5e17eb" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" ></Rectangle>
+        
+            <Label VerticalAlignment="center" HorizontalAlignment="Right" Grid.Row="1">
+                <iconPacks:PackIconModern Kind="PageSearch" Foreground="White" Height="auto" Width="auto" MaxHeight="60" MaxWidth="60"/>
+            </Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="10 20" MaxHeight="30" Text="Rechecher un élèves"/>
+
+        <ComboBox x:Name="cbb_promo" Grid.Row="1" Grid.Column="2" MinWidth="200" MaxWidth="250" MaxHeight="30" HorizontalAlignment="Left" Margin="10 20" DropDownOpened="titrePromo"/>
+
+        <!--<Button Grid.Column="2" Grid.Row="1"> </Button>-->
+
+        <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" CanUserResizeColumns="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="Background" Value="#5e17eb" />
+                    <Setter Property="Foreground" Value="AliceBlue" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Height" Value="50"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="Nomgrid" Header="Nom" Width="*" Binding="{Binding utilisateur}" />
+                <DataGridTextColumn Header="Prénom" Width="*"/>
+                <DataGridTextColumn Header="Promo" Width="*"/>
+                <DataGridTextColumn Header="Mail" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>            
     </Grid>
 </Page>
