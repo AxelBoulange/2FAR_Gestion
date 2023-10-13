@@ -9,10 +9,13 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using _2FAR_Library.Graphique;
+using _2FAR_Gestion.Content;
+using _2FAR_Gestion.Content.Promo;
+using _2FAR_Library;
 
 namespace _2FAR_Gestion
 {
@@ -35,8 +38,11 @@ namespace _2FAR_Gestion
 
         private void consulter()
         {
-            //List<Action> actionsButton = new List<Action>() { voir, supprimer, ajouter };
-            //this.listCartes.Children.Add(new Carte("btssssssgbhnj,k;ssss", "bGHJK?NBVGHJ", actionButton);
+            if (this.Parent is MainWindow mw)
+            {
+                mw.Content = new FrameContent(new AjouterPromo());
+
+            }
         }
         private void modifier()
         {
