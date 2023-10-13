@@ -38,11 +38,13 @@ namespace _2FAR_Library
         {
             HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            var brush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("white"));    
             this.Margin = new Thickness(0, 0, 20, 0);
             this.Content = name;
             this.Width = 80;
             this.Height = 25;
             this.Background = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
+            this.Foreground = brush;
             this.Click += (sender, e) => click.Invoke();
 
         }

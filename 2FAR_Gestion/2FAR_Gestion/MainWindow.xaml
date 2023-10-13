@@ -10,6 +10,6 @@
         mc:Ignorable="d"
         Title="2Far - Gestion" Height="450" Width="800"
         Background="White">
-    <!--Closing="MainWindow_Closing">-->
+    <!--="MainWindow_Closing">-->
 </mah:MetroWindow>
 

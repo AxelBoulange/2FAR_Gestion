@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Windows;
-using MahApps.Metro.Controls;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -14,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-namespace _2FAR_Gestion
+namespace _2FAR_Gestion.Content.Promo
 {
-    public partial class MainWindow : MetroWindow
+    /// <summary>
+    /// Logique d'interaction pour AjouterPromo.xaml
+    /// </summary>
+    public partial class AjouterPromo : Page
     {
-        public MainWindow()
+        public AjouterPromo()
         {
             InitializeComponent();
-            this.Content = new PageAccueil();
         }
-        //private void MainWindow_Closing()
-        //{
-
-        //}
     }
 }
