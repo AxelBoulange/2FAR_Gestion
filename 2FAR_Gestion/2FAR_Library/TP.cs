@@ -21,5 +21,14 @@ namespace _2FAR_Library
             this.nomTP = nomtp;
             this.descriptionTP = descriptiontp;
         }
+
+        public TP(int idtp, string nomtp, string descriptiontp)
+        {
+            this.tacheList = new List<Tache>();
+            this.idTP = idtp;
+            this.nomTP = nomtp;
+            this.descriptionTP = descriptiontp;
+
+        }
     }
 }

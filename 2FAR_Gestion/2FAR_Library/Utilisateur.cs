@@ -8,15 +8,18 @@ namespace _2FAR_Library
 {
     public class Utilisateur
     {
-        Promo? promoUtilisateur { get; set; }
+        public int promoUtilisateur{ get; set; }
         public int idUtilisateur { get; set; }
         public string nomUtilisateur { get; set; }
         public string prenomUtilisateur { get; set; }
         public string mailUtilisateur { get; set; }
         public string mdpUtilisateur { get; set; }
         public bool isAdmin { get; set; }
+        
+            
 
-        public Utilisateur(Promo promoutilisateur, int idutilisateur, string nomutilisateur, string prenomutilisateur, string mailutilisateur, string mdputilisateur, bool isadmin)
+
+        public Utilisateur( int idutilisateur, string nomutilisateur, string prenomutilisateur, string mailutilisateur, string mdputilisateur, bool isadmin, int promoutilisateur)
         {
             this.promoUtilisateur = promoutilisateur;
             this.idUtilisateur = idutilisateur;
@@ -26,5 +29,7 @@ namespace _2FAR_Library
             this.mdpUtilisateur = mdputilisateur;
             this.isAdmin = isadmin;
         }
+
+        
     }
 }
