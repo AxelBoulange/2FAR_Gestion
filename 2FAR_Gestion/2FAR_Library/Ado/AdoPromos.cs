@@ -9,9 +9,8 @@ namespace _2FAR_Library.Ado
 {
     public class AdoPromos : AdoUtilisateur
     {
-    
-
-        public static List<Promo> getAdoPromos() { 
+        public static List<Promo> getAdoPromos() 
+        { 
             List<Utilisateur> utilisateur = getAdoUtilisateur();
             Connexion connexion = new Connexion();
             SqlConnection conn = connexion.GetConn();
@@ -23,7 +22,6 @@ namespace _2FAR_Library.Ado
             while (reader.Read())
             {
                 promotions.Add(new Promo(reader.GetInt16(0), reader.GetString(1)));
-
             }
             foreach (Promo p in promotions) 
             { 
@@ -37,6 +35,5 @@ namespace _2FAR_Library.Ado
             }
             return promotions;
         }
-
     }
 }
