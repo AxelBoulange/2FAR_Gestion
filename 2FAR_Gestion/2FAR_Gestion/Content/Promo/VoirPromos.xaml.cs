@@ -33,11 +33,6 @@ namespace _2FAR_Gestion
 
         private void consulter()
         {
-            // if (this.Parent is MainWindow mw)
-            // {
-            //     mw.Content = new FrameContent(new AjouterPromo());
-            //
-            // }
         }
         private void modifier()
         {
