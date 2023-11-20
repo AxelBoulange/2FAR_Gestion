@@ -11,16 +11,16 @@ namespace _2FAR_Library.Ado
     {
 
 
-        public static List<Valider> getAdoValider()
-        {
-            List<Tache> taches = getAdoTache();
-            Connexion connexion = new Connexion();
-            SqlConnection conn = connexion.GetConn();
-            conn.Open();
-            string sql = "SELECT * FROM utilisateur;";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-        }
+        //public static List<Valider> getAdoValider()
+        //{
+        //    List<Tache> taches = getAdoTache();
+        //    Connexion connexion = new Connexion();
+        //    SqlConnection conn = connexion.GetConn();
+        //    conn.Open();
+        //    string sql = "SELECT * FROM utilisateur;";
+        //    SqlCommand cmd = new SqlCommand(sql, conn);
+        //    SqlDataReader reader = cmd.ExecuteReader();
+        //}
         
     }
 }
