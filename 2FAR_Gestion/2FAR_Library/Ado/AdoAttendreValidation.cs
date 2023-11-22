@@ -4,41 +4,36 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace _2FAR_Library.Ado
 {
-    public class AdoValider : AdoTache 
+    public class AdoAttendreValidation : AdoTache
     {
-
-
-        public static List<Valider> getAdoValider()
+        public static List<AttendreValidation> GetAttendreValidation()
         {
             List<Tache> taches = getAdoTache();
             List<Utilisateur> utilisateurs = getAdoUtilisateur();
             Connexion connexion = new Connexion();
             SqlConnection conn = connexion.GetConn();
             conn.Open();
-            string sql = "SELECT * FROM valider;";
+            string sql = "SELECT * FROM attendre_validation;";
             SqlCommand cmd = new SqlCommand(sql, conn);
             SqlDataReader reader = cmd.ExecuteReader();
-            List<Valider> validerList = new List<Valider>();    
-            while (reader.Read()) 
-            { 
+            List<AttendreValidation> attendreValidationList = new List<AttendreValidation>();
+            while (reader.Read())
+            {
                 foreach(Utilisateur u in utilisateurs)
                 {
                     foreach(Tache t in taches)
                     {
-                        if (reader.GetInt16(2) == u.idUtilisateur && reader.GetInt16(3) == t.idTache)
+                        if(reader.GetInt16(1) == u.idUtilisateur && reader.GetInt16(2) == t.idTache)
                         {
-                            validerList.Add(new Valider(u, t, reader.GetString(0), reader.GetBoolean(1))); 
+                            attendreValidationList.Add(new AttendreValidation(reader.GetString(0), u, t));
                         }
                     }
                 }
             }
-            return validerList;
+            return attendreValidationList;
         }
-        
-        
     }
 }

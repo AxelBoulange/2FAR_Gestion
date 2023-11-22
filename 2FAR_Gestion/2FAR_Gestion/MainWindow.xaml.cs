@@ -13,16 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using _2FAR_Library;
 
 namespace _2FAR_Gestion
 {
     public partial class MainWindow : MetroWindow
     {
+        public  AdoAll all;
+
         public MainWindow()
         {
+            AdoAll allStart = new AdoAll();
+            all = allStart;
             InitializeComponent();
-            this.Content = new PageAccueil();
+            this.Content = new PageAccueil(all);
         }
         //private void MainWindow_Closing()
         //{

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _2FAR_Library.Ado
 {
-    public class AdoTache
+    public class AdoTache : AdoPromos
     {
 
         public static List<Tache> getAdoTache()
