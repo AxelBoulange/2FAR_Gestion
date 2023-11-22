@@ -32,7 +32,7 @@
         <TextBox x:Name="tbx_search" Grid.Row="1" Grid.Column="1" Margin="10 20" MaxHeight="30" VerticalContentAlignment="Center" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" TextChanged="tbx_search_TextChanged"/>
         <TextBlock Grid.Row="1" Grid.Column="1" MinWidth="120" MaxWidth="120" MaxHeight="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 20" x:Name="search_text" Text="Rechercher un élève" Visibility="Visible" />
 
-        <ComboBox x:Name="cbb_promo" Grid.Row="1" Grid.Column="2" MinWidth="200" MaxWidth="250" MaxHeight="30" HorizontalAlignment="Left" Margin="10 20" FontSize="18" FontWeight="Bold" DropDownOpened="cbb_promo_Drop"/>
+        <ComboBox x:Name="cbb_promo" Grid.Row="1" Grid.Column="2" MinWidth="200" MaxWidth="250" MaxHeight="30" HorizontalAlignment="Left" Margin="10 20" FontSize="18" FontWeight="Bold" DropDownOpened="cbb_promo_Drop" SelectionChanged="cbb_promo_SelectionChanged"/>
         <TextBlock Grid.Row="1" Grid.Column="2" MinWidth="180" MaxWidth="220" MaxHeight="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 20" x:Name="cbb_text" Text="Sélectionnez une promo" Visibility="Visible" />
 
         <Button Grid.Row="1" Grid.Column="3" MaxHeight="40" MaxWidth="40" Background="Transparent" BorderBrush="White" BorderThickness="1" ToolTip="Ajouter un élève" Click="add_eleve" >
@@ -61,7 +61,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Nom" Header="Nom" Width="*" Binding="{Binding nomUtilisateur}" />
                 <DataGridTextColumn Header="Prénom" Width="*" Binding="{Binding prenomUtilisateur}"/>
-                <DataGridTextColumn Header="Promo" Width="*" Binding="{Binding promoUtilisateur}"/>
+                <DataGridTextColumn Header="Promo" Width="*" Binding="{Binding nomPromo}"/>
                 <DataGridTextColumn Header="Mail" Width="*" Binding="{Binding mailUtilisateur}" />
             </DataGrid.Columns>
         </DataGrid>            
