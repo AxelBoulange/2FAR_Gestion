@@ -15,6 +15,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Reflection.Emit;
+using Microsoft.VisualBasic;
+using _2FAR_Gestion.Content;
+using MahApps.Metro.Controls;
+using _2FAR_Gestion.Content.Eleve;
+using _2FAR_Library.Ado;
+using Promo = _2FAR_Library.Promo;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace _2FAR_Gestion
 {
@@ -23,34 +31,115 @@ namespace _2FAR_Gestion
         public VoirEleve()
         {
             InitializeComponent();
-            cbb_promo.Items.Add("Promo");
-            cbb_promo.SelectedItem = "Promo";
+
+            List<_2FAR_Library.Promo> promo = AdoPromos.getAdoPromos();
+            List<string> promo_string = new List<string>();
+            foreach (var item in promo)
+            {
+                promo_string.Add(item.nomPromo);
+            }
+            cbb_promo.ItemsSource = promo_string;
 
 
 
-            _2FAR_Library.Utilisateur user = new _2FAR_Library.Utilisateur(0, "test", "alala", "mail@mail.fr", "azerty39", true);
-            _2FAR_Library.Utilisateur user1 = new _2FAR_Library.Utilisateur(0, "test", "alala", "mail@mail.fr", "azerty39", true);
-            _2FAR_Library.Utilisateur user2 = new _2FAR_Library.Utilisateur(0, "test", "alala", "mail@mail.fr", "azerty39", true);
-            _2FAR_Library.Utilisateur user3 = new _2FAR_Library.Utilisateur(0, "test", "alala", "mail@mail.fr", "azerty39", true);
-            _2FAR_Library.Utilisateur user4 = new _2FAR_Library.Utilisateur(0, "test", "alala", "mail@mail.fr", "azerty39", true);
 
-            List<_2FAR_Library.Utilisateur> collection = new List<_2FAR_Library.Utilisateur>();
-            collection.Add(user);
-            collection.Add(user1);
-            collection.Add(user2);
-            collection.Add(user3);
-            collection.Add(user4);
+            List<_2FAR_Library.Utilisateur>utilisateur= AdoUtilisateur.getAdoUtilisateur();
+            List<string> nomPromo = new List<string>();
+            foreach (Promo p in AdoPromos.getAdoPromos())
+            {
+                foreach (_2FAR_Library.Utilisateur u in utilisateur)
+                {
+                    if (u.promoUtilisateur == p.idPromo)
+                    {
+                        nomPromo.Add(p.nomPromo);
+                    }
+                }
+            };
+            datagrid.ItemsSource = AdoUtilisateur.getAdoUtilisateur();
+}
 
-            //datagrid.Items.Add(collection);
-            datagrid.ItemsSource = collection;
+        public void add_eleve(object sender, RoutedEventArgs e)
+        {
+            if (this.Parent is FrameContent fc)
+            {
+                fc.frameContent.Content = new AjouterEleve();
+            }
 
         }
 
-
-        public void titrePromo(object sender, EventArgs e)
+        private void cbb_promo_Drop(object sender, EventArgs e)
         {
-                cbb_promo.Items.Remove("Promo");
-        }        
+            cbb_text.Visibility = Visibility.Hidden;
+        }
 
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbx_search.Clear();
+            search_text.Visibility= Visibility.Hidden;
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbx_search.Text.Length < 1)
+            {
+                search_text.Visibility = Visibility.Visible;
+
+            }
+        }
+
+        private void tbx_search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = tbx_search.Text;
+            List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(text);
+            datagrid.ItemsSource =  elevesfiltrer;
+        }
+
+
+
+
+
+
+        private List<_2FAR_Library.Utilisateur> FiltrerEleves(string texteRecherche)
+        {
+            if (cbb_promo.Text != "")
+            {
+                Promo p = AdoPromos.getAdoPromos().Where(p => p.nomPromo == cbb_promo.Text).First();
+                List<_2FAR_Library.Utilisateur> user = AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.promoUtilisateur == p.idPromo).ToList();
+                return user.Where(Utilisateur =>
+            Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
+            Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
+            Utilisateur.mailUtilisateur.ToLower().Contains(texteRecherche.ToLower()))
+            .ToList();
+            }
+            else
+            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur =>
+            Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
+            Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
+            Utilisateur.mailUtilisateur.ToLower().Contains(texteRecherche.ToLower()))
+            .ToList();
+        }
+
+
+
+
+        private void cbb_promo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string item = (string)cbb_promo.SelectedItem;
+            List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerElevesByPromo(item);
+            datagrid.ItemsSource = elevesfiltrer;
+        }
+
+        private List<_2FAR_Library.Utilisateur> FiltrerElevesByPromo(string item)
+        {
+            if (FiltrerEleves != null)
+            {
+                List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_search.Text);
+                return elevesfiltrer.Where(Utilisateur => Utilisateur.promoUtilisateur == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+
+            }
+            else
+                return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.promoUtilisateur == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+
+        }
     }
 }

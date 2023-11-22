@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using _2FAR_Gestion.Content;
-using _2FAR_Gestion.Content.Promo;
 using _2FAR_Library;
 
 namespace _2FAR_Gestion
@@ -23,26 +22,17 @@ namespace _2FAR_Gestion
     {
         public VoirPromos()
         {
-            List<Action> actionsButton = new List<Action>() { consulter, modifier, supprimer};
-            //actionsButton.Add("voir");
-            //actionsButton.Add("consulter");
-            //actionsButton.Add("supprimer");
+            Dictionary<string,Action> actionsButton = new Dictionary<string,Action>() { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
             InitializeComponent();
+            
             this.listCartes.Children.Add(new Carte("BTS", "Bts2", actionsButton));
-            this.listCartes.Children.Add(new Carte("BTS", "Bts1", consulter));
+            this.listCartes.Children.Add(new Carte("BTS", "Bts1", actionsButton));
             this.listCartes.Children.Add(new Carte("BTSsio", "BtsSIO", actionsButton));
-
-
-            //listCartes.Children.Add(new Carte("bts SIO 1", "Classe de bts sio 1"));
+            
         }
 
         private void consulter()
         {
-            if (this.Parent is MainWindow mw)
-            {
-                mw.Content = new FrameContent(new AjouterPromo());
-
-            }
         }
         private void modifier()
         {
@@ -51,7 +41,20 @@ namespace _2FAR_Gestion
 
         private void supprimer()
         {
-
+            MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+                
+            }
+            else
+            {
+                //impossible mais oklm
+                MessageBox.Show("Erreur Inconnue");
+            }
         }
     }
 }
