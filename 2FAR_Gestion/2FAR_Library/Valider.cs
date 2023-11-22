@@ -19,5 +19,6 @@ namespace _2FAR_Library
             this.reponse = reponsee;
             this.isJuste = isjuste;
         }
+        
     }
 }

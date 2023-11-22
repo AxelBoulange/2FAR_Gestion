@@ -9,19 +9,33 @@ namespace _2FAR_Library.Ado
 {
     public class AdoTP : AdoTache
     {
+        
 
-
-        //public static List<AdoTP> GetAdoTP()
-        //{
-        //    List<Tache> taches = getAdoTache();
-        //    Connexion connexion = new Connexion();
-        //    SqlConnection conn = connexion.GetConn();
-        //    conn.Open();
-        //    string sql = "SELECT * FROM tp;";
-        //    SqlCommand cmd = new SqlCommand(sql, conn);
-        //    SqlDataReader reader = cmd.ExecuteReader();
-        //    List<TP> tpList = new List<TP>();
-        //    return;
-        //}
+        public static List<TP> GetAdoTP()
+        {
+            List<Tache> taches = getAdoTache();
+            Connexion connexion = new Connexion();
+            SqlConnection conn = connexion.GetConn();
+            conn.Open();
+            string sql = "SELECT * FROM tp;";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<TP> tpList = new List<TP>();
+            while (reader.Read())
+            {
+                tpList.Add(new TP(reader.GetInt16(0), reader.GetString(1), reader.GetString(2)));
+            }
+            foreach (TP tp in tpList)
+            {
+                foreach (Tache t in taches)
+                {
+                    if(t.fk_id_tp == tp.idTP)
+                    {
+                        tp.tacheList.Add(t);
+                    }
+                }
+            }
+            return tpList;
+        }
     }
 }

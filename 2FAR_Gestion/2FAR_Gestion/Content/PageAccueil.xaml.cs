@@ -1,4 +1,5 @@
 ﻿using _2FAR_Gestion.Content;
+using _2FAR_Library;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,13 @@ namespace _2FAR_Gestion
 
     public partial class PageAccueil : Page
     {
-        public PageAccueil()
+        AdoAll all;
+
+
+        public PageAccueil(AdoAll allo)
         {
+            all= allo;
+       
             InitializeComponent();
         }
 
@@ -36,6 +42,7 @@ namespace _2FAR_Gestion
         }
         private void ListTpPage (object sender, RoutedEventArgs e)
         {
+            
             if(this.Parent is MainWindow mw)
             {
                 mw.Content = new FrameContent(new ListeTp());
