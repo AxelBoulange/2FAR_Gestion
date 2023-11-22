@@ -17,15 +17,25 @@ namespace _2FAR_Library.Graphique
         {
             Grid.SetColumn(this, 0);
 
-            // CrÈer un pinceau avec la couleur hexadÈcimale
+            // Cr√©er un pinceau avec la couleur hexad√©cimale
             var brush = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
             Background = brush;
             Width = 100;
-            Children.Add(new Button_icon("CabinetFiles", 60, 60, PageCreateTp));
-            Children.Add(new Button_icon("CabinetFilesVariant", 60, 60, PageListTP));
-            Children.Add(new Button_icon("People", 60, 60, PageVoirEleves));
-            Children.Add(new Button_icon("PeopleMultiple", 60, 60, PageVoirPromos));
-            Children.Add(new Button_icon("Check", 60, 60, DemandeValidation));
+            Button_icon btnIco = new Button_icon("CabinetFiles", 60, 60, PageCreateTp);
+            btnIco.ToolTip = "Cr√©e un TP";
+            Children.Add(btnIco);
+            btnIco = new Button_icon("CabinetFilesVariant", 60, 60, PageListTP);
+            btnIco.ToolTip = "Liste des TP";
+            Children.Add(btnIco);
+            btnIco = new Button_icon("People", 60, 60, PageVoirEleves);
+            btnIco.ToolTip = "Voir Les Eleves";
+            Children.Add(btnIco);
+            btnIco = new Button_icon("PeopleMultiple", 60, 60, PageVoirPromos);
+            btnIco.ToolTip = "Voir Les Promos";
+            Children.Add(btnIco);
+            btnIco = new Button_icon("Check", 60, 60, DemandeValidation);
+            btnIco.ToolTip = "Voir Les Demandes De Validation";
+            Children.Add(btnIco);
         }
 
     }
