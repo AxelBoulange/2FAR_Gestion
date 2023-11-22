@@ -19,14 +19,13 @@ namespace _2FAR_Gestion
 {
     public partial class MainWindow : MetroWindow
     {
-        public  AdoAll all;
+        
 
         public MainWindow()
         {
-            AdoAll allStart = new AdoAll();
-            all = allStart;
+            
             InitializeComponent();
-            this.Content = new PageAccueil(all);
+            this.Content = new PageAccueil();
         }
         //private void MainWindow_Closing()
         //{

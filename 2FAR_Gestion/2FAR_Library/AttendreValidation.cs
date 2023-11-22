@@ -9,14 +9,14 @@ namespace _2FAR_Library
     public class AttendreValidation
     {
         public string dte_demande;
-        public int fk_id_utilisateur;
-        public int fk_id_tache;
+        public Utilisateur utilisateur;
+        public Tache tache;
 
-        public AttendreValidation(string dteDemande, int idUtilisateur, int idTache) 
+        public AttendreValidation(string _dteDemande, Utilisateur _utilisateur, Tache _tache) 
         {
-            this.dte_demande = dteDemande;
-            this.fk_id_utilisateur = idUtilisateur;
-            this.fk_id_tache = idTache;
+            this.dte_demande = _dteDemande;
+            this.utilisateur = _utilisateur;
+            this.tache = _tache;
         }
     }
 }

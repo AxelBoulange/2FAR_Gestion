@@ -31,7 +31,7 @@ namespace _2FAR_Library.Ado
                     {
                         if (reader.GetInt16(2) == u.idUtilisateur && reader.GetInt16(3) == t.idTache)
                         {
-                            validerList.Add(new Valider(u, t, reader.GetString(0), reader.GetBoolean(1))); 
+                            validerList.Add(new Valider(t, u, reader.GetString(0), reader.GetBoolean(1))); 
                         }
                     }
                 }

@@ -22,13 +22,11 @@ namespace _2FAR_Gestion
 
     public partial class PageAccueil : Page
     {
-        AdoAll all;
+        
 
 
-        public PageAccueil(AdoAll allo)
+        public PageAccueil()
         {
-            all= allo;
-       
             InitializeComponent();
         }
 
