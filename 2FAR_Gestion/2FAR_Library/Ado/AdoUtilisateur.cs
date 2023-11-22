@@ -10,8 +10,6 @@ namespace _2FAR_Library.Ado
 {
     public class AdoUtilisateur
     {
-        
-
         public static List<Utilisateur> getAdoUtilisateur()
         {
             Connexion connexion = new Connexion();

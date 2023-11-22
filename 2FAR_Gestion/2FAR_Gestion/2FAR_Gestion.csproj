@@ -24,4 +24,10 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Remove="Content\Promo\AjouterPromo.xaml" />
+    <Compile Remove="Content\Promo\AjouterPromo.xaml.cs" />
+  </ItemGroup>
+
+
 </Project>
