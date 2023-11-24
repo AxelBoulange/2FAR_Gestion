@@ -19,7 +19,7 @@ namespace _2FAR_Gestion
         {
             if (this.Parent is MainWindow mw)
             {
-                mw.Content = new FrameContent(new CreationTP());
+                mw.Content = new FrameContent(new CreationTp());
                 
             }
         }
