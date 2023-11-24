@@ -27,6 +27,16 @@
   <ItemGroup>
     <Page Remove="Content\Promo\AjouterPromo.xaml" />
     <Compile Remove="Content\Promo\AjouterPromo.xaml.cs" />
+    <Compile Remove="classes\**" />
+    <Page Remove="classes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="classes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="classes\**" />
   </ItemGroup>
 
 
