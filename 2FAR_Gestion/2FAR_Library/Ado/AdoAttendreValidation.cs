@@ -9,7 +9,7 @@ namespace _2FAR_Library.Ado
 {
     public class AdoAttendreValidation : AdoTache
     {
-        public static List<AttendreValidation> GetAttendreValidation()
+        public static List<AttendreValidation> getAdoAttendreValidation()
         {
             List<Tache> taches = getAdoTache();
             List<Utilisateur> utilisateurs = getAdoUtilisateur();

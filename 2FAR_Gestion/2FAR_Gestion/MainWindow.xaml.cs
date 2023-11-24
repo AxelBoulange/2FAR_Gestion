@@ -14,17 +14,31 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using _2FAR_Library;
+using _2FAR_Library.Ado;
 using System.Data.SqlClient;
 
 namespace _2FAR_Gestion
 {
     public partial class MainWindow : MetroWindow
     {
+        public static List<AttendreValidation> tpAttenteValidations;
+        public static List<AttribuerTP> attribuerTPs;
+        public static List<Valider> tpValider;
+        public static List<Promo> listePromotions;
+        public static List<Utilisateur> listeUtilisateurs;
+        public static List<Tache> listeTaches;
+        public static List<TP> listeTP;
         
 
         public MainWindow()
         {
-            
+            //tpAttenteValidations = AdoAttendreValidation.getAdoAttendreValidation();
+            //attribuerTPs = AdoAttribuerTP.getAdoAttribuerTP();
+            //tpValider = AdoValider.getAdoValider();
+            listePromotions = AdoPromos.getAdoPromos();
+            listeUtilisateurs = AdoUtilisateur.getAdoUtilisateur();
+            //listeTaches = AdoTache.getAdoTache();
+            //listeTP = AdoTP.GetAdoTP();
             InitializeComponent();
             this.Content = new PageAccueil();
         }

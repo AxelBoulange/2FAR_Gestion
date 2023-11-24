@@ -18,7 +18,7 @@ namespace _2FAR_Gestion
         {
             InitializeComponent();
 
-            List<_2FAR_Library.Promo> promo = AdoPromos.getAdoPromos();
+            List<_2FAR_Library.Promo> promo = MainWindow.listePromotions;
             List<string> promo_string = new List<string>();
             foreach (var item in promo)
             {
@@ -29,9 +29,9 @@ namespace _2FAR_Gestion
 
 
 
-            List<_2FAR_Library.Utilisateur>utilisateur= AdoUtilisateur.getAdoUtilisateur();
+            List<_2FAR_Library.Utilisateur>utilisateur= MainWindow.listeUtilisateurs;
             List<string> nomPromo = new List<string>();
-            foreach (Promo p in AdoPromos.getAdoPromos())
+            foreach (Promo p in MainWindow.listePromotions)
             {
                 foreach (_2FAR_Library.Utilisateur u in utilisateur)
                 {
@@ -41,7 +41,7 @@ namespace _2FAR_Gestion
                     }
                 }
             };
-            datagrid.ItemsSource = AdoUtilisateur.getAdoUtilisateur();
+            datagrid.ItemsSource = MainWindow.listeUtilisateurs;
 }
 
         public void add_eleve(object sender, RoutedEventArgs e)
