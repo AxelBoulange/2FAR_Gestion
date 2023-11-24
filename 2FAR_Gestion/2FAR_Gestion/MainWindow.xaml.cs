@@ -47,7 +47,7 @@ namespace _2FAR_Gestion
 
 
             //suppression des tables
-            SqlCommand cmdValider = new SqlCommand(sqlDeleteValider, conn);
+            /*SqlCommand cmdValider = new SqlCommand(sqlDeleteValider, conn);
             cmdValider.ExecuteReader();
             SqlCommand cmdAttribuerTP = new SqlCommand(sqlDeleteAttribuerTP, conn);
             cmdAttribuerTP.ExecuteReader();
@@ -63,7 +63,7 @@ namespace _2FAR_Gestion
             cmdTache.ExecuteReader();
             SqlCommand cmdTP = new SqlCommand(sqlDeleteTP, conn);
             cmdTP.ExecuteReader();
-
+            */
             //inserer les données 
             // Ordre Promo -> Utilisateur -> TP -> Tache -> Attribuer_TP -> Valider -> Attendre_validation -> Avancement_tache
         }
