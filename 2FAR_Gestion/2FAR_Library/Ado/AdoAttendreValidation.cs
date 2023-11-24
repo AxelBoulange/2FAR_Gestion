@@ -16,7 +16,7 @@ namespace _2FAR_Library.Ado
             Connexion connexion = new Connexion();
             SqlConnection conn = connexion.GetConn();
             conn.Open();
-            string sql = "SELECT * FROM attendre_validation;";
+            string sql = "SELECT * FROM attendre_validation ORDER BY dte_demande DESC;";
             SqlCommand cmd = new SqlCommand(sql, conn);
             SqlDataReader reader = cmd.ExecuteReader();
             List<AttendreValidation> attendreValidationList = new List<AttendreValidation>();
