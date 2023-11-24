@@ -1,4 +1,4 @@
-﻿using _2FAR_Gestion.classes;
+﻿
 using _2FAR_Library;
 using System;
 using System.Collections.Generic;
@@ -89,8 +89,8 @@ namespace _2FAR_Gestion
         {
             if (cbb_promo.Text != "")
             {
-                Promo p = AdoPromos.getAdoPromos().Where(p => p.nomPromo == cbb_promo.Text).First();
-                List<_2FAR_Library.Utilisateur> user = AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.promoUtilisateur == p.idPromo).ToList();
+                Promo p = MainWindow.listePromotions.Where(p => p.nomPromo == cbb_promo.Text).First();
+                List<_2FAR_Library.Utilisateur> user = MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.promoUtilisateur == p.idPromo).ToList();
                 return user.Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
@@ -98,7 +98,7 @@ namespace _2FAR_Gestion
             .ToList();
             }
             else
-            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur =>
+            return MainWindow.listeUtilisateurs.Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.mailUtilisateur.ToLower().Contains(texteRecherche.ToLower()))
@@ -120,17 +120,17 @@ namespace _2FAR_Gestion
             if (FiltrerEleves != null)
             {
                 List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_search.Text);
-                return elevesfiltrer.Where(Utilisateur => Utilisateur.promoUtilisateur == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return elevesfiltrer.Where(Utilisateur => Utilisateur.promoUtilisateur == MainWindow.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
 
             }
             else
             if (cbb_promo.Text != "")
             {
-                return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.promoUtilisateur == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.promoUtilisateur == MainWindow.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
 
             }
             else
-            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.promoUtilisateur == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.promoUtilisateur == MainWindow.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
 
         }
 
@@ -140,7 +140,7 @@ namespace _2FAR_Gestion
             {
                 tbx_search.Text= string.Empty;
             }
-            datagrid.ItemsSource = AdoUtilisateur.getAdoUtilisateur();
+            datagrid.ItemsSource = MainWindow.listeUtilisateurs;
 
 
         }
