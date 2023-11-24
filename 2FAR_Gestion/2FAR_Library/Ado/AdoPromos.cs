@@ -29,7 +29,7 @@ namespace _2FAR_Library.Ado
             { 
                 foreach(Utilisateur u in utilisateur)
                 {
-                    if(u.promoUtilisateur == p.idPromo)
+                    if(u.fk_id_promo == p.idPromo)
                     {
                         p.utilisateurList.Add(u);
                     }
