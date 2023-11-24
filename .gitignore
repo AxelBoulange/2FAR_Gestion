@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # Ignorer le fichier Connexion.cs
-Connexion.cs
+\2FAR_Gestion\2FAR_Library\Connexion.cs
 
 # User-specific files
 *.rsuser

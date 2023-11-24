@@ -3,30 +3,16 @@ using _2FAR_Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using System.Reflection.Emit;
-using Microsoft.VisualBasic;
 using _2FAR_Gestion.Content;
-using MahApps.Metro.Controls;
 using _2FAR_Gestion.Content.Eleve;
 using _2FAR_Library.Ado;
 using Promo = _2FAR_Library.Promo;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace _2FAR_Gestion
 {
-    public partial class VoirEleve : Page
+    public partial class VoirEleve 
     {
         public VoirEleve()
         {
@@ -138,7 +124,24 @@ namespace _2FAR_Gestion
 
             }
             else
+            if (cbb_promo.Text != "")
+            {
                 return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.promoUtilisateur == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+
+            }
+            else
+            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.promoUtilisateur == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+
+        }
+
+        private void reset(object sender, EventArgs e)
+        {
+            if (tbx_search is TextBox)
+            {
+                tbx_search.Text= string.Empty;
+            }
+            datagrid.ItemsSource = AdoUtilisateur.getAdoUtilisateur();
+
 
         }
     }
