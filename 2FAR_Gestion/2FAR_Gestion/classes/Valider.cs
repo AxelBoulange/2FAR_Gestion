@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _2FAR_Gestion.classes
+﻿namespace _2FAR_Gestion.classes
 {
     public class Valider
     {
