@@ -19,7 +19,6 @@ namespace _2FAR_Gestion
 {
     public partial class MainWindow : MetroWindow
     {
-        
 
         public MainWindow()
         {

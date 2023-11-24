@@ -138,7 +138,24 @@ namespace _2FAR_Gestion
 
             }
             else
+            if (cbb_promo.Text != "")
+            {
                 return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.promoUtilisateur == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+
+            }
+            else
+            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.promoUtilisateur == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+
+        }
+
+        private void reset(object sender, EventArgs e)
+        {
+            if (tbx_search is TextBox)
+            {
+                tbx_search.Text= string.Empty;
+            }
+            datagrid.ItemsSource = AdoUtilisateur.getAdoUtilisateur();
+
 
         }
     }
