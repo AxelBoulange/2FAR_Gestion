@@ -9,14 +9,14 @@ namespace _2FAR_Library.Ado
 {
     public class AdoAttendreValidation : AdoTache
     {
-        public static List<AttendreValidation> GetAttendreValidation()
+        public static List<AttendreValidation> getAdoAttendreValidation()
         {
             List<Tache> taches = getAdoTache();
             List<Utilisateur> utilisateurs = getAdoUtilisateur();
             Connexion connexion = new Connexion();
             SqlConnection conn = connexion.GetConn();
             conn.Open();
-            string sql = "SELECT * FROM attendre_validation;";
+            string sql = "SELECT * FROM attendre_validation ORDER BY dte_demande DESC;";
             SqlCommand cmd = new SqlCommand(sql, conn);
             SqlDataReader reader = cmd.ExecuteReader();
             List<AttendreValidation> attendreValidationList = new List<AttendreValidation>();

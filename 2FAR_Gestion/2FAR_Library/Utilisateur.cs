@@ -2,7 +2,7 @@
 {
     public class Utilisateur
     {
-        public int promoUtilisateur{ get; set; }
+        public int fk_id_promo { get; set; }
         public int idUtilisateur { get; set; }
         public string nomUtilisateur { get; set; }
         public string prenomUtilisateur { get; set; }
@@ -15,7 +15,7 @@
 
         public Utilisateur( int idutilisateur, string nomutilisateur, string prenomutilisateur, string mailutilisateur, string mdputilisateur, bool isadmin, int promoutilisateur, string nomPromo)
         {
-            this.promoUtilisateur = promoutilisateur;
+            this.fk_id_promo = promoutilisateur;
             this.idUtilisateur = idutilisateur;
             this.nomUtilisateur = nomutilisateur;
             this.prenomUtilisateur = prenomutilisateur;

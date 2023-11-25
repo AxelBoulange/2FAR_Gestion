@@ -1,8 +1,8 @@
 namespace _2FAR_Gestion.Content.TP;
 
-public partial class ListeTachesTP
+public partial class ListeTachesTp
 {
-    public ListeTachesTP()
+    public ListeTachesTp()
     {
         InitializeComponent();
     }

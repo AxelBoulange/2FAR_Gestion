@@ -2,10 +2,10 @@
 
 namespace _2FAR_Gestion
 {
-    public partial class CreationTP
+    public partial class CreationTp
     {
 
-        public CreationTP()
+        public CreationTp()
         {
             InitializeComponent();
         }
