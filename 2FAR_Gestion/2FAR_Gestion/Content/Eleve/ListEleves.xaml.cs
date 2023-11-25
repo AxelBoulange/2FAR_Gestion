@@ -9,14 +9,17 @@ using _2FAR_Gestion.Content;
 using _2FAR_Gestion.Content.Eleve;
 using _2FAR_Library.Ado;
 using Promo = _2FAR_Library.Promo;
+using MahApps.Metro.Controls;
 
 namespace _2FAR_Gestion
 {
-    public partial class VoirEleve 
+    public partial class VoirEleves 
     {
-        public VoirEleve()
+        private MainWindow pa;
+        public VoirEleves(MainWindow pa)
         {
             InitializeComponent();
+            this.pa = pa;
 
             List<_2FAR_Library.Promo> promo = AdoPromos.getAdoPromos();
             List<string> promo_string = new List<string>();
@@ -29,7 +32,7 @@ namespace _2FAR_Gestion
 
 
 
-            List<_2FAR_Library.Utilisateur>utilisateur= AdoUtilisateur.getAdoUtilisateur();
+            List<_2FAR_Library.Utilisateur> utilisateur = AdoUtilisateur.getAdoUtilisateur();
             List<string> nomPromo = new List<string>();
             foreach (Promo p in AdoPromos.getAdoPromos())
             {
@@ -42,14 +45,12 @@ namespace _2FAR_Gestion
                 }
             };
             datagrid.ItemsSource = AdoUtilisateur.getAdoUtilisateur();
-}
+        }
 
-        public void add_eleve(object sender, RoutedEventArgs e)
+        public void add_eleve(object sender, EventArgs e)
         {
-            if (this.Parent is FrameContent fc)
-            {
-                fc.frameContent.Content = new AjouterEleve();
-            }
+            //   ((FrameContent)this.Parent).frameContent.Content = new AjouterEleve();
+            pa.Content = new MenuNavbar(new AjouterEleve(), pa);
 
         }
 
@@ -79,9 +80,6 @@ namespace _2FAR_Gestion
             List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(text);
             datagrid.ItemsSource =  elevesfiltrer;
         }
-
-
-
 
 
 
@@ -136,7 +134,7 @@ namespace _2FAR_Gestion
 
         private void reset(object sender, EventArgs e)
         {
-            if (tbx_search is TextBox)
+            if (tbx_search is TextBox) 
             {
                 tbx_search.Text= string.Empty;
             }

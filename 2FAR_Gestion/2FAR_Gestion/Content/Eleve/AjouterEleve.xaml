@@ -8,7 +8,47 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AjouterEleve">
 
-    <Grid>
-        <Label>ghjkl</Label>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="6" Fill="#5e17eb" RadiusX="50" RadiusY="50" />
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Foreground="White" Content="Ajouter un élève"/>
+        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Nom :"/>
+        <TextBox x:Name="tbx_nom_eleve" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="15,35,15,0" MinHeight="20" Width="232"></TextBox>
+
+        <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Prénom :"/>
+        <TextBox x:Name="tbx_prenom_eleve" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" Margin="15,35,15,0" MinHeight="20"></TextBox>
+
+        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Mail :"/>
+        <TextBox x:Name="tbx_mail_eleve" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Top" Margin="15,35,15,0" MinHeight="20" MaxWidth="236" ></TextBox>
+
+        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Mot de passe"/>
+        <TextBox x:Name="tbx_mdp_eleve" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Top" Margin="15,35,15,0" MinHeight="20" MaxWidth="236" ></TextBox>
+
+        <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Promo"/>
+        <ComboBox x:Name="cbb_promo_eleve" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="15, 35,15,0" Width="236"/>
+
+        <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="top" Height="50" Margin="150,20,150,0" Content="Validé"/>
+
+
+
+
+
+
     </Grid>
 </Page>
