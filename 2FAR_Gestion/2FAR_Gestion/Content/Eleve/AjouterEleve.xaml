@@ -19,36 +19,36 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
-        <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="6" Fill="#5e17eb" RadiusX="50" RadiusY="50" />
+        <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" Fill="#5e17eb" RadiusX="50" RadiusY="50" />
         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Foreground="White" Content="Ajouter un élève"/>
-        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Nom :"/>
-        <TextBox x:Name="tbx_nom_eleve" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="15,35,15,0" MinHeight="20" Width="232"></TextBox>
 
-        <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Prénom :"/>
-        <TextBox x:Name="tbx_prenom_eleve" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" Margin="15,35,15,0" MinHeight="20"></TextBox>
+        <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="18" Content="Nom :"/>
+        <TextBox x:Name="nom_add_eleve" Grid.Column="1" Grid.Row="3" Margin="15,0,15,10" MaxHeight="30"/>
 
-        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Mail :"/>
-        <TextBox x:Name="tbx_mail_eleve" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Top" Margin="15,35,15,0" MinHeight="20" MaxWidth="236" ></TextBox>
+        <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="18" Content="Prénom :"/>
+        <TextBox x:Name="prenom_add_eleve" Grid.Column="2" Grid.Row="3" Margin="15,0,15,10" MaxHeight="30"/>
 
-        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Mot de passe"/>
-        <TextBox x:Name="tbx_mdp_eleve" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Top" Margin="15,35,15,0" MinHeight="20" MaxWidth="236" ></TextBox>
+        <Label Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="18" Content="Mail :"/>
+        <TextBox x:Name="mail_add_eleve" Grid.Column="1" Grid.Row="5" Margin="15,0,15,10" MaxHeight="30"/>
 
-        <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" FontSize="16" Foreground="White" Content="Promo"/>
-        <ComboBox x:Name="cbb_promo_eleve" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="15, 35,15,0" Width="236"/>
+        <Label Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="18" Content="Mot de passe :"/>
+        <TextBox x:Name="mdp_add_eleve" Grid.Column="1" Grid.Row="7" Margin="15,0,15,10" MaxHeight="30"/>
 
-        <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="top" Height="50" Margin="150,20,150,0" Content="Validé"/>
+        <Label Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="18" Content="Promo :"/>
+        <ComboBox Grid.Column="1" Grid.Row="9" Margin="15,0,15,10"/>
 
-
-
-
-
+        <Button Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" MinWidth="300" MaxWidth="400" MinHeight="10" MaxHeight="40"  Content="Valider" Foreground="White" Background="#5e17eb"  BorderBrush="White" BorderThickness="2" FontSize="18px"/>
 
     </Grid>
 </Page>

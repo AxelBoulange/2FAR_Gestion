@@ -11,10 +11,25 @@ namespace _2FAR_Gestion
         {
             Dictionary<string,Action> actionsButton = new Dictionary<string,Action>() { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
             InitializeComponent();
+
+
+            foreach (var promo in MainWindow.listePromotions)
+            {
+                int count = 0;
+                foreach (var utilisateur in MainWindow.listeUtilisateurs) {
+                    if (utilisateur.fk_id_promo == promo.idPromo)
+                    {
+                        count++;
+                    }
+                 }
+                this.listCartes.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsButton, 18, 25));
+            }
+
+
             
-            this.listCartes.Children.Add(new Carte("BTS", "Bts2", actionsButton));
-            this.listCartes.Children.Add(new Carte("BTS", "Bts1", actionsButton));
-            this.listCartes.Children.Add(new Carte("BTSsio", "BtsSIO", actionsButton));
+            //this.listCartes.Children.Add(new Carte("BTS", "Bts2", actionsButton));
+            //this.listCartes.Children.Add(new Carte("BTS", "Bts1", actionsButton));
+            //this.listCartes.Children.Add(new Carte("BTSsio", "BtsSIO", actionsButton));
             
         }
 
@@ -23,7 +38,6 @@ namespace _2FAR_Gestion
         }
         private void modifier()
         {
-           this.listCartes.Children.Clear();
         }
 
         private void supprimer()
