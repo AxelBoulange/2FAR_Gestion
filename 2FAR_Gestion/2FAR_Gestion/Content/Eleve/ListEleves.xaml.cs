@@ -41,9 +41,55 @@ namespace _2FAR_Gestion
                 }
             };
             datagrid.ItemsSource = MainWindow.listeUtilisateurs;
+}
+
+        public void add_eleve(object sender, RoutedEventArgs e)
+        {
+            if (this.Parent is FrameContent fc)
+            {
+                fc.frameContent.Content = new AjouterEleve();
+            }
+
         }
-                Promo p = AdoPromos.getAdoPromos().Where(p => p.nomPromo == cbb_promo.Text).First();
-                List<_2FAR_Library.Utilisateur> user = AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.fk_id_promo == p.idPromo).ToList();
+
+        private void cbb_promo_Drop(object sender, EventArgs e)
+        {
+            cbb_text.Visibility = Visibility.Hidden;
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbx_search.Clear();
+            search_text.Visibility= Visibility.Hidden;
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbx_search.Text.Length < 1)
+            {
+                search_text.Visibility = Visibility.Visible;
+
+            }
+        }
+
+        private void tbx_search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = tbx_search.Text;
+            List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(text);
+            datagrid.ItemsSource =  elevesfiltrer;
+        }
+
+
+
+
+
+
+        private List<_2FAR_Library.Utilisateur> FiltrerEleves(string texteRecherche)
+        {
+            if (cbb_promo.Text != "")
+            {
+                Promo p = MainWindow.listePromotions.Where(p => p.nomPromo == cbb_promo.Text).First();
+                List<_2FAR_Library.Utilisateur> user = MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == p.idPromo).ToList();
                 return user.Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
@@ -73,16 +119,17 @@ namespace _2FAR_Gestion
             if (FiltrerEleves != null)
             {
                 List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_search.Text);
-                return elevesfiltrer.Where(Utilisateur => Utilisateur.fk_id_promo == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return elevesfiltrer.Where(Utilisateur => Utilisateur.fk_id_promo == MainWindow.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
 
             }
             else
             if (cbb_promo.Text != "")
             {
-                return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.fk_id_promo == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == MainWindow.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
             }
             else
-            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.fk_id_promo == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == MainWindow.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
+
         }
 
         private void reset(object sender, EventArgs e)
@@ -92,8 +139,6 @@ namespace _2FAR_Gestion
                 tbx_search.Text= string.Empty;
             }
             datagrid.ItemsSource = MainWindow.listeUtilisateurs;
-
-
         }
     }
 }
