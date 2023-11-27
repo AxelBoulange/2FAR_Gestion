@@ -15,8 +15,7 @@ namespace _2FAR_Library
     {
         public Carte(string title, string content, Dictionary<string, Action> actionButtons, int TitleSize, int DescSize)
         {
-            BorderBrush = new System.Windows.Media.SolidColorBrush(
-                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
+            BorderBrush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
             BorderThickness = new Thickness(1);
             this.HorizontalAlignment = HorizontalAlignment.Stretch;
             this.Margin = new Thickness(20, 20, 20, 20);
@@ -30,19 +29,23 @@ namespace _2FAR_Library
             grid.Margin = new Thickness(20, 20, 20, 20);
             Child = grid;
 
-            Label cardTitle = new Label();
-            cardTitle.HorizontalAlignment = HorizontalAlignment.Stretch;
-            cardTitle.VerticalAlignment = VerticalAlignment.Stretch;
-            cardTitle.Content = title;
+            Frame card = new Frame();
+            card.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5e17eb"));
+            card.HorizontalAlignment = HorizontalAlignment.Stretch;
+            card.VerticalAlignment = VerticalAlignment.Stretch;
+            Grid.SetColumn(card, 0);
+            grid.Children.Add(card);
+            
+            TextBlock cardTitle = new TextBlock();
+            cardTitle.HorizontalAlignment = HorizontalAlignment.Center;
+            cardTitle.VerticalAlignment = VerticalAlignment.Center;
+            cardTitle.Text = title;
+            cardTitle.TextWrapping = TextWrapping.Wrap;
             cardTitle.Foreground = Brushes.White;
-            cardTitle.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5e17eb"));
             cardTitle.FontSize = TitleSize;
             cardTitle.FontWeight = FontWeights.Bold;
-            cardTitle.HorizontalContentAlignment = HorizontalAlignment.Center;
-            cardTitle.VerticalContentAlignment = VerticalAlignment.Center;
-            Grid.SetColumn(cardTitle, 0);
-            grid.Children.Add(cardTitle);
-
+            cardTitle.Margin = new Thickness(5, 5, 5, 5);
+            card.Content = cardTitle;
 
             TextBlock cardContent = new TextBlock();
             cardContent.TextWrapping = TextWrapping.Wrap;
@@ -60,7 +63,7 @@ namespace _2FAR_Library
             
             StackPanel stackPanel = new StackPanel();
             stackPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
-            stackPanel.VerticalAlignment = VerticalAlignment.Stretch;
+            stackPanel.VerticalAlignment = VerticalAlignment.Center;
 
             
             foreach (var action in actionButtons)
