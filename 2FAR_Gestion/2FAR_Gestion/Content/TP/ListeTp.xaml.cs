@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using _2FAR_Gestion.Content;
 using _2FAR_Library;
+using _2FAR_Gestion.Content.Promo;
 
 namespace _2FAR_Gestion
 {
     public partial class ListeTp
     {
-        public ListeTp()
+        private MainWindow mw;
+        public ListeTp(MainWindow mw)
         {
+            this.mw = mw;
             Dictionary<string,Action> actionsButton = new Dictionary<string,Action>() { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
             
             InitializeComponent();
@@ -23,14 +27,8 @@ namespace _2FAR_Gestion
                         count++;
                     }
                 }
-                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\n nombre de tache : 0" , tp.descriptionTP, actionsButton, 15, 14));
+                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\n nombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14));
             }
-
-
-
-            //this.listCartes.Children.Add(new Carte("TPCOOL1", "PERNELLE", actionsButton));
-            //this.listCartes.Children.Add(new Carte("TPCOOL2", "COURBEZ", actionsButton));
-            //this.listCartes.Children.Add(new Carte("TPNULACHIER", "ANGLAIS", actionsButton));
         }
         private void consulter()
         {
@@ -57,6 +55,11 @@ namespace _2FAR_Gestion
                 //impossible mais oklm
                 MessageBox.Show("Erreur Inconnue");
             }
+        }
+
+        private void add_tp(object sender, EventArgs e)
+        {
+            mw.Content = new MenuNavbar(new CreationTp(), mw);
         }
     }
 }

@@ -52,20 +52,32 @@ namespace _2FAR_Library
             cardContent.Foreground = Brushes.Black;
             cardContent.FontSize = DescSize;
             cardContent.FontWeight = FontWeights.Bold;
+            cardContent.Padding = new Thickness(15);
             Grid.SetColumn(cardContent, 1);
             grid.Children.Add(cardContent);
 
 
+            
             StackPanel stackPanel = new StackPanel();
-            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
-            stackPanel.VerticalAlignment = VerticalAlignment.Center;
-            stackPanel.Margin = new Thickness(5, 5, 5, 5);
+            stackPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
+            stackPanel.VerticalAlignment = VerticalAlignment.Stretch;
+
             
             foreach (var action in actionButtons)
             {
-                Btn boutton = new Btn(action.Key, action.Value);
-                boutton.Margin = new Thickness(0, 5, 0, 5);
-                stackPanel.Children.Add(boutton);
+                Btn button = new Btn(action.Key, action.Value);
+                button.Margin = new Thickness(0, 5, 0, 5);
+                button.HorizontalAlignment = HorizontalAlignment.Stretch;
+                button.VerticalAlignment = VerticalAlignment.Stretch;
+
+                button.Height = 40;
+
+                if (action.Key == "supprimer")
+                {
+                    button.Background = Brushes.Red;
+                }
+                stackPanel.Children.Add(button);
+
             }
 
             Grid.SetColumn(stackPanel, 2);

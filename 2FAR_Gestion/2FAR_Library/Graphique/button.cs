@@ -41,8 +41,6 @@ namespace _2FAR_Library.Graphique
             var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("white"));
             Margin = new Thickness(0, 0, 20, 0);
             Content = name;
-            Width = 150;
-            Height = 35;
             Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5e17eb"));
             Foreground = brush;
             Click += (sender, e) => click.Invoke();

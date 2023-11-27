@@ -25,7 +25,7 @@ namespace _2FAR_Gestion.Content
     }
     private void ListTP()
     {
-        this.frameContent.Content = new ListeTp();
+        this.frameContent.Content = new ListeTp(page);
     }
     private void VoirEleve()
     {

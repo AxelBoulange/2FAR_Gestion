@@ -28,7 +28,7 @@ namespace _2FAR_Gestion
             
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new MenuNavbar(new ListeTp(),mw);
+                mw.Content = new MenuNavbar(new ListeTp(mw),mw);
             }
         }
         private void VoirElevePage (object sender, RoutedEventArgs e)

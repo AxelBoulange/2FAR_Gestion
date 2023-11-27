@@ -14,13 +14,13 @@ namespace _2FAR_Gestion
 {
     public partial class VoirEleves 
     {
-        private MainWindow pa;
-        public VoirEleves(MainWindow pa)
+        private MainWindow mw;
+        public VoirEleves(MainWindow mw)
         {
             InitializeComponent();
-            this.pa = pa;
+            this.mw = mw;
 
-            List<_2FAR_Library.Promo> promo = AdoPromos.getAdoPromos();
+            List<_2FAR_Library.Promo> promo = MainWindow.listePromotions;
             List<string> promo_string = new List<string>();
             foreach (var item in promo)
             {
@@ -31,9 +31,9 @@ namespace _2FAR_Gestion
 
 
 
-            List<_2FAR_Library.Utilisateur> utilisateur = AdoUtilisateur.getAdoUtilisateur();
+            List<_2FAR_Library.Utilisateur> utilisateur = MainWindow.listeUtilisateurs;
             List<string> nomPromo = new List<string>();
-            foreach (Promo p in AdoPromos.getAdoPromos())
+            foreach (Promo p in MainWindow.listePromotions)
             {
                 foreach (_2FAR_Library.Utilisateur u in utilisateur)
                 {
@@ -43,13 +43,13 @@ namespace _2FAR_Gestion
                     }
                 }
             };
-            datagrid.ItemsSource = AdoUtilisateur.getAdoUtilisateur();
+            datagrid.ItemsSource = MainWindow.listeUtilisateurs;
         }
 
         public void add_eleve(object sender, EventArgs e)
         {
             //   ((FrameContent)this.Parent).frameContent.Content = new AjouterEleve();
-            pa.Content = new MenuNavbar(new AjouterEleve(), pa);
+            mw.Content = new MenuNavbar(new AjouterEleve(), mw);
 
         }
 
@@ -86,8 +86,8 @@ namespace _2FAR_Gestion
         {
             if (cbb_promo.Text != "")
             {
-                Promo p = AdoPromos.getAdoPromos().Where(p => p.nomPromo == cbb_promo.Text).First();
-                List<_2FAR_Library.Utilisateur> user = AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.fk_id_promo == p.idPromo).ToList();
+                Promo p = MainWindow.listePromotions.Where(p => p.nomPromo == cbb_promo.Text).First();
+                List<_2FAR_Library.Utilisateur> user = MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == p.idPromo).ToList();
                 return user.Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
@@ -95,7 +95,7 @@ namespace _2FAR_Gestion
             .ToList();
             }
             else
-            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur =>
+            return MainWindow.listeUtilisateurs.Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.mailUtilisateur.ToLower().Contains(texteRecherche.ToLower()))
@@ -123,11 +123,11 @@ namespace _2FAR_Gestion
             else
             if (cbb_promo.Text != "")
             {
-                return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.fk_id_promo == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
 
             }
             else
-            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur => Utilisateur.fk_id_promo == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
+            return MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == AdoPromos.getAdoPromos().Where(p => p.nomPromo == item).First().idPromo).ToList();
 
         }
 
@@ -137,7 +137,7 @@ namespace _2FAR_Gestion
             {
                 tbx_search.Text= string.Empty;
             }
-            datagrid.ItemsSource = AdoUtilisateur.getAdoUtilisateur();
+            datagrid.ItemsSource = MainWindow.listeUtilisateurs;
 
 
         }
