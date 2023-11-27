@@ -23,7 +23,7 @@ namespace _2FAR_Library.Ado
             List<TP> tpList = new List<TP>();
             while (reader.Read())
             {
-                tpList.Add(new TP(reader.GetInt16(0), reader.GetString(1), reader.GetString(2)));
+                tpList.Add(new TP(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
             }
             foreach (TP tp in tpList)
             {

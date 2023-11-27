@@ -37,8 +37,8 @@ namespace _2FAR_Gestion
             //tpValider = AdoValider.getAdoValider();
             listePromotions = AdoPromos.getAdoPromos();
             listeUtilisateurs = AdoUtilisateur.getAdoUtilisateur();
-            //listeTaches = AdoTache.getAdoTache();
-            //listeTP = AdoTP.GetAdoTP();
+            listeTaches = AdoTache.getAdoTache();
+            listeTP = AdoTP.GetAdoTP();
             InitializeComponent();
             this.Content = new PageAccueil();
         }

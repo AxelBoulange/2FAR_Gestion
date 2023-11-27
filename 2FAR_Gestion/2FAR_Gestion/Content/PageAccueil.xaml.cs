@@ -19,7 +19,7 @@ namespace _2FAR_Gestion
         {
             if (this.Parent is MainWindow mw)
             {
-                mw.Content = new FrameContent(new CreationTp());
+                mw.Content = new MenuNavbar(new CreationTp(),mw);
                 
             }
         }
@@ -28,28 +28,28 @@ namespace _2FAR_Gestion
             
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new FrameContent(new ListeTp());
+                mw.Content = new MenuNavbar(new ListeTp(),mw);
             }
         }
         private void VoirElevePage (object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new FrameContent(new VoirEleve());
+                mw.Content = new MenuNavbar(new VoirEleves(mw),mw);
             }
         }
         private void VoirPromosPage ( object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new FrameContent(new VoirPromos());
+                mw.Content = new MenuNavbar(new VoirPromos(),mw);
             }
         }
         private void DemandeValidationPage ( object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new FrameContent(new DemandeValidation());
+                mw.Content = new MenuNavbar(new DemandeValidation(),mw);
             }
         }
     }

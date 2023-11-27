@@ -13,7 +13,7 @@ namespace _2FAR_Library
 {
     public class Carte : Border
     {
-        public Carte(string title, string content, Dictionary<string, Action> actionButtons)
+        public Carte(string title, string content, Dictionary<string, Action> actionButtons, int TitleSize, int DescSize)
         {
             BorderBrush = new System.Windows.Media.SolidColorBrush(
                 (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
@@ -34,9 +34,9 @@ namespace _2FAR_Library
             cardTitle.HorizontalAlignment = HorizontalAlignment.Stretch;
             cardTitle.VerticalAlignment = VerticalAlignment.Stretch;
             cardTitle.Content = title;
-            cardTitle.Foreground = Brushes.Black;
+            cardTitle.Foreground = Brushes.White;
             cardTitle.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5e17eb"));
-            cardTitle.FontSize = 20;
+            cardTitle.FontSize = TitleSize;
             cardTitle.FontWeight = FontWeights.Bold;
             cardTitle.HorizontalContentAlignment = HorizontalAlignment.Center;
             cardTitle.VerticalContentAlignment = VerticalAlignment.Center;
@@ -44,20 +44,23 @@ namespace _2FAR_Library
             grid.Children.Add(cardTitle);
 
 
-            Label cardContent = new Label();
+            TextBlock cardContent = new TextBlock();
+            cardContent.TextWrapping = TextWrapping.Wrap;
             cardContent.HorizontalAlignment = HorizontalAlignment.Center;
             cardContent.VerticalAlignment = VerticalAlignment.Center;
-            cardContent.Content = content;
+            cardContent.Text = content;
             cardContent.Foreground = Brushes.Black;
-            cardContent.FontSize = 15;
+            cardContent.FontSize = DescSize;
             cardContent.FontWeight = FontWeights.Bold;
             Grid.SetColumn(cardContent, 1);
             grid.Children.Add(cardContent);
+
 
             StackPanel stackPanel = new StackPanel();
             stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
             stackPanel.VerticalAlignment = VerticalAlignment.Center;
             stackPanel.Margin = new Thickness(5, 5, 5, 5);
+            
             foreach (var action in actionButtons)
             {
                 Btn boutton = new Btn(action.Key, action.Value);
@@ -67,6 +70,7 @@ namespace _2FAR_Library
 
             Grid.SetColumn(stackPanel, 2);
             grid.Children.Add(stackPanel);
+
 
         }
     }

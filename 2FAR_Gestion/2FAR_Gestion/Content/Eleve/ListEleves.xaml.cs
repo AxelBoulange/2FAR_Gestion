@@ -1,4 +1,4 @@
-using _2FAR_Library;
+﻿using _2FAR_Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +8,19 @@ using _2FAR_Gestion.Content;
 using _2FAR_Gestion.Content.Eleve;
 using _2FAR_Library.Ado;
 using Promo = _2FAR_Library.Promo;
+using MahApps.Metro.Controls;
 
 namespace _2FAR_Gestion
 {
-    public partial class VoirEleve 
+    public partial class VoirEleves 
     {
-        public VoirEleve()
+        private MainWindow pa;
+        public VoirEleves(MainWindow pa)
         {
             InitializeComponent();
+            this.pa = pa;
 
-            List<Promo> promo = MainWindow.listePromotions;
+            List<_2FAR_Library.Promo> promo = AdoPromos.getAdoPromos();
             List<string> promo_string = new List<string>();
             foreach (var item in promo)
             {
@@ -28,9 +31,9 @@ namespace _2FAR_Gestion
 
 
 
-            List<_2FAR_Library.Utilisateur>utilisateur= MainWindow.listeUtilisateurs;
+            List<_2FAR_Library.Utilisateur> utilisateur = AdoUtilisateur.getAdoUtilisateur();
             List<string> nomPromo = new List<string>();
-            foreach (Promo p in MainWindow.listePromotions)
+            foreach (Promo p in AdoPromos.getAdoPromos())
             {
                 foreach (_2FAR_Library.Utilisateur u in utilisateur)
                 {
@@ -41,7 +44,7 @@ namespace _2FAR_Gestion
                 }
             };
             datagrid.ItemsSource = MainWindow.listeUtilisateurs;
-}
+        }
 
         public void add_eleve(object sender, RoutedEventArgs e)
         {
@@ -78,12 +81,6 @@ namespace _2FAR_Gestion
             List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(text);
             datagrid.ItemsSource =  elevesfiltrer;
         }
-
-
-
-
-
-
         private List<_2FAR_Library.Utilisateur> FiltrerEleves(string texteRecherche)
         {
             if (cbb_promo.Text != "")
@@ -97,7 +94,7 @@ namespace _2FAR_Gestion
             .ToList();
             }
             else
-            return MainWindow.listeUtilisateurs.Where(Utilisateur =>
+            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.mailUtilisateur.ToLower().Contains(texteRecherche.ToLower()))
@@ -124,20 +121,15 @@ namespace _2FAR_Gestion
             }
             else
             if (cbb_promo.Text != "")
-            {
                 return MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == MainWindow.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
-            }
             else
                 return MainWindow.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == MainWindow.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
-
         }
 
         private void reset(object sender, EventArgs e)
         {
-            if (tbx_search is TextBox)
-            {
+            if (tbx_search is TextBox) 
                 tbx_search.Text= string.Empty;
-            }
             datagrid.ItemsSource = MainWindow.listeUtilisateurs;
         }
     }

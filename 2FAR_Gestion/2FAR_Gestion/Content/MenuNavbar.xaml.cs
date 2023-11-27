@@ -6,14 +6,15 @@ namespace _2FAR_Gestion.Content
     /// <summary>
     /// Logique d'interaction pour FrameContent.xaml
     /// </summary>
-    public partial class FrameContent
+    public partial class MenuNavbar
     {
-        public FrameContent( Page contentPage)
+        MainWindow page;
+        public MenuNavbar( Page contentPage, MainWindow page)
         {
             InitializeComponent();
             this.frameGrid.Children.Add(new NavBar(CreateTP, ListTP, VoirEleve, VoirPromos, DemandeValidation));
             this.frameContent.Content = contentPage;
-
+            this.page = page;
         }
 
 
@@ -28,7 +29,7 @@ namespace _2FAR_Gestion.Content
     }
     private void VoirEleve()
     {
-        this.frameContent.Content = new VoirEleve();
+        this.frameContent.Content = new VoirEleves(page);
     }
     private void VoirPromos()
     {
