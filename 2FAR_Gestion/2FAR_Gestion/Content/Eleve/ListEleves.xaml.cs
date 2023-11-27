@@ -14,11 +14,11 @@ namespace _2FAR_Gestion
 {
     public partial class VoirEleves 
     {
-        private MainWindow pa;
-        public VoirEleves(MainWindow pa)
+        private MainWindow mw;
+        public VoirEleves(MainWindow mw)
         {
             InitializeComponent();
-            this.pa = pa;
+            this.mw = mw;
 
             List<_2FAR_Library.Promo> promo = AdoPromos.getAdoPromos();
             List<string> promo_string = new List<string>();
@@ -48,11 +48,7 @@ namespace _2FAR_Gestion
 
         public void add_eleve(object sender, RoutedEventArgs e)
         {
-            if (this.Parent is FrameContent fc)
-            {
-                fc.frameContent.Content = new AjouterEleve();
-            }
-
+                mw.Content = new MenuNavbar(new AjouterEleve(),mw);
         }
 
         private void cbb_promo_Drop(object sender, EventArgs e)
