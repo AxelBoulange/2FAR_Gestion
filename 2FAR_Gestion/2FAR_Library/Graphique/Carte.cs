@@ -13,7 +13,7 @@ namespace _2FAR_Library
 {
     public class Carte : Border
     {
-        public Carte(string title, string content, Dictionary<string, Action> actionButtons, int TitleSize, int DescSize)
+        public Carte(string title, string content, Dictionary<string, Action<int>> actionButtons, int TitleSize, int DescSize, int Id)
         {
             BorderBrush = new System.Windows.Media.SolidColorBrush(
                 (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
@@ -65,7 +65,7 @@ namespace _2FAR_Library
             
             foreach (var action in actionButtons)
             {
-                Btn button = new Btn(action.Key, action.Value);
+                Btn button = new Btn(action.Key, action.Value, Id);
                 button.Margin = new Thickness(0, 5, 0, 5);
                 button.HorizontalAlignment = HorizontalAlignment.Stretch;
                 button.VerticalAlignment = VerticalAlignment.Stretch;

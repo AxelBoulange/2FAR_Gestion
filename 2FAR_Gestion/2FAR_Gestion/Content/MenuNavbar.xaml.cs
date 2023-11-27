@@ -33,7 +33,7 @@ namespace _2FAR_Gestion.Content
     }
     private void VoirPromos()
     {
-        this.frameContent.Content = new VoirPromos();
+        this.frameContent.Content = new VoirPromos(page);
     }
     private void DemandeValidation()
     {

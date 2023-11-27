@@ -13,7 +13,7 @@ namespace _2FAR_Gestion
         public ListeTp(MainWindow mw)
         {
             this.mw = mw;
-            Dictionary<string,Action> actionsButton = new Dictionary<string,Action>() { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
+            Dictionary<string,Action<int>> actionsButton = new Dictionary<string,Action<int>>() { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
             
             InitializeComponent();
 
@@ -27,19 +27,19 @@ namespace _2FAR_Gestion
                         count++;
                     }
                 }
-                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\n nombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14));
+                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\n nombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14, tp.idTP));
             }
         }
-        private void consulter()
+        private void consulter(int id)
         {
             
         }
-        private void modifier()
+        private void modifier(int id)
         {
             this.listCartes.Children.Clear();
         }
 
-        private void supprimer()
+        private void supprimer(int id)
         {
             MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)

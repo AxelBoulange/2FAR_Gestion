@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using System.Windows;
 using _2FAR_Library;
+using _2FAR_Gestion.Content;
+using _2FAR_Gestion.Content.Promo;
 
 namespace _2FAR_Gestion
 {
     public partial class VoirPromos
     {
-        public VoirPromos()
+        MainWindow mw;
+        int id;
+        public VoirPromos(MainWindow mw)
         {
-            Dictionary<string,Action> actionsButton = new Dictionary<string,Action>() { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
+            this.mw = mw;
+           this.id = 0;
+            Dictionary<string, Action<int>> actionsButton = new Dictionary<string, Action<int>>() { { "consulter", consulter }, { "modifier", modifier }, { "supprimer", supprimer } };
+
             InitializeComponent();
 
-
-            foreach (var promo in MainWindow.listePromotions)
+                        foreach (var promo in MainWindow.listePromotions)
             {
                 int count = 0;
                 foreach (var utilisateur in MainWindow.listeUtilisateurs) {
@@ -22,25 +28,20 @@ namespace _2FAR_Gestion
                         count++;
                     }
                  }
-                this.listCartes.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsButton, 18, 25));
+                this.listCartes.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsButton, 18, 25, promo.idPromo));
             }
-
-
-            
-            //this.listCartes.Children.Add(new Carte("BTS", "Bts2", actionsButton));
-            //this.listCartes.Children.Add(new Carte("BTS", "Bts1", actionsButton));
-            //this.listCartes.Children.Add(new Carte("BTSsio", "BtsSIO", actionsButton));
-            
         }
 
-        private void consulter()
+        private void consulter(int id)
         {
         }
-        private void modifier()
+        private void modifier(int id)
         {
+            
+            mw.Content = new MenuNavbar(new ActionPromos(id),mw);
         }
 
-        private void supprimer()
+        private void supprimer(int id)
         {
             MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
@@ -56,6 +57,12 @@ namespace _2FAR_Gestion
                 //impossible mais oklm
                 MessageBox.Show("Erreur Inconnue");
             }
+        }
+
+        private void add_promo(object sender, RoutedEventArgs e)
+        {
+            mw.Content = new MenuNavbar(new ActionPromos(), mw);
+
         }
     }
 }
