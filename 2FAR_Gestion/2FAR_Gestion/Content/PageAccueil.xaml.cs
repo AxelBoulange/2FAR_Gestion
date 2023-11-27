@@ -7,14 +7,10 @@ namespace _2FAR_Gestion
 
     public partial class PageAccueil
     {
-        
-
-
         public PageAccueil()
         {
             InitializeComponent();
         }
-
         private void CreationTpPage(object sender, RoutedEventArgs e)
         {
             if (this.Parent is MainWindow mw)
@@ -25,7 +21,6 @@ namespace _2FAR_Gestion
         }
         private void ListTpPage (object sender, RoutedEventArgs e)
         {
-            
             if(this.Parent is MainWindow mw)
             {
                 mw.Content = new MenuNavbar(new ListeTp(),mw);

@@ -25,9 +25,9 @@ namespace _2FAR_Library.Ado
                 {
                     foreach(Tache t in taches)
                     {
-                        if(reader.GetInt16(1) == u.idUtilisateur && reader.GetInt16(2) == t.idTache)
+                        if(reader.GetInt32(1) == u.idUtilisateur && reader.GetInt32(2) == t.idTache)
                         {
-                            attendreValidationList.Add(new AttendreValidation(reader.GetString(0), u, t));
+                            attendreValidationList.Add(new AttendreValidation(reader.GetDateTime(0).ToString(), u, t));
                         }
                     }
                 }
