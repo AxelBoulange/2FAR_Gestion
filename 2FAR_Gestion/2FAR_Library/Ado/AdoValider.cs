@@ -10,14 +10,11 @@ namespace _2FAR_Library.Ado
 {
     public class AdoValider : AdoTache 
     {
-
-
         public static List<Valider> getAdoValider()
         {
             List<Tache> taches = getAdoTache();
             List<Utilisateur> utilisateurs = getAdoUtilisateur();
-            Connexion connexion = new Connexion();
-            SqlConnection conn = connexion.GetConn();
+            SqlConnection conn = new Connexion().GetConn();
             conn.Open();
             string sql = "SELECT * FROM valider;";
             SqlCommand cmd = new SqlCommand(sql, conn);
@@ -38,7 +35,5 @@ namespace _2FAR_Library.Ado
             }
             return validerList;
         }
-        
-        
     }
 }

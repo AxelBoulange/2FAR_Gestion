@@ -9,13 +9,10 @@ namespace _2FAR_Library.Ado
 {
     public class AdoTP : AdoTache
     {
-        
-
         public static List<TP> GetAdoTP()
         {
             List<Tache> taches = getAdoTache();
-            Connexion connexion = new Connexion();
-            SqlConnection conn = connexion.GetConn();
+            SqlConnection conn = new Connexion().GetConn();
             conn.Open();
             string sql = "SELECT * FROM tp;";
             SqlCommand cmd = new SqlCommand(sql, conn);

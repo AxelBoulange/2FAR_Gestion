@@ -13,8 +13,7 @@ namespace _2FAR_Library.Ado
         {
             List<Tache> taches = getAdoTache();
             List<Utilisateur> utilisateurs = getAdoUtilisateur();
-            Connexion connexion = new Connexion();
-            SqlConnection conn = connexion.GetConn();
+            SqlConnection conn = new Connexion().GetConn();
             conn.Open();
             string sql = "SELECT * FROM attendre_validation ORDER BY dte_demande DESC;";
             SqlCommand cmd = new SqlCommand(sql, conn);

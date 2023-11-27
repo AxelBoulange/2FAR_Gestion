@@ -9,12 +9,9 @@ namespace _2FAR_Library.Ado
 {
     public class AdoPromos : AdoUtilisateur
     {
-    
-
         public static List<Promo> getAdoPromos() { 
             List<Utilisateur> utilisateur = getAdoUtilisateur();
-            Connexion connexion = new Connexion();
-            SqlConnection conn = connexion.GetConn();
+            SqlConnection conn = new Connexion().GetConn();
             conn.Open();
             string sql = "SELECT * FROM promotion";
             SqlCommand cmd = new SqlCommand(sql, conn);
@@ -37,6 +34,5 @@ namespace _2FAR_Library.Ado
             }
             return promotions;
         }
-
     }
 }
