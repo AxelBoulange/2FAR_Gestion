@@ -13,8 +13,7 @@ namespace _2FAR_Library.Ado
         {
             List<TP> tp = GetAdoTP();
             List<Promo> promos = getAdoPromos();
-            Connexion connexion = new Connexion();
-            SqlConnection conn = connexion.GetConn();
+            SqlConnection conn = new Connexion().GetConn();
             conn.Open();
             string sql = "SELECT * FROM etre_attribuer";
             SqlCommand cmd = new SqlCommand(sql, conn);

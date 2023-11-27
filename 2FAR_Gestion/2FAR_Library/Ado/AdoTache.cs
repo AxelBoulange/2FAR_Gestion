@@ -9,11 +9,9 @@ namespace _2FAR_Library.Ado
 {
     public class AdoTache : AdoPromos
     {
-
         public static List<Tache> getAdoTache()
         {
-            Connexion connexion = new Connexion();
-            SqlConnection conn = connexion.GetConn();
+            SqlConnection conn = new Connexion().GetConn();
             conn.Open();
             string sql = "SELECT * FROM tache;";
             SqlCommand cmd = new SqlCommand(sql, conn);

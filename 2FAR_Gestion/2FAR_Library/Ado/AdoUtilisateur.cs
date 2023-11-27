@@ -12,8 +12,7 @@ namespace _2FAR_Library.Ado
     {
         public static List<Utilisateur> getAdoUtilisateur()
         {
-            Connexion connexion = new Connexion();
-            SqlConnection conn = connexion.GetConn();
+            SqlConnection conn = new Connexion().GetConn();
             conn.Open();
             string sql = "SELECT * FROM utilisateur u INNER JOIN promotion p on p.id_promotion = u.fk_id_promo;";
             SqlCommand cmd = new SqlCommand(sql, conn);
@@ -25,7 +24,5 @@ namespace _2FAR_Library.Ado
             }
             return utilisateurs;
         }
-
-
     }
 }
