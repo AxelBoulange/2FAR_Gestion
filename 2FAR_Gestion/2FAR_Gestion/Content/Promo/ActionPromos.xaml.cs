@@ -21,27 +21,22 @@ namespace _2FAR_Gestion.Content.Promo
     /// </summary>
     public partial class ActionPromos : Page
     {
-        string action;
-        _2FAR_Library.Promo promo;
-        public ActionPromos(int promo)
+        //_2FAR_Library.Promo prom;
+
+        public ActionPromos()
         {
+            loading("ajouter une promo");
+
+        }
+        public ActionPromos(_2FAR_Library.Promo p)
+        {
+
             loading("Modifier une promo");
-            foreach (_2FAR_Library.Promo p in MainWindow.listePromotions)
-            {
-                  if (p.idPromo == promo)
-                {
-                    _2FAR_Library.Promo prom = p;
-                    lb_test.Content = prom.nomPromo;
+            tbx_nomPromo.Text= p.nomPromo;
 
-                }
-            }
-            
         }
 
-        public ActionPromos() 
-        {
-            loading("Ajouter une promo");
-        }
+    
 
         void loading(string title)
         {

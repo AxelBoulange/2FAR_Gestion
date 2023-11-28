@@ -4,6 +4,7 @@ using System.Windows;
 using _2FAR_Library;
 using _2FAR_Gestion.Content;
 using _2FAR_Gestion.Content.Promo;
+using System.Windows.Controls;
 
 namespace _2FAR_Gestion
 {
@@ -15,7 +16,7 @@ namespace _2FAR_Gestion
         {
             this.mw = mw;
            this.id = 0;
-            Dictionary<string, Action<int>> actionsButton = new Dictionary<string, Action<int>>() { { "consulter", consulter }, { "modifier", modifier }, { "supprimer", supprimer } };
+            Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "consulter", consulter }, { "modifier", modifier }, { "supprimer", supprimer } };
 
             InitializeComponent();
 
@@ -28,20 +29,35 @@ namespace _2FAR_Gestion
                         count++;
                     }
                  }
-                this.listCartes.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsButton, 18, 25, promo.idPromo));
+                this.listCartes.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsButton, 18, 25, promo));
             }
         }
 
-        private void consulter(int id)
+        private void consulter(object o, EventArgs e)
         {
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
+            {
+                var promo = c.objectCarte;
+                if (promo is _2FAR_Library.Promo) 
+                { 
+                mw.Content = new MenuNavbar(new ListeTpPromos((Promo)promo), mw);
+                }
+            }
         }
-        private void modifier(int id)
+        private void modifier(object o, EventArgs e)
         {
-            
-            mw.Content = new MenuNavbar(new ActionPromos(id),mw);
+
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
+            {
+                var promo = c.objectCarte;
+                if (promo is _2FAR_Library.Promo)
+                {
+                    mw.Content = new MenuNavbar(new ActionPromos((Promo)promo), mw);
+                }
+            }
         }
 
-        private void supprimer(int id)
+        private void supprimer(object o, EventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)

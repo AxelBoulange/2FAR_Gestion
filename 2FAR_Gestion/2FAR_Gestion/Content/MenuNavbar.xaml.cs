@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using _2FAR_Library.Graphique;
+using _2FAR_Library;
 
 namespace _2FAR_Gestion.Content
 {
