@@ -12,7 +12,7 @@ namespace _2FAR_Gestion
         {
             InitializeComponent();
             Dictionary<string,Action> actionsButton = new Dictionary<string,Action>() { {"Valider",valider}};
-            foreach (var attendreValidation in MainWindow.tpAttenteValidations)
+            foreach (var attendreValidation in MainWindow.listeAttenteValidations)
             {
                 listCartes.Children.Add(new Carte(attendreValidation.dte_demande + " | " + MainWindow.listeTP.Where(Tp => Tp.idTP == attendreValidation.tache.fk_id_tp ).First().nomTP + " | " + MainWindow.listePromotions.Where(promo => promo.idPromo == attendreValidation.utilisateur.fk_id_promo ).First().nomPromo, attendreValidation.tache.descriptionTache + " | " + attendreValidation.utilisateur.nomUtilisateur.Split().First() + " " + attendreValidation.utilisateur.prenomUtilisateur, actionsButton, 18,25));
             }
