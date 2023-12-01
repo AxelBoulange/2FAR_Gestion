@@ -14,13 +14,14 @@ namespace _2FAR_Library
 {
     public class Carte : Border
     {
-        public Carte(string title, string content, Dictionary<string, Action> actionButtons, int TitleSize, int DescSize)
+        public object? objectCarte;
+        public Carte(string title, string content, Dictionary<string, Action<object , EventArgs >> actionButtons, int TitleSize, int DescSize, object? objetcarte)
         {
             BorderBrush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
             BorderThickness = new Thickness(1);
             this.HorizontalAlignment = HorizontalAlignment.Stretch;
             this.Margin = new Thickness(20, 20, 20, 20);
-
+            objectCarte = objetcarte;
             Grid grid = new Grid();
             for (int i = 0; i < 3; i++) //faire 3 column
             {

@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using _2FAR_Library.Graphique;
+using _2FAR_Library;
 
 namespace _2FAR_Gestion.Content
 {
@@ -33,7 +34,7 @@ namespace _2FAR_Gestion.Content
     }
     private void VoirPromos()
     {
-        this.frameContent.Content = new VoirPromos();
+        this.frameContent.Content = new VoirPromos(page);
     }
     private void DemandeValidation()
     {

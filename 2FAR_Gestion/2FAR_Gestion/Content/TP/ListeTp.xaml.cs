@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using _2FAR_Gestion.Content;
 using _2FAR_Library;
+using _2FAR_Gestion.Content;
 using _2FAR_Gestion.Content.Promo;
 
 namespace _2FAR_Gestion
@@ -13,7 +13,7 @@ namespace _2FAR_Gestion
         public ListeTp(MainWindow mw)
         {
             this.mw = mw;
-            Dictionary<string,Action> actionsButton = new Dictionary<string,Action>() { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
+            Dictionary<string,Action<object, EventArgs>> actionsButton = new Dictionary<string,Action<object, EventArgs>> { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
             
             InitializeComponent();
 
@@ -27,19 +27,19 @@ namespace _2FAR_Gestion
                         count++;
                     }
                 }
-                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\n nombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14));
+                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\n nombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14, tp));
             }
         }
-        private void consulter()
+        private void consulter(object o, EventArgs e)
         {
             
         }
-        private void modifier()
+        private void modifier(object o, EventArgs e)
         {
             this.listCartes.Children.Clear();
         }
 
-        private void supprimer()
+        private void supprimer(object o, EventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)

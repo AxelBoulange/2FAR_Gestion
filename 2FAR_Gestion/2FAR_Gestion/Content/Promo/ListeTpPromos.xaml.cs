@@ -9,7 +9,8 @@ public partial class ListeTpPromos
         get;
         set;
     }
-    public ListeTpPromos(int idpromo)
+
+    public ListeTpPromos(_2FAR_Library.Promo promo)
     {
         this.TP =  MainWindow.listeTP.Where(TP => TP.idTP == MainWindow.attribuerTPs.Where(etreatribuer => etreatribuer.tp.idTP == TP.idTP)).ToList();
         InitializeComponent();

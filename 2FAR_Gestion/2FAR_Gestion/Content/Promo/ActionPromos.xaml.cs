@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2FAR_Library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,28 @@ namespace _2FAR_Gestion.Content.Promo
     /// </summary>
     public partial class ActionPromos : Page
     {
+        //_2FAR_Library.Promo prom;
+
         public ActionPromos()
         {
+            loading("ajouter une promo");
+
+        }
+        public ActionPromos(_2FAR_Library.Promo p)
+        {
+
+            loading("Modifier une promo");
+            tbx_nomPromo.Text= p.nomPromo;
+
+        }
+
+    
+
+        void loading(string title)
+        {
             InitializeComponent();
+
+            lb_title.Content = title;
         }
     }
 }
