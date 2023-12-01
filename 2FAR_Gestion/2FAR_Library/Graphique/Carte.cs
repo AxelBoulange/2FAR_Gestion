@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Btn = _2FAR_Library.Graphique.Btn;
 
@@ -13,14 +14,14 @@ namespace _2FAR_Library
 {
     public class Carte : Border
     {
-        public Carte(string title, string content, Dictionary<string, Action> actionButtons, int TitleSize, int DescSize)
+        public object? objectCarte;
+        public Carte(string title, string content, Dictionary<string, Action<object , EventArgs >> actionButtons, int TitleSize, int DescSize, object? objetcarte)
         {
-            BorderBrush = new System.Windows.Media.SolidColorBrush(
-                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
+            BorderBrush = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb"));
             BorderThickness = new Thickness(1);
             this.HorizontalAlignment = HorizontalAlignment.Stretch;
             this.Margin = new Thickness(20, 20, 20, 20);
-
+            objectCarte = objetcarte;
             Grid grid = new Grid();
             for (int i = 0; i < 3; i++) //faire 3 column
             {
@@ -30,19 +31,23 @@ namespace _2FAR_Library
             grid.Margin = new Thickness(20, 20, 20, 20);
             Child = grid;
 
-            Label cardTitle = new Label();
-            cardTitle.HorizontalAlignment = HorizontalAlignment.Stretch;
-            cardTitle.VerticalAlignment = VerticalAlignment.Stretch;
-            cardTitle.Content = title;
+            Frame card = new Frame();
+            card.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5e17eb"));
+            card.HorizontalAlignment = HorizontalAlignment.Stretch;
+            card.VerticalAlignment = VerticalAlignment.Stretch;
+            Grid.SetColumn(card, 0);
+            grid.Children.Add(card);
+            
+            TextBlock cardTitle = new TextBlock();
+            cardTitle.HorizontalAlignment = HorizontalAlignment.Center;
+            cardTitle.VerticalAlignment = VerticalAlignment.Center;
+            cardTitle.Text = title;
+            cardTitle.TextWrapping = TextWrapping.Wrap;
             cardTitle.Foreground = Brushes.White;
-            cardTitle.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5e17eb"));
             cardTitle.FontSize = TitleSize;
             cardTitle.FontWeight = FontWeights.Bold;
-            cardTitle.HorizontalContentAlignment = HorizontalAlignment.Center;
-            cardTitle.VerticalContentAlignment = VerticalAlignment.Center;
-            Grid.SetColumn(cardTitle, 0);
-            grid.Children.Add(cardTitle);
-
+            cardTitle.Margin = new Thickness(5, 5, 5, 5);
+            card.Content = cardTitle;
 
             TextBlock cardContent = new TextBlock();
             cardContent.TextWrapping = TextWrapping.Wrap;
@@ -52,26 +57,35 @@ namespace _2FAR_Library
             cardContent.Foreground = Brushes.Black;
             cardContent.FontSize = DescSize;
             cardContent.FontWeight = FontWeights.Bold;
+            cardContent.Padding = new Thickness(15);
             Grid.SetColumn(cardContent, 1);
             grid.Children.Add(cardContent);
 
 
+            
             StackPanel stackPanel = new StackPanel();
-            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+            stackPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
             stackPanel.VerticalAlignment = VerticalAlignment.Center;
-            stackPanel.Margin = new Thickness(5, 5, 5, 5);
+
             
             foreach (var action in actionButtons)
             {
-                Btn boutton = new Btn(action.Key, action.Value);
-                boutton.Margin = new Thickness(0, 5, 0, 5);
-                stackPanel.Children.Add(boutton);
+                Btn button = new Btn(action.Key, action.Value);
+                button.Margin = new Thickness(0, 5, 0, 5);
+                button.HorizontalAlignment = HorizontalAlignment.Stretch;
+                button.VerticalAlignment = VerticalAlignment.Stretch;
+
+                button.Height = 40;
+
+                if (action.Key == "supprimer")
+                {
+                    button.Background = Brushes.Red;
+                }
+                stackPanel.Children.Add(button);
             }
 
             Grid.SetColumn(stackPanel, 2);
             grid.Children.Add(stackPanel);
-
-
         }
     }
 }

@@ -20,6 +20,5 @@ namespace _2FAR_Library
         public Connexion() {
             this.Conn = new SqlConnection("Data Source=DESKTOP-QRFG8IL;Initial Catalog=gestion_tp2;Integrated Security=SSPI");
         }
-
     }
 }

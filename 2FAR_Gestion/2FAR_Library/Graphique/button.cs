@@ -34,18 +34,16 @@ namespace _2FAR_Library.Graphique
 
     public class Btn : Button
     {
-        public Btn(string name, Action click)
+        public Btn(string name, Action<object, EventArgs> click)
         {
             HorizontalAlignment = HorizontalAlignment.Right;
             VerticalAlignment = VerticalAlignment.Center;
             var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("white"));
             Margin = new Thickness(0, 0, 20, 0);
             Content = name;
-            Width = 150;
-            Height = 35;
             Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5e17eb"));
             Foreground = brush;
-            Click += (sender, e) => click.Invoke();
+            Click += (sender, e) => click(sender, e);
 
         }
     }
