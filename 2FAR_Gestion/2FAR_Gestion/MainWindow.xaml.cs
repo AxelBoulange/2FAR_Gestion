@@ -33,7 +33,7 @@ namespace _2FAR_Gestion
         public MainWindow()
         {
             tpAttenteValidations = AdoAttendreValidation.getAdoAttendreValidation();
-            //attribuerTPs = AdoAttribuerTP.getAdoAttribuerTP();
+            attribuerTPs = AdoAttribuerTP.getAdoAttribuerTP();
             //tpValider = AdoValider.getAdoValider();
             listePromotions = AdoPromos.getAdoPromos();
             listeUtilisateurs = AdoUtilisateur.getAdoUtilisateur();
