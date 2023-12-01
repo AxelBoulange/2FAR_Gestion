@@ -58,7 +58,7 @@ namespace _2FAR_Gestion
             //initialisation de la connexion
             Connexion connexion = new Connexion();
             SqlConnection conn = connexion.GetConn();
-            /*
+            
             //suppression des tables
             SqlCommand cmdDelete = new SqlCommand();
             conn.Open();
@@ -95,25 +95,31 @@ namespace _2FAR_Gestion
             cmd.ExecuteNonQuery();
             cmd.CommandText = "DBCC CHECKIDENT (tache, RESEED, 0)";
             cmd.ExecuteNonQuery();
-            
+
             //inserer les données 
             // Ordre Promo -> Utilisateur -> TP -> Tache -> Attribuer_TP -> Valider -> Attendre_validation -> Avancement_tache
-            
-            SqlCommand cmdInsert = new SqlCommand();
-            cmdInsert.Connection = conn;
 
-           
 
-            string sqlPromo = "INSERT INTO promotion (nom_promotion) VALUES (@nom_promotion)";
-            foreach (Promo p in listePromotions) 
-            {
+
+            SqlCommand cmdInsert;
+
+
+            foreach (Promo p in listePromotions) {
+
+                cmdInsert = new SqlCommand();
+                cmdInsert.Connection = conn;
+                string sqlPromo = "INSERT INTO promotion (nom_promotion) VALUES (@nom_promotion)";
                 cmdInsert.CommandText = sqlPromo;
                 cmdInsert.Parameters.AddWithValue("@nom_promotion", p.nomPromo);
                 cmdInsert.ExecuteNonQuery();
             }
-            string sqlUtilisateur = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, mail_utilisateur, mdp_utilisateur, is_admin, fk_id_promo) VALUES (@nom_utilisateur, @prenom_utilisateur, @mail_utilisateur, @mdp_utilisateur, @is_admin, @fk_id_promo)";
-            foreach(Utilisateur u in listeUtilisateurs)
+
+            
+            foreach (Utilisateur u in listeUtilisateurs)
             {
+                cmdInsert = new SqlCommand();
+                cmdInsert.Connection = conn;
+                string sqlUtilisateur = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, mail_utilisateur, mdp_utilisateur, is_admin, fk_id_promo) VALUES (@nom_utilisateur, @prenom_utilisateur, @mail_utilisateur, @mdp_utilisateur, @is_admin, @fk_id_promo)";
                 cmdInsert.CommandText = sqlUtilisateur;
                 cmdInsert.Parameters.AddWithValue("@nom_utilisateur", u.nomUtilisateur);
                 cmdInsert.Parameters.AddWithValue("@prenom_utilisateur", u.prenomUtilisateur);
@@ -123,21 +129,27 @@ namespace _2FAR_Gestion
                 cmdInsert.Parameters.AddWithValue("@fk_id_promo", u.fk_id_promo);
                 cmdInsert.ExecuteNonQuery();
             }
-            string sqlTP = "INSERT INTO tp (nom_tp, description_tp) VALUES (@nom_tp, @description_tp)";
+            
             foreach (TP t in listeTP)
             {
-                cmdInsert.CommandText= sqlTP;
+                cmdInsert = new SqlCommand();
+                cmdInsert.Connection = conn;
+                string sqlTP = "INSERT INTO tp (nom_tp, description_tp) VALUES (@nom_tp, @description_tp)";
+                cmdInsert.CommandText = sqlTP;
                 cmdInsert.Parameters.AddWithValue("@nom_tp", t.nomTP);
                 cmdInsert.Parameters.AddWithValue("@description_tp", t.descriptionTP);
                 cmdInsert.ExecuteNonQuery();
             }
-            string sqlTache = "INSERT INTO tache (description_tache, ordre_tache, point_etape, is_bonus, is_actif, fk_id_tp, titre_tache, is_checkpoint) VALUES (@description_tache, @ordre_tache, @point_tache, @is_bonus, @is_actif, @fk_id_tp, @titre_tache, @is_checkpoint)";
+            
             foreach (Tache t in listeTaches)
             {
+                cmdInsert = new SqlCommand();
+                cmdInsert.Connection = conn;
+                string sqlTache = "INSERT INTO tache (description_tache, ordre_tache, point_etape, is_bonus, is_actif, fk_id_tp, titre_tache, is_checkpoint) VALUES (@description_tache, @ordre_tache, @point_tache, @is_bonus, @is_actif, @fk_id_tp, @titre_tache, @is_checkpoint)";
                 cmdInsert.CommandText = sqlTache;
                 cmdInsert.Parameters.AddWithValue("@description_tache", t.descriptionTache);
                 cmdInsert.Parameters.AddWithValue("@ordre_tache", t.ordreTache);
-                cmdInsert.Parameters.AddWithValue("@point_etape", t.pointTache);
+                cmdInsert.Parameters.AddWithValue("@point_tache", t.pointTache);
                 cmdInsert.Parameters.AddWithValue("@is_bonus", t.isBonus);
                 cmdInsert.Parameters.AddWithValue("@is_actif", t.isActif);
                 cmdInsert.Parameters.AddWithValue("@fk_id_tp", t.fk_id_tp);
@@ -145,19 +157,25 @@ namespace _2FAR_Gestion
                 cmdInsert.Parameters.AddWithValue("@is_checkpoint", t.isCheckpoint);
                 cmdInsert.ExecuteNonQuery();
             }
-            string sqlAttributionTP = "INSERT INTO (dte_fin, is_actif, fk_id_tp, fk_id_promo) VALUES (@dte_fin, @is_actif, @fk_id_tp, @fk_id_promo)";
-            foreach(AttribuerTP a in listeAttributions)
+            
+            foreach (AttribuerTP a in listeAttributions)
             {
-                cmdInsert.CommandText= sqlAttributionTP;
+                cmdInsert = new SqlCommand();
+                cmdInsert.Connection = conn;
+                string sqlAttributionTP = "INSERT INTO etre_attribuer (dte_fin, is_actif, fk_id_tp, fk_id_promo) VALUES (@dte_fin, @is_actif, @fk_id_tp, @fk_id_promo)";
+                cmdInsert.CommandText = sqlAttributionTP;
                 cmdInsert.Parameters.AddWithValue("@dte_fin", a.dte_fin);
                 cmdInsert.Parameters.AddWithValue("@is_actif", a.is_actif);
                 cmdInsert.Parameters.AddWithValue("@fk_id_tp", a.tp.idTP);
                 cmdInsert.Parameters.AddWithValue("@fk_id_promo", a.promotion.idPromo);
                 cmdInsert.ExecuteNonQuery();
             }
-            string sqlValidationTP = "INSERT INTO (reponse, is_valide, fk_id_utilisateur,fk_id_tache) VALUES (@reponse, @is_valide, @fk_id_utilisateur, @fk_id_tache)";
-            foreach(Valider v in listeValidations)
+            
+            foreach (Valider v in listeValidations)
             {
+                cmdInsert = new SqlCommand();
+                cmdInsert.Connection = conn;
+                string sqlValidationTP = "INSERT INTO valider (reponse, is_valide, fk_id_utilisateur,fk_id_tache) VALUES (@reponse, @is_valide, @fk_id_utilisateur, @fk_id_tache)";
                 cmdInsert.CommandText = sqlValidationTP;
                 cmdInsert.Parameters.AddWithValue("@reponse", v.reponse);
                 cmdInsert.Parameters.AddWithValue("@is_valide", v.isJuste);
@@ -165,18 +183,24 @@ namespace _2FAR_Gestion
                 cmdInsert.Parameters.AddWithValue("@fk_id_tache", v.tacheValider.idTache);
                 cmdInsert.ExecuteNonQuery();
             }
-            string sqlAttenteValidationTP = "INSERT INTO (dte_demande, fk_id_utilisateur, fk_id_tache) VALUES (@dte_demande, @fk_id_utilisateur, @fk_id_tache)";
-            foreach(AttendreValidation v in listeAttenteValidations)
+            
+            foreach (AttendreValidation v in listeAttenteValidations)
             {
+                cmdInsert = new SqlCommand();
+                cmdInsert.Connection = conn;
+                string sqlAttenteValidationTP = "INSERT INTO attendre_validation (dte_demande, fk_id_utilisateur, fk_id_tache) VALUES (@dte_demande, @fk_id_utilisateur, @fk_id_tache)";
                 cmdInsert.CommandText = sqlAttenteValidationTP;
                 cmdInsert.Parameters.AddWithValue("@dte_demande", v.dte_demande);
                 cmdInsert.Parameters.AddWithValue("@fk_id_utilisateur", v.utilisateur.idUtilisateur);
                 cmdInsert.Parameters.AddWithValue("@fk_id_tache", v.tache.idTache);
                 cmdInsert.ExecuteNonQuery();
             }
-            string sqlAvancementTP = "INSERT INTO avancement_tache (fk_id_tache, fk_id_utilisateur, taux_avancement) VALUES (@fk_id_tache, @fk_id_utilisateur, @taux_avancement)";
-            foreach(AvancementTache a in listeAvancementTaches)
+            
+            foreach (AvancementTache a in listeAvancementTaches)
             {
+                cmdInsert = new SqlCommand();
+                cmdInsert.Connection = conn;
+                string sqlAvancementTP = "INSERT INTO avancement_tache (fk_id_tache, fk_id_utilisateur, taux_avancement) VALUES (@fk_id_tache, @fk_id_utilisateur, @taux_avancement)";
                 cmdInsert.CommandText = sqlAvancementTP;
                 cmdInsert.Parameters.AddWithValue("@fk_id_tache", a.tache.idTache);
                 cmdInsert.Parameters.AddWithValue("@fk_id_utilisateur", a.utilisateur.idUtilisateur);
@@ -184,7 +208,7 @@ namespace _2FAR_Gestion
                 cmdInsert.ExecuteNonQuery();
             }
             conn.Close();
-            */
+            
         }
     }
 }

@@ -12,7 +12,7 @@ public partial class ListeTpPromos
 
     public ListeTpPromos(_2FAR_Library.Promo promo)
     {
-        this.TP =  MainWindow.listeTP.Where(TP => TP.idTP == MainWindow.attribuerTPs.Where(etreatribuer => etreatribuer.tp.idTP == TP.idTP)).ToList();
-        InitializeComponent();
+     //   this.TP =  MainWindow.listeTP.Where(TP => TP.idTP == MainWindow.listeAttributions.Where(etreatribuer => etreatribuer.tp.idTP == TP.idTP)).ToList();
+     //   InitializeComponent();
     }
 }
