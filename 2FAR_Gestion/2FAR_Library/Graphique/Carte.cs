@@ -67,23 +67,24 @@ namespace _2FAR_Library
             stackPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
             stackPanel.VerticalAlignment = VerticalAlignment.Center;
 
-            
-            foreach (var action in actionButtons)
+            if (actionButtons != null)
             {
-                Btn button = new Btn(action.Key, action.Value);
-                button.Margin = new Thickness(0, 5, 0, 5);
-                button.HorizontalAlignment = HorizontalAlignment.Stretch;
-                button.VerticalAlignment = VerticalAlignment.Stretch;
-
-                button.Height = 40;
-
-                if (action.Key == "supprimer")
+                foreach (var action in actionButtons)
                 {
-                    button.Background = Brushes.Red;
-                }
-                stackPanel.Children.Add(button);
-            }
+                    Btn button = new Btn(action.Key, action.Value);
+                    button.Margin = new Thickness(0, 5, 0, 5);
+                    button.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    button.VerticalAlignment = VerticalAlignment.Stretch;
 
+                    button.Height = 40;
+
+                    if (action.Key == "supprimer")
+                    {
+                        button.Background = Brushes.Red;
+                    }
+                    stackPanel.Children.Add(button);
+                } 
+            }
             Grid.SetColumn(stackPanel, 2);
             grid.Children.Add(stackPanel);
         }

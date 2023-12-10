@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_2FAR_Gestion.Content.Promo"
       mc:Ignorable="d"
       Title="ListeTpPromos" Height="450" Width="800">
-    <Grid>
-        <StackPanel Orientation="Horizontal"/>
-    </Grid>
+    <ScrollViewer x:Name="cartes" Grid.Row="1" Grid.Column="1" >
+        <StackPanel x:Name="listCartes"/>
+    </ScrollViewer>
 </Page>
