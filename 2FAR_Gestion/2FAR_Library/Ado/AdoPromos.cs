@@ -9,22 +9,23 @@ namespace _2FAR_Library.Ado
 {
     public class AdoPromos : AdoUtilisateur
     {
-        public static List<Promo> getAdoPromos() { 
-            List<Utilisateur> utilisateur = getAdoUtilisateur();
-            SqlConnection conn = new Connexion().GetConn();
-            conn.Open();
+        public static List<Promo> getAdoPromos(SqlConnection connexion, List<Utilisateur> toutLesUtilisateurs) 
+        {
             string sql = "SELECT * FROM promotion";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
+            SqlCommand cmd = new SqlCommand(sql, connexion);
             List<Promo> promotions = new List<Promo>();
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                promotions.Add(new Promo(reader.GetInt32(0), reader.GetString(1)));
+                while (reader.Read())
+                {
+                    promotions.Add(new Promo(reader.GetInt32(0), reader.GetString(1)));
 
+                }
             }
+            
             foreach (Promo p in promotions) 
             { 
-                foreach(Utilisateur u in utilisateur)
+                foreach(Utilisateur u in toutLesUtilisateurs)
                 {
                     if(u.fk_id_promo == p.idPromo)
                     {

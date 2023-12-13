@@ -30,18 +30,24 @@ namespace _2FAR_Gestion
         public static List<Utilisateur> listeUtilisateurs;
         public static List<Tache> listeTaches;
         public static List<TP> listeTP;
-        
+
 
         public MainWindow()
         {
-            listeAttenteValidations = AdoAttendreValidation.getAdoAttendreValidation();
-            listeAttributions = AdoAttribuerTP.getAdoAttribuerTP();
-            listeValidations = AdoValider.getAdoValider();
-            listeAvancementTaches = AdoAvancementTache.getAdoAvancementTache();
-            listePromotions = AdoPromos.getAdoPromos();
-            listeUtilisateurs = AdoUtilisateur.getAdoUtilisateur();
-            listeTaches = AdoTache.getAdoTache();
-            listeTP = AdoTP.GetAdoTP();
+            //initialisation de la connexion
+            listeTaches = AdoTache.getAdoTache(Connexion.GetConn());
+            listeTP = AdoTP.GetAdoTP(Connexion.GetConn(), listeTaches); // taches
+            
+
+            listeUtilisateurs = AdoUtilisateur.getAdoUtilisateur(Connexion.GetConn());
+            listePromotions = AdoPromos.getAdoPromos(Connexion.GetConn(), listeUtilisateurs); // utilisateurs
+
+            listeAttributions = AdoAttribuerTP.getAdoAttribuerTP(Connexion.GetConn(), listeTP, listePromotions); //TP ET PROMO
+
+            listeAttenteValidations = AdoAttendreValidation.getAdoAttendreValidation(Connexion.GetConn(), listeUtilisateurs, listeTaches); //utilisateurs ET Taches
+            listeValidations = AdoValider.getAdoValider(Connexion.GetConn(), listeUtilisateurs, listeTaches); //Utilisateurs taches
+            listeAvancementTaches = AdoAvancementTache.getAdoAvancementTache(Connexion.GetConn(), listeUtilisateurs, listeTaches); //utilisateurs et taches
+            
             InitializeComponent();
             this.Content = new PageAccueil();
 
@@ -54,15 +60,9 @@ namespace _2FAR_Gestion
 
         private void MainWindow_Closing()
         {
-
-            //initialisation de la connexion
-            Connexion connexion = new Connexion();
-            SqlConnection conn = connexion.GetConn();
-            
             //suppression des tables
-            SqlCommand cmdDelete = new SqlCommand();
-            conn.Open();
-            cmdDelete.Connection = conn;
+            
+            SqlCommand cmdDelete = new SqlCommand {Connection = Connexion.GetConn()};
             cmdDelete.CommandText = "DELETE FROM valider";
             cmdDelete.ExecuteNonQuery();
             cmdDelete.CommandText = "DELETE FROM avancement_tache";
@@ -82,10 +82,11 @@ namespace _2FAR_Gestion
             cmdDelete.CommandText = "DELETE FROM tp";
             cmdDelete.ExecuteNonQuery();
             
+            cmdDelete.Connection.Close();
+            
             //remettre les autoincrement à 1 
-            SqlCommand cmd = new SqlCommand(); 
+            SqlCommand cmd = new SqlCommand {Connection = Connexion.GetConn()};
 
-            cmd.Connection = conn;
             
             cmd.CommandText = "DBCC CHECKIDENT (promotion, RESEED, 0)";
             cmd.ExecuteNonQuery();
@@ -95,19 +96,19 @@ namespace _2FAR_Gestion
             cmd.ExecuteNonQuery();
             cmd.CommandText = "DBCC CHECKIDENT (tache, RESEED, 0)";
             cmd.ExecuteNonQuery();
-
+            
+            cmd.Connection.Close();
+            
             //inserer les données 
             // Ordre Promo -> Utilisateur -> TP -> Tache -> Attribuer_TP -> Valider -> Attendre_validation -> Avancement_tache
 
 
 
-            SqlCommand cmdInsert;
+            SqlCommand cmdInsert = new SqlCommand {Connection = Connexion.GetConn()};
 
 
-            foreach (Promo p in listePromotions) {
-
-                cmdInsert = new SqlCommand();
-                cmdInsert.Connection = conn;
+            foreach (Promo p in listePromotions) 
+            {
                 string sqlPromo = "INSERT INTO promotion (nom_promotion) VALUES (@nom_promotion)";
                 cmdInsert.CommandText = sqlPromo;
                 cmdInsert.Parameters.AddWithValue("@nom_promotion", p.nomPromo);
@@ -117,8 +118,6 @@ namespace _2FAR_Gestion
             
             foreach (Utilisateur u in listeUtilisateurs)
             {
-                cmdInsert = new SqlCommand();
-                cmdInsert.Connection = conn;
                 string sqlUtilisateur = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, mail_utilisateur, mdp_utilisateur, is_admin, fk_id_promo) VALUES (@nom_utilisateur, @prenom_utilisateur, @mail_utilisateur, @mdp_utilisateur, @is_admin, @fk_id_promo)";
                 cmdInsert.CommandText = sqlUtilisateur;
                 cmdInsert.Parameters.AddWithValue("@nom_utilisateur", u.nomUtilisateur);
@@ -132,8 +131,6 @@ namespace _2FAR_Gestion
             
             foreach (TP t in listeTP)
             {
-                cmdInsert = new SqlCommand();
-                cmdInsert.Connection = conn;
                 string sqlTP = "INSERT INTO tp (nom_tp, description_tp) VALUES (@nom_tp, @description_tp)";
                 cmdInsert.CommandText = sqlTP;
                 cmdInsert.Parameters.AddWithValue("@nom_tp", t.nomTP);
@@ -143,8 +140,6 @@ namespace _2FAR_Gestion
             
             foreach (Tache t in listeTaches)
             {
-                cmdInsert = new SqlCommand();
-                cmdInsert.Connection = conn;
                 string sqlTache = "INSERT INTO tache (description_tache, ordre_tache, point_etape, is_bonus, is_actif, fk_id_tp, titre_tache, is_checkpoint) VALUES (@description_tache, @ordre_tache, @point_tache, @is_bonus, @is_actif, @fk_id_tp, @titre_tache, @is_checkpoint)";
                 cmdInsert.CommandText = sqlTache;
                 cmdInsert.Parameters.AddWithValue("@description_tache", t.descriptionTache);
@@ -160,8 +155,6 @@ namespace _2FAR_Gestion
             
             foreach (AttribuerTP a in listeAttributions)
             {
-                cmdInsert = new SqlCommand();
-                cmdInsert.Connection = conn;
                 string sqlAttributionTP = "INSERT INTO etre_attribuer (dte_fin, is_actif, fk_id_tp, fk_id_promo) VALUES (@dte_fin, @is_actif, @fk_id_tp, @fk_id_promo)";
                 cmdInsert.CommandText = sqlAttributionTP;
                 cmdInsert.Parameters.AddWithValue("@dte_fin", a.dte_fin);
@@ -173,8 +166,6 @@ namespace _2FAR_Gestion
             
             foreach (Valider v in listeValidations)
             {
-                cmdInsert = new SqlCommand();
-                cmdInsert.Connection = conn;
                 string sqlValidationTP = "INSERT INTO valider (reponse, is_valide, fk_id_utilisateur,fk_id_tache) VALUES (@reponse, @is_valide, @fk_id_utilisateur, @fk_id_tache)";
                 cmdInsert.CommandText = sqlValidationTP;
                 cmdInsert.Parameters.AddWithValue("@reponse", v.reponse);
@@ -186,8 +177,6 @@ namespace _2FAR_Gestion
             
             foreach (AttendreValidation v in listeAttenteValidations)
             {
-                cmdInsert = new SqlCommand();
-                cmdInsert.Connection = conn;
                 string sqlAttenteValidationTP = "INSERT INTO attendre_validation (dte_demande, fk_id_utilisateur, fk_id_tache) VALUES (@dte_demande, @fk_id_utilisateur, @fk_id_tache)";
                 cmdInsert.CommandText = sqlAttenteValidationTP;
                 cmdInsert.Parameters.AddWithValue("@dte_demande", v.dte_demande);
@@ -198,8 +187,6 @@ namespace _2FAR_Gestion
             
             foreach (AvancementTache a in listeAvancementTaches)
             {
-                cmdInsert = new SqlCommand();
-                cmdInsert.Connection = conn;
                 string sqlAvancementTP = "INSERT INTO avancement_tache (fk_id_tache, fk_id_utilisateur, taux_avancement) VALUES (@fk_id_tache, @fk_id_utilisateur, @taux_avancement)";
                 cmdInsert.CommandText = sqlAvancementTP;
                 cmdInsert.Parameters.AddWithValue("@fk_id_tache", a.tache.idTache);
@@ -207,7 +194,7 @@ namespace _2FAR_Gestion
                 cmdInsert.Parameters.AddWithValue("@taux_avancement", a.taux_avancement);
                 cmdInsert.ExecuteNonQuery();
             }
-            conn.Close();
+            cmdInsert.Connection.Close();
             
         }
     }

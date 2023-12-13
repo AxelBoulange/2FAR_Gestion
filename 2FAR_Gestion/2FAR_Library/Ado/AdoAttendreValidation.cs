@@ -9,25 +9,23 @@ namespace _2FAR_Library.Ado
 {
     public class AdoAttendreValidation : AdoTache
     {
-        public static List<AttendreValidation> getAdoAttendreValidation()
+        public static List<AttendreValidation> getAdoAttendreValidation(SqlConnection connexion, List<Utilisateur> toutLesUtilisateurs, List<Tache> touteLesTaches)
         {
-            List<Tache> taches = getAdoTache();
-            List<Utilisateur> utilisateurs = getAdoUtilisateur();
-            SqlConnection conn = new Connexion().GetConn();
-            conn.Open();
             string sql = "SELECT * FROM attendre_validation ORDER BY dte_demande DESC;";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
+            SqlCommand cmd = new SqlCommand(sql, connexion);
             List<AttendreValidation> attendreValidationList = new List<AttendreValidation>();
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                foreach(Utilisateur u in utilisateurs)
+                while (reader.Read())
                 {
-                    foreach(Tache t in taches)
+                    foreach(Utilisateur u in toutLesUtilisateurs)
                     {
-                        if(reader.GetInt32(1) == u.idUtilisateur && reader.GetInt32(2) == t.idTache)
+                        foreach(Tache t in touteLesTaches)
                         {
-                            attendreValidationList.Add(new AttendreValidation(reader.GetDateTime(0).ToString(), u, t));
+                            if(reader.GetInt32(1) == u.idUtilisateur && reader.GetInt32(2) == t.idTache)
+                            {
+                                attendreValidationList.Add(new AttendreValidation(reader.GetDateTime(0).ToString(), u, t));
+                            }
                         }
                     }
                 }

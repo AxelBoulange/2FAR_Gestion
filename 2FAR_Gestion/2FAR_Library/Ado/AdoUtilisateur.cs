@@ -10,18 +10,20 @@ namespace _2FAR_Library.Ado
 {
     public class AdoUtilisateur
     {
-        public static List<Utilisateur> getAdoUtilisateur()
+        public static List<Utilisateur> getAdoUtilisateur(SqlConnection connexion)
         {
-            SqlConnection conn = new Connexion().GetConn();
-            conn.Open();
-            string sql = "SELECT * FROM utilisateur u INNER JOIN promotion p on p.id_promotion = u.fk_id_promo;";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
             List<Utilisateur> utilisateurs = new List<Utilisateur>();
-            while(reader.Read())
+
+            string sql = "SELECT * FROM utilisateur u INNER JOIN promotion p on p.id_promotion = u.fk_id_promo;";
+            SqlCommand cmd = new SqlCommand(sql,(SqlConnection)connexion);
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                utilisateurs.Add(new Utilisateur(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetBoolean(5), reader.GetInt32(6), reader.GetString(8)));
+                while(reader.Read())
+                {
+                    utilisateurs.Add(new Utilisateur(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetBoolean(5), reader.GetInt32(6), reader.GetString(8)));
+                }
             }
+            
             return utilisateurs;
         }
     }

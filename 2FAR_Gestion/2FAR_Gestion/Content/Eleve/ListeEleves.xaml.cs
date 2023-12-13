@@ -12,30 +12,24 @@ using MahApps.Metro.Controls;
 
 namespace _2FAR_Gestion
 {
-    public partial class VoirEleves 
+    public partial class ListeEleves 
     {
-        private MainWindow mw;
-        public VoirEleves(MainWindow mw)
+        public ListeEleves()
         {
             InitializeComponent();
-            this.mw = mw;
 
-            List<_2FAR_Library.Promo> promo = AdoPromos.getAdoPromos();
             List<string> promo_string = new List<string>();
-            foreach (var item in promo)
+            foreach (var item in MainWindow.listePromotions)
             {
                 promo_string.Add(item.nomPromo);
             }
             cbb_promo.ItemsSource = promo_string;
-
-
-
-
-            List<_2FAR_Library.Utilisateur> utilisateur = AdoUtilisateur.getAdoUtilisateur();
+            
+            
             List<string> nomPromo = new List<string>();
-            foreach (Promo p in AdoPromos.getAdoPromos())
+            foreach (Promo p in MainWindow.listePromotions)
             {
-                foreach (_2FAR_Library.Utilisateur u in utilisateur)
+                foreach (_2FAR_Library.Utilisateur u in MainWindow.listeUtilisateurs)
                 {
                     if (u.fk_id_promo == p.idPromo)
                     {
@@ -48,7 +42,7 @@ namespace _2FAR_Gestion
 
         public void add_eleve(object sender, RoutedEventArgs e)
         {
-                mw.Content = new MenuNavbar(new AjouterEleve(),mw);
+            Application.Current.MainWindow.Content = new MenuNavbar(new AjouterEleve());
         }
 
         private void cbb_promo_Drop(object sender, EventArgs e)
@@ -90,7 +84,7 @@ namespace _2FAR_Gestion
             .ToList();
             }
             else
-            return AdoUtilisateur.getAdoUtilisateur().Where(Utilisateur =>
+            return AdoUtilisateur.getAdoUtilisateur(Connexion.GetConn()).Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.mailUtilisateur.ToLower().Contains(texteRecherche.ToLower()))

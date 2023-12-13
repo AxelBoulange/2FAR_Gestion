@@ -9,31 +9,27 @@ namespace _2FAR_Library.Ado
 {
     public class AdoAvancementTache : AdoTache
     {
-        public static List<AvancementTache> getAdoAvancementTache()
+        public static List<AvancementTache> getAdoAvancementTache(SqlConnection connexion, List<Utilisateur> toutLesUtilisateurs, List<Tache> touteLesTaches)
         {
-            List<Utilisateur> utilisateurs = getAdoUtilisateur();
-            List<Tache> taches = getAdoTache();
-            SqlConnection conn = new Connexion().GetConn();
-            conn.Open();
             string sql = "SELECT * FROM avancement_tache";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
+            SqlCommand cmd = new SqlCommand(sql, connexion);
             List<AvancementTache> avancementTaches = new List<AvancementTache>();
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                foreach(Tache t in taches)
+                while (reader.Read())
                 {
-                    foreach(Utilisateur u in utilisateurs)
+                    foreach(Tache t in touteLesTaches)
                     {
-                        if(t.idTache == reader.GetInt32(0) && u.idUtilisateur == reader.GetInt32(1))
+                        foreach(Utilisateur u in toutLesUtilisateurs)
                         {
-                            avancementTaches.Add(new AvancementTache(reader.GetInt32(2), t, u));
+                            if(t.idTache == reader.GetInt32(0) && u.idUtilisateur == reader.GetInt32(1))
+                            {
+                                avancementTaches.Add(new AvancementTache(reader.GetInt32(2), t, u));
+                            }
                         }
                     }
-
                 }
             }
-
                 return avancementTaches;
         }
 

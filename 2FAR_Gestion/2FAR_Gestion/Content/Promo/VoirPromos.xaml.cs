@@ -10,12 +10,8 @@ namespace _2FAR_Gestion
 {
     public partial class VoirPromos
     {
-        MainWindow mw;
-        int id;
-        public VoirPromos(MainWindow mw)
+        public VoirPromos()
         {
-            this.mw = mw;
-           this.id = 0;
             Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "consulter", consulter }, { "modifier", modifier }, { "supprimer", supprimer } };
 
             InitializeComponent();
@@ -40,7 +36,7 @@ namespace _2FAR_Gestion
                 var promo = c.objectCarte;
                 if (promo is _2FAR_Library.Promo) 
                 { 
-                mw.Content = new MenuNavbar(new ListeTpPromos((Promo)promo), mw);
+                Application.Current.MainWindow.Content = new MenuNavbar(new ListeTpPromos((Promo)promo));
                 }
             }
         }
@@ -52,7 +48,7 @@ namespace _2FAR_Gestion
                 var promo = c.objectCarte;
                 if (promo is _2FAR_Library.Promo)
                 {
-                    mw.Content = new MenuNavbar(new ActionPromos((Promo)promo), mw);
+                    Application.Current.MainWindow.Content = new MenuNavbar(new ActionPromos((Promo)promo));
                 }
             }
         }
@@ -77,7 +73,7 @@ namespace _2FAR_Gestion
 
         private void add_promo(object sender, RoutedEventArgs e)
         {
-            mw.Content = new MenuNavbar(new ActionPromos(), mw);
+            Application.Current.MainWindow.Content = new MenuNavbar(new ActionPromos());
 
         }
     }

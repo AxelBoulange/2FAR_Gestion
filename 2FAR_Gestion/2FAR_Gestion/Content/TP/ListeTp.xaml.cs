@@ -9,10 +9,8 @@ namespace _2FAR_Gestion
 {
     public partial class ListeTp
     {
-        private MainWindow mw;
-        public ListeTp(MainWindow mw)
+        public ListeTp()
         {
-            this.mw = mw;
             Dictionary<string,Action<object, EventArgs>> actionsButton = new Dictionary<string,Action<object, EventArgs>> { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
             
             InitializeComponent();
@@ -59,7 +57,7 @@ namespace _2FAR_Gestion
 
         private void add_tp(object sender, EventArgs e)
         {
-            mw.Content = new MenuNavbar(new CreationTp(mw), mw);
+            Application.Current.MainWindow.Content = new MenuNavbar(new CreationTp());
         }
     }
 }

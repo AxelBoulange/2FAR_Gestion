@@ -16,6 +16,5 @@ public partial class ListeTpPromos
         foreach (var attribuerTp in MainWindow.listeAttributions)
             if (attribuerTp.promotion.idPromo == promo.idPromo)
                 listCartes.Children.Add(new Carte(attribuerTp.tp.nomTP, attribuerTp.tp.descriptionTP, null,20,15,null));
-
     }
 }

@@ -10,21 +10,17 @@ namespace _2FAR_Library.Ado
 {
     public class AdoValider : AdoTache 
     {
-        public static List<Valider> getAdoValider()
+        public static List<Valider> getAdoValider(SqlConnection connexion, List<Utilisateur> toutLesUtilisateurs, List<Tache> touteLesTaches)
         {
-            List<Tache> taches = getAdoTache();
-            List<Utilisateur> utilisateurs = getAdoUtilisateur();
-            SqlConnection conn = new Connexion().GetConn();
-            conn.Open();
             string sql = "SELECT * FROM valider;";
-            SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlCommand cmd = new SqlCommand(sql, connexion);
             SqlDataReader reader = cmd.ExecuteReader();
             List<Valider> validerList = new List<Valider>();    
             while (reader.Read()) 
             { 
-                foreach(Utilisateur u in utilisateurs)
+                foreach(Utilisateur u in toutLesUtilisateurs)
                 {
-                    foreach(Tache t in taches)
+                    foreach(Tache t in touteLesTaches)
                     {
                         if (reader.GetInt32(2) == u.idUtilisateur && reader.GetInt32(3) == t.idTache)
                         {

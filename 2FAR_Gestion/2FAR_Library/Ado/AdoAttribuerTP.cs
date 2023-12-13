@@ -9,29 +9,28 @@ namespace _2FAR_Library.Ado
 {
      public class AdoAttribuerTP : AdoTP
     {
-        public static List<AttribuerTP> getAdoAttribuerTP()
+        public static List<AttribuerTP>  getAdoAttribuerTP(SqlConnection connexion, List<TP> toutLesTps, List<Promo> touteLesPromotions)
         {
-            List<TP> tp = GetAdoTP();
-            List<Promo> promos = getAdoPromos();
-            SqlConnection conn = new Connexion().GetConn();
-            conn.Open();
             string sql = "SELECT * FROM etre_attribuer";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
+            SqlCommand cmd = new SqlCommand(sql, (SqlConnection)connexion);
             List<AttribuerTP> attribuerTPList = new List<AttribuerTP>();
-            while(reader.Read()) 
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                foreach(Promo p in promos)
+                while(reader.Read()) 
                 {
-                    foreach(TP t in tp)
+                    foreach(Promo p in touteLesPromotions)
                     {
-                        if(reader.GetInt32(2) == t.idTP && reader.GetInt32(3) == p.idPromo)
+                        foreach(TP t in toutLesTps)
                         {
-                            attribuerTPList.Add(new AttribuerTP(reader.GetDateTime(0).ToString(), reader.GetBoolean(1), t, p)); 
+                            if(reader.GetInt32(2) == t.idTP && reader.GetInt32(3) == p.idPromo)
+                            {
+                                attribuerTPList.Add(new AttribuerTP(reader.GetDateTime(0).ToString(), reader.GetBoolean(1), t, p)); 
+                            }
                         }
                     }
                 }
             }
+            
             return attribuerTPList;
         }
     }

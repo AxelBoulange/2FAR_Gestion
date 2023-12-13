@@ -9,32 +9,30 @@ namespace _2FAR_Gestion.Content
     /// </summary>
     public partial class MenuNavbar
     {
-        MainWindow page;
-        public MenuNavbar( Page contentPage, MainWindow page)
+        public MenuNavbar( Page contentPage)
         {
             InitializeComponent();
             this.frameGrid.Children.Add(new NavBar(CreateTP, ListTP, VoirEleve, VoirPromos, DemandeValidation));
             this.frameContent.Content = contentPage;
-            this.page = page;
         }
 
 
         private void CreateTP()
     {
 
-        this.frameContent.Content = new CreationTp(page);
+        this.frameContent.Content = new CreationTp();
     }
     private void ListTP()
     {
-        this.frameContent.Content = new ListeTp(page);
+        this.frameContent.Content = new ListeTp();
     }
     private void VoirEleve()
     {
-        this.frameContent.Content = new VoirEleves(page);
+        this.frameContent.Content = new ListeEleves();
     }
     private void VoirPromos()
     {
-        this.frameContent.Content = new VoirPromos(page);
+        this.frameContent.Content = new VoirPromos();
     }
     private void DemandeValidation()
     {
