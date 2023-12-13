@@ -9,7 +9,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="2Far - Gestion" Height="450" Width="800"
-        Background="White">
-    <!--="MainWindow_Closing">-->
+        Background="White"
+        >
 </mah:MetroWindow>
 

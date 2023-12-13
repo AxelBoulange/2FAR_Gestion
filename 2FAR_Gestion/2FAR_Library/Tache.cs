@@ -15,7 +15,7 @@
 
         public int fk_id_tp { get; set; }
 
-        public Tache( int _idtache, string _descriptiontache, bool _ischeckpoint, int _ordretache, int _pointtache, bool _isbonus, bool _isactif, int _fkidtp ,string _titretache)
+        public Tache( int _idtache, string _descriptiontache, bool _ischeckpoint, int _ordretache, int _pointtache, bool _isbonus, bool _isactif, int _fkidtp, string _titreTache)
         {
             this.idTache = _idtache;
             this.descriptionTache = _descriptiontache;
@@ -25,7 +25,7 @@
             this.isBonus = _isbonus;
             this.isActif = _isactif;
             this.fk_id_tp = _fkidtp;
-            this.titreTache = _titretache;
+            this.titreTache = _titreTache;
         }
     }
 }

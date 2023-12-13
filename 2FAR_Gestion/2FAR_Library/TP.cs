@@ -23,7 +23,6 @@ namespace _2FAR_Library
             this.idTP = idtp;
             this.nomTP = nomtp;
             this.descriptionTP = descriptiontp;
-
         }
     }
 }

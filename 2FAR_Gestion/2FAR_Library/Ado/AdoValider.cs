@@ -26,7 +26,7 @@ namespace _2FAR_Library.Ado
                 {
                     foreach(Tache t in taches)
                     {
-                        if (reader.GetInt16(2) == u.idUtilisateur && reader.GetInt16(3) == t.idTache)
+                        if (reader.GetInt32(2) == u.idUtilisateur && reader.GetInt32(3) == t.idTache)
                         {
                             validerList.Add(new Valider(t, u, reader.GetString(0), reader.GetBoolean(1))); 
                         }

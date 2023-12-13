@@ -25,9 +25,9 @@ namespace _2FAR_Library.Ado
                 {
                     foreach(TP t in tp)
                     {
-                        if(reader.GetInt16(2) == t.idTP && reader.GetInt16(3) == p.idPromo)
+                        if(reader.GetInt32(2) == t.idTP && reader.GetInt32(3) == p.idPromo)
                         {
-                            attribuerTPList.Add(new AttribuerTP(reader.GetString(0), reader.GetBoolean(1), t, p)); 
+                            attribuerTPList.Add(new AttribuerTP(reader.GetDateTime(0).ToString(), reader.GetBoolean(1), t, p)); 
                         }
                     }
                 }
