@@ -15,7 +15,7 @@ namespace _2FAR_Gestion
         {
             if (this.Parent is MainWindow mw)
             {
-                mw.Content = new MenuNavbar(new CreationTp(),mw);
+                mw.Content = new MenuNavbar(new CreationTp(mw),mw);
                 
             }
         }

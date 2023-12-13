@@ -45,7 +45,7 @@
         <Label Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="18" Content="Promos : "/>
         <ComboBox Grid.Column="1" Grid.Row="8" Margin="15,0,15,10"/>
 
-        <Button Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" MinWidth="300" MaxWidth="400" MinHeight="10" MaxHeight="40"  Content="Valider la création du TP" Foreground="White" Background="#5e17eb"  BorderBrush="White" BorderThickness="2" FontSize="18px"/>
+        <Button Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" MinWidth="300" MaxWidth="400" MinHeight="10" MaxHeight="40"  Content="Valider la création du TP" Foreground="White" Background="#5e17eb"  BorderBrush="White" BorderThickness="2" FontSize="18px" Click="Button_Click"/>
 
     </Grid>
 </Page>

@@ -27,7 +27,7 @@
 
         <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" Content="Liste des TP de la promotion" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
         <ScrollViewer x:Name="tp_scrollvieweera" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" >
-            <!--<StackPanel x:Name="listCartes"/>-->
+            <StackPanel x:Name="listCartes"/>
         </ScrollViewer>
     </Grid>
 </Page>
