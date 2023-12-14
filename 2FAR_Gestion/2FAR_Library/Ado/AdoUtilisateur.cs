@@ -16,14 +16,10 @@ namespace _2FAR_Library.Ado
 
             string sql = "SELECT * FROM utilisateur u INNER JOIN promotion p on p.id_promotion = u.fk_id_promo;";
             SqlCommand cmd = new SqlCommand(sql,(SqlConnection)connexion);
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while(reader.Read())
-                {
-                    utilisateurs.Add(new Utilisateur(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetBoolean(5), reader.GetInt32(6), reader.GetString(8)));
-                }
-            }
-            
+            SqlDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+                utilisateurs.Add(new Utilisateur(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetBoolean(5), reader.GetInt32(6), reader.GetString(8)));
+            connexion.Close();
             return utilisateurs;
         }
     }

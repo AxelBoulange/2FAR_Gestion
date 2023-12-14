@@ -14,23 +14,22 @@ namespace _2FAR_Library.Ado
             string sql = "SELECT * FROM etre_attribuer";
             SqlCommand cmd = new SqlCommand(sql, (SqlConnection)connexion);
             List<AttribuerTP> attribuerTPList = new List<AttribuerTP>();
-            using (SqlDataReader reader = cmd.ExecuteReader())
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                while(reader.Read()) 
+                foreach (Promo p in touteLesPromotions)
                 {
-                    foreach(Promo p in touteLesPromotions)
+                    foreach (TP t in toutLesTps)
                     {
-                        foreach(TP t in toutLesTps)
+                        if (reader.GetInt32(2) == t.idTP && reader.GetInt32(3) == p.idPromo)
                         {
-                            if(reader.GetInt32(2) == t.idTP && reader.GetInt32(3) == p.idPromo)
-                            {
-                                attribuerTPList.Add(new AttribuerTP(reader.GetDateTime(0).ToString(), reader.GetBoolean(1), t, p)); 
-                            }
+                            attribuerTPList.Add(new AttribuerTP(reader.GetDateTime(0).ToString(), reader.GetBoolean(1),
+                                t, p));
                         }
                     }
                 }
             }
-            
+            connexion.Close();
             return attribuerTPList;
         }
     }

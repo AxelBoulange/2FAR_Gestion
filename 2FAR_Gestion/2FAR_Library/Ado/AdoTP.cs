@@ -14,13 +14,9 @@ namespace _2FAR_Library.Ado
             string sql = "SELECT * FROM tp;";
             SqlCommand cmd = new SqlCommand(sql, connexion);
             List<TP> tpList = new List<TP>();
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    tpList.Add(new TP(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
-                }
-            }
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                tpList.Add(new TP(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
             foreach (TP tp in tpList)
             {
                 foreach (Tache t in touteLesTaches)
@@ -31,6 +27,7 @@ namespace _2FAR_Library.Ado
                     }
                 }
             }
+            connexion.Close();
             return tpList;
         }
     }

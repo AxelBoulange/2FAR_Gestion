@@ -16,10 +16,10 @@ namespace _2FAR_Gestion
 
             InitializeComponent();
 
-                        foreach (var promo in MainWindow.listePromotions)
+            foreach (var promo in Ados.listePromotions)
             {
                 int count = 0;
-                foreach (var utilisateur in MainWindow.listeUtilisateurs) {
+                foreach (var utilisateur in Ados.listeUtilisateurs) {
                     if (utilisateur.fk_id_promo == promo.idPromo)
                     {
                         count++;

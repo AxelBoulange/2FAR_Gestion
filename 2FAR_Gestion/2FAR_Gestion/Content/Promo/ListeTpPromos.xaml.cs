@@ -13,7 +13,7 @@ public partial class ListeTpPromos
     public ListeTpPromos(_2FAR_Library.Promo promo)
     {
         InitializeComponent();
-        foreach (var attribuerTp in MainWindow.listeAttributions)
+        foreach (var attribuerTp in Ados.listeAttributions)
             if (attribuerTp.promotion.idPromo == promo.idPromo)
                 listCartes.Children.Add(new Carte(attribuerTp.tp.nomTP, attribuerTp.tp.descriptionTP, null,20,15,null));
     }

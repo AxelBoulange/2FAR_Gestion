@@ -15,10 +15,10 @@ namespace _2FAR_Gestion
             
             InitializeComponent();
 
-            foreach (var tp in MainWindow.listeTP)
+            foreach (var tp in Ados.listeTP)
             {
                 int count = 0;
-                foreach (var tache in MainWindow.listeTaches)
+                foreach (var tache in Ados.listeTaches)
                 {
                     if (tache.fk_id_tp == tp.idTP)
                     {

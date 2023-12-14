@@ -22,31 +22,40 @@ namespace _2FAR_Gestion
 {
     public partial class MainWindow : MetroWindow
     {
-        public static List<AttendreValidation> listeAttenteValidations;
-        public static List<AttribuerTP> listeAttributions;
-        public static List<Valider> listeValidations;
-        public static List<AvancementTache> listeAvancementTaches;
-        public static List<Promo> listePromotions;
-        public static List<Utilisateur> listeUtilisateurs;
-        public static List<Tache> listeTaches;
-        public static List<TP> listeTP;
+        // public static List<AttendreValidation> listeAttenteValidations;
+        // public static List<AttribuerTP> listeAttributions;
+        // public static List<Valider> listeValidations;
+        // public static List<AvancementTache> listeAvancementTaches;
+        // public static List<Promo> listePromotions;
+        // public static List<Utilisateur> listeUtilisateurs;
+        // public static List<Tache> listeTaches;
+        // public static List<TP> listeTP;
 
 
         public MainWindow()
         {
-            //initialisation de la connexion
-            listeTaches = AdoTache.getAdoTache(Connexion.GetConn());
-            listeTP = AdoTP.GetAdoTP(Connexion.GetConn(), listeTaches); // taches
-            
+            // listeTaches = AdoTache.getAdoTache(Connexion.GetConn());
+            // listeTP = AdoTP.GetAdoTP(Connexion.GetConn(), listeTaches); // taches
+            //
+            //
+            // listeUtilisateurs = AdoUtilisateur.getAdoUtilisateur(Connexion.GetConn());
+            // listePromotions = AdoPromos.getAdoPromos(Connexion.GetConn(), listeUtilisateurs); // utilisateurs
+            //
+            // listeAttributions = AdoAttribuerTP.getAdoAttribuerTP(Connexion.GetConn(), listeTP, listePromotions); //TP ET PROMO
+            //
+            // listeAttenteValidations = AdoAttendreValidation.getAdoAttendreValidation(Connexion.GetConn(), listeUtilisateurs, listeTaches); //utilisateurs ET Taches
+            // listeValidations = AdoValider.getAdoValider(Connexion.GetConn(), listeUtilisateurs, listeTaches); //Utilisateurs taches
+            // listeAvancementTaches = AdoAvancementTache.getAdoAvancementTache(Connexion.GetConn(), listeUtilisateurs, listeTaches); //utilisateurs et taches
 
-            listeUtilisateurs = AdoUtilisateur.getAdoUtilisateur(Connexion.GetConn());
-            listePromotions = AdoPromos.getAdoPromos(Connexion.GetConn(), listeUtilisateurs); // utilisateurs
-
-            listeAttributions = AdoAttribuerTP.getAdoAttribuerTP(Connexion.GetConn(), listeTP, listePromotions); //TP ET PROMO
-
-            listeAttenteValidations = AdoAttendreValidation.getAdoAttendreValidation(Connexion.GetConn(), listeUtilisateurs, listeTaches); //utilisateurs ET Taches
-            listeValidations = AdoValider.getAdoValider(Connexion.GetConn(), listeUtilisateurs, listeTaches); //Utilisateurs taches
-            listeAvancementTaches = AdoAvancementTache.getAdoAvancementTache(Connexion.GetConn(), listeUtilisateurs, listeTaches); //utilisateurs et taches
+            Ados.GetAdos();
+            var dumb = Ados.listeAttenteValidations;
+            var d1 = Ados.listeAttributions;
+            var d2 = Ados.listeValidations;
+            var d3 = Ados.listeAvancementTaches;
+            var d4 = Ados.listePromotions;
+            var d5 = Ados.listeUtilisateurs;
+            var d6 = Ados.listeTaches;
+            var d7 = Ados.listeTP;
             
             InitializeComponent();
             this.Content = new PageAccueil();
@@ -107,7 +116,7 @@ namespace _2FAR_Gestion
             SqlCommand cmdInsert = new SqlCommand {Connection = Connexion.GetConn()};
 
 
-            foreach (Promo p in listePromotions) 
+            foreach (Promo p in Ados.listePromotions) 
             {
                 string sqlPromo = "INSERT INTO promotion (nom_promotion) VALUES (@nom_promotion)";
                 cmdInsert.CommandText = sqlPromo;
@@ -116,7 +125,7 @@ namespace _2FAR_Gestion
             }
 
             
-            foreach (Utilisateur u in listeUtilisateurs)
+            foreach (Utilisateur u in Ados.listeUtilisateurs)
             {
                 string sqlUtilisateur = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, mail_utilisateur, mdp_utilisateur, is_admin, fk_id_promo) VALUES (@nom_utilisateur, @prenom_utilisateur, @mail_utilisateur, @mdp_utilisateur, @is_admin, @fk_id_promo)";
                 cmdInsert.CommandText = sqlUtilisateur;
@@ -129,7 +138,7 @@ namespace _2FAR_Gestion
                 cmdInsert.ExecuteNonQuery();
             }
             
-            foreach (TP t in listeTP)
+            foreach (TP t in Ados.listeTP)
             {
                 string sqlTP = "INSERT INTO tp (nom_tp, description_tp) VALUES (@nom_tp, @description_tp)";
                 cmdInsert.CommandText = sqlTP;
@@ -138,7 +147,7 @@ namespace _2FAR_Gestion
                 cmdInsert.ExecuteNonQuery();
             }
             
-            foreach (Tache t in listeTaches)
+            foreach (Tache t in Ados.listeTaches)
             {
                 string sqlTache = "INSERT INTO tache (description_tache, ordre_tache, point_etape, is_bonus, is_actif, fk_id_tp, titre_tache, is_checkpoint) VALUES (@description_tache, @ordre_tache, @point_tache, @is_bonus, @is_actif, @fk_id_tp, @titre_tache, @is_checkpoint)";
                 cmdInsert.CommandText = sqlTache;
@@ -153,7 +162,7 @@ namespace _2FAR_Gestion
                 cmdInsert.ExecuteNonQuery();
             }
             
-            foreach (AttribuerTP a in listeAttributions)
+            foreach (AttribuerTP a in Ados.listeAttributions)
             {
                 string sqlAttributionTP = "INSERT INTO etre_attribuer (dte_fin, is_actif, fk_id_tp, fk_id_promo) VALUES (@dte_fin, @is_actif, @fk_id_tp, @fk_id_promo)";
                 cmdInsert.CommandText = sqlAttributionTP;
@@ -164,7 +173,7 @@ namespace _2FAR_Gestion
                 cmdInsert.ExecuteNonQuery();
             }
             
-            foreach (Valider v in listeValidations)
+            foreach (Valider v in Ados.listeValidations)
             {
                 string sqlValidationTP = "INSERT INTO valider (reponse, is_valide, fk_id_utilisateur,fk_id_tache) VALUES (@reponse, @is_valide, @fk_id_utilisateur, @fk_id_tache)";
                 cmdInsert.CommandText = sqlValidationTP;
@@ -175,7 +184,7 @@ namespace _2FAR_Gestion
                 cmdInsert.ExecuteNonQuery();
             }
             
-            foreach (AttendreValidation v in listeAttenteValidations)
+            foreach (AttendreValidation v in Ados.listeAttenteValidations)
             {
                 string sqlAttenteValidationTP = "INSERT INTO attendre_validation (dte_demande, fk_id_utilisateur, fk_id_tache) VALUES (@dte_demande, @fk_id_utilisateur, @fk_id_tache)";
                 cmdInsert.CommandText = sqlAttenteValidationTP;
@@ -185,7 +194,7 @@ namespace _2FAR_Gestion
                 cmdInsert.ExecuteNonQuery();
             }
             
-            foreach (AvancementTache a in listeAvancementTaches)
+            foreach (AvancementTache a in Ados.listeAvancementTaches)
             {
                 string sqlAvancementTP = "INSERT INTO avancement_tache (fk_id_tache, fk_id_utilisateur, taux_avancement) VALUES (@fk_id_tache, @fk_id_utilisateur, @taux_avancement)";
                 cmdInsert.CommandText = sqlAvancementTP;

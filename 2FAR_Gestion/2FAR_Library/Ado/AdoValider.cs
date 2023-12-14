@@ -29,6 +29,7 @@ namespace _2FAR_Library.Ado
                     }
                 }
             }
+            connexion.Close();
             return validerList;
         }
     }

@@ -14,22 +14,21 @@ namespace _2FAR_Library.Ado
             string sql = "SELECT * FROM attendre_validation ORDER BY dte_demande DESC;";
             SqlCommand cmd = new SqlCommand(sql, connexion);
             List<AttendreValidation> attendreValidationList = new List<AttendreValidation>();
-            using (SqlDataReader reader = cmd.ExecuteReader())
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                while (reader.Read())
+                foreach (Utilisateur u in toutLesUtilisateurs)
                 {
-                    foreach(Utilisateur u in toutLesUtilisateurs)
+                    foreach (Tache t in touteLesTaches)
                     {
-                        foreach(Tache t in touteLesTaches)
+                        if (reader.GetInt32(1) == u.idUtilisateur && reader.GetInt32(2) == t.idTache)
                         {
-                            if(reader.GetInt32(1) == u.idUtilisateur && reader.GetInt32(2) == t.idTache)
-                            {
-                                attendreValidationList.Add(new AttendreValidation(reader.GetDateTime(0).ToString(), u, t));
-                            }
+                            attendreValidationList.Add(new AttendreValidation(reader.GetDateTime(0).ToString(), u, t));
                         }
                     }
                 }
             }
+            connexion.Close();
             return attendreValidationList;  
         }
     }

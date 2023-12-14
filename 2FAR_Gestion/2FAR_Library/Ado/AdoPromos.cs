@@ -14,15 +14,9 @@ namespace _2FAR_Library.Ado
             string sql = "SELECT * FROM promotion";
             SqlCommand cmd = new SqlCommand(sql, connexion);
             List<Promo> promotions = new List<Promo>();
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    promotions.Add(new Promo(reader.GetInt32(0), reader.GetString(1)));
-
-                }
-            }
-            
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                promotions.Add(new Promo(reader.GetInt32(0), reader.GetString(1)));
             foreach (Promo p in promotions) 
             { 
                 foreach(Utilisateur u in toutLesUtilisateurs)
@@ -33,6 +27,7 @@ namespace _2FAR_Library.Ado
                     }
                 }
             }
+            connexion.Close();
             return promotions;
         }
     }

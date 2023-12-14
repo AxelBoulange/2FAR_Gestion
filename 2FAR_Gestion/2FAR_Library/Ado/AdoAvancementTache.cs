@@ -14,23 +14,22 @@ namespace _2FAR_Library.Ado
             string sql = "SELECT * FROM avancement_tache";
             SqlCommand cmd = new SqlCommand(sql, connexion);
             List<AvancementTache> avancementTaches = new List<AvancementTache>();
-            using (SqlDataReader reader = cmd.ExecuteReader())
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                while (reader.Read())
+                foreach (Tache t in touteLesTaches)
                 {
-                    foreach(Tache t in touteLesTaches)
+                    foreach (Utilisateur u in toutLesUtilisateurs)
                     {
-                        foreach(Utilisateur u in toutLesUtilisateurs)
+                        if (t.idTache == reader.GetInt32(0) && u.idUtilisateur == reader.GetInt32(1))
                         {
-                            if(t.idTache == reader.GetInt32(0) && u.idUtilisateur == reader.GetInt32(1))
-                            {
-                                avancementTaches.Add(new AvancementTache(reader.GetInt32(2), t, u));
-                            }
+                            avancementTaches.Add(new AvancementTache(reader.GetInt32(2), t, u));
                         }
                     }
                 }
             }
-                return avancementTaches;
+            connexion.Close();
+            return avancementTaches;
         }
 
     }

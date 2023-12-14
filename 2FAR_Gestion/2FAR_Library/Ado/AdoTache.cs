@@ -12,19 +12,14 @@ namespace _2FAR_Library.Ado
     {
         public static List<Tache> getAdoTache(SqlConnection connexion)
         {
+            var dumb = connexion.State;
             string sql = "SELECT * FROM tache;";
             SqlCommand cmd = new SqlCommand(sql, connexion);
             List<Tache> taches = new List<Tache>();
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                    //manque is_checkpoint
-                {
-                    //taches.Add(new Tache(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetBoolean(4), reader.GetBoolean(5), reader.GetInt32(6)));
-
-                    taches.Add(new Tache(reader.GetInt32(0), reader.GetString(1), reader.GetBoolean(8), reader.GetInt32(2), reader.GetInt32(3), reader.GetBoolean(4), reader.GetBoolean(5), reader.GetInt32(6), reader.GetString(7)));
-                }
-            }
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                taches.Add(new Tache(reader.GetInt32(0), reader.GetString(1), reader.GetBoolean(2) , reader.GetInt32(3), reader.GetInt32(4), reader.GetBoolean(5), reader.GetBoolean(6), reader.GetInt32(7), reader.GetString(8)));
+            connexion.Close();
             return taches;
         }
     }
