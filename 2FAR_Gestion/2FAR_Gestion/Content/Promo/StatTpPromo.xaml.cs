@@ -5,12 +5,12 @@ using LiveChartsCore.SkiaSharpView;
 namespace _2FAR_Gestion.Content.Promo;
 
 
-public partial class StatTpPromo : Page
+public partial class StatTpPromo
 {
-    public ISeries[] Series { get; set; }
+    public ISeries[] series { get; set; }
     public StatTpPromo()
     {
-        Series = new ISeries[]
+        series = new ISeries[]
         {
             new ColumnSeries<int>
             {
@@ -25,6 +25,7 @@ public partial class StatTpPromo : Page
                 Stroke = null
             }
         };
+        DataContext = this;
         InitializeComponent();
     }
 }

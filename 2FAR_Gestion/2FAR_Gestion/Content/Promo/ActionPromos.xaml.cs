@@ -26,7 +26,6 @@ namespace _2FAR_Gestion.Content.Promo
         public ActionPromos()
         {
             loading("ajouter une promo");
-
         }
         public ActionPromos(_2FAR_Library.Promo p)
         {

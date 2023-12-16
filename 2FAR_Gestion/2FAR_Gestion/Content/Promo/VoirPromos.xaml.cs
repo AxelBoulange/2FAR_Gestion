@@ -35,9 +35,7 @@ namespace _2FAR_Gestion
             {
                 var promo = c.objectCarte;
                 if (promo is _2FAR_Library.Promo) 
-                { 
-                Application.Current.MainWindow.Content = new MenuNavbar(new ListeTpPromos((Promo)promo));
-                }
+                    Application.Current.MainWindow.Content = new MenuNavbar(new ListeTpPromos((Promo)promo));
             }
         }
         private void modifier(object o, EventArgs e)
