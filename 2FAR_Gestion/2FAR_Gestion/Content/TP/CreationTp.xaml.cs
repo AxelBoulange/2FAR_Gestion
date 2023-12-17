@@ -29,9 +29,9 @@ namespace _2FAR_Gestion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string date;
+            DateTime date;
 
-            if (string.IsNullOrWhiteSpace(tbx_nom_tp.Text) || string.IsNullOrWhiteSpace(tbx_description_tp.Text) || string.IsNullOrWhiteSpace(cbb_promo_tp.Text) || cbb_promo_tp.SelectedItem == null || dtp_date.SelectedDate < DateTime.Now )
+            if (string.IsNullOrWhiteSpace(tbx_nom_tp.Text) || string.IsNullOrWhiteSpace(tbx_description_tp.Text) || string.IsNullOrWhiteSpace(cbb_promo_tp.Text) || cbb_promo_tp.SelectedItem == null || dtp_date.SelectedDate < DateTime.Now || dtp_date.SelectedDate == null)
             {
                 MessageBox.Show("Erreur, tout les champs sont obligatoire", "Vérification", MessageBoxButton.OK);
             }
@@ -50,8 +50,7 @@ namespace _2FAR_Gestion
 
                     }
                 }
-                date = dtp_date.SelectedDate.ToString();
-                
+                date = (DateTime)dtp_date.SelectedDate;
                 Ados.listeTP.Add(new TP(Ados.listeTP.Last().idTP + 1, tbx_nom_tp.Text, tbx_description_tp.Text));
                 Ados.listeAttributions.Add(new AttribuerTP(date, true, Ados.listeTP.Last(), promoEleve));
 

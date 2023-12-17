@@ -23,7 +23,7 @@ namespace _2FAR_Library.Ado
                     {
                         if (reader.GetInt32(2) == t.idTP && reader.GetInt32(3) == p.idPromo)
                         {
-                            attribuerTPList.Add(new AttribuerTP(reader.GetDateTime(0).ToString(), reader.GetBoolean(1),
+                            attribuerTPList.Add(new AttribuerTP(reader.GetDateTime(0), reader.GetBoolean(1),
                                 t, p));
                         }
                     }
