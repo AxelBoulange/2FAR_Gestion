@@ -8,11 +8,11 @@ using System.Windows.Controls;
 
 namespace _2FAR_Gestion
 {
-    public partial class VoirPromos
+    public partial class ListePromos
     {
-        public VoirPromos()
+        public ListePromos()
         {
-            Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "consulter", consulter }, { "modifier", modifier }, { "supprimer", supprimer } };
+            Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "voir les tps", voir_Les_Tps }, { "modifier", modifier }, { "supprimer", supprimer } };
 
             InitializeComponent();
 
@@ -29,7 +29,7 @@ namespace _2FAR_Gestion
             }
         }
 
-        private void consulter(object o, EventArgs e)
+        private void voir_Les_Tps(object o, EventArgs e)
         {
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
             {

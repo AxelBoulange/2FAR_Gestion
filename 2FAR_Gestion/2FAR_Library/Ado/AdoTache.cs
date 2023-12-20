@@ -12,7 +12,6 @@ namespace _2FAR_Library.Ado
     {
         public static List<Tache> getAdoTache(SqlConnection connexion)
         {
-            var dumb = connexion.State;
             string sql = "SELECT * FROM tache;";
             SqlCommand cmd = new SqlCommand(sql, connexion);
             List<Tache> taches = new List<Tache>();
