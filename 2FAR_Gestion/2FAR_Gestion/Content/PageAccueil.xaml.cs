@@ -15,8 +15,7 @@ namespace _2FAR_Gestion
         {
             if (this.Parent is MainWindow mw)
             {
-                mw.Content = new MenuNavbar(new CreationTp());
-                
+                mw.Content = new MenuNavbar(new CreationModificationTp());
             }
         }
         private void ListTpPage (object sender, RoutedEventArgs e)

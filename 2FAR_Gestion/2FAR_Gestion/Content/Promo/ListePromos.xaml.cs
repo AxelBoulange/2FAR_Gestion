@@ -12,7 +12,7 @@ namespace _2FAR_Gestion
     {
         public ListePromos()
         {
-            Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "voir les tps", voir_Les_Tps }, { "modifier", modifier }, { "supprimer", supprimer } };
+            Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "Voir les TPs", voir_Les_Tps }, { "Modifier", modifier }, { "Supprimer", supprimer } };
 
             InitializeComponent();
 

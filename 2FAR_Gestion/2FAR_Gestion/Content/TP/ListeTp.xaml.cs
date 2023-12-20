@@ -15,7 +15,7 @@ namespace _2FAR_Gestion
     {
         public ListeTp()
         {
-            Dictionary<string,Action<object, EventArgs>> actionsButton = new Dictionary<string,Action<object, EventArgs>> { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
+            Dictionary<string,Action<object, EventArgs>> actionsButton = new Dictionary<string,Action<object, EventArgs>> { {"Consulter",consulter},{"Modifier",modifier},{"Supprimer",supprimer}};
             
             InitializeComponent();
 
@@ -34,17 +34,19 @@ namespace _2FAR_Gestion
         }
         private void consulter(object o, EventArgs e)
         {
-            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
             {
-                var tp = c.objectCarte;
-                if (tp is _2FAR_Library.TP)
                     Application.Current.MainWindow.Content = new MenuNavbar(new VoirTp((TP)tp));
             }
 
         }
         private void modifier(object o, EventArgs e)
         {
-            this.listCartes.Children.Clear();
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
+            {
+                Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationTp(Ados.listeAttributions.Where(at => at.tp.idTP == tp.idTP).First()));
+            }
+
         }
 
         private void supprimer(object o, EventArgs e)
@@ -121,7 +123,7 @@ namespace _2FAR_Gestion
 
         private void add_tp(object sender, EventArgs e)
         {
-            Application.Current.MainWindow.Content = new MenuNavbar(new CreationTp());
+            Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationTp());
         }
     }
 }

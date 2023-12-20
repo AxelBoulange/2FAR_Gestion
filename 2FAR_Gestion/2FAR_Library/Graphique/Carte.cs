@@ -78,9 +78,13 @@ namespace _2FAR_Library
 
                     button.Height = 40;
 
-                    if (action.Key == "supprimer")
+                    if (action.Key == "Supprimer")
                     {
                         button.Background = Brushes.Red;
+                    }
+                    if (action.Key == "Statistiques")
+                    {
+                        button.Background = Brushes.ForestGreen;
                     }
                     stackPanel.Children.Add(button);
                 } 
