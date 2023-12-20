@@ -33,23 +33,16 @@ namespace _2FAR_Gestion
 
         private void voir_Les_Tps(object o, EventArgs e)
         {
-            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
-            {
-                var promo = c.objectCarte;
-                if (promo is _2FAR_Library.Promo) 
-                    Application.Current.MainWindow.Content = new MenuNavbar(new ListeTpPromos((Promo)promo));
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.Promo promo)
+            { 
+                Application.Current.MainWindow.Content = new MenuNavbar(new ListeTpPromos((Promo)promo));
             }
         }
         private void modifier(object o, EventArgs e)
         {
-
-            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
-            {
-                var promo = c.objectCarte;
-                if (promo is _2FAR_Library.Promo)
-                {
-                    Application.Current.MainWindow.Content = new MenuNavbar(new ActionPromos((Promo)promo));
-                }
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.Promo promo)
+            { 
+                Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationPromo(promo));
             }
         }
 
@@ -119,28 +112,20 @@ namespace _2FAR_Gestion
                                     Ados.listeUtilisateurs.RemoveAt(i);
                                 }
                              }
-                            
                         }
                     }
-                        
                     Application.Current.MainWindow.Content = new MenuNavbar(new ListePromos());
                 }
-
             }
-            else if (result == MessageBoxResult.Cancel)
+            else if (result != MessageBoxResult.Cancel)
             {
-
-            }
-            else
-            {
-                //impossible mais oklm
                 MessageBox.Show("Erreur Inconnue");
             }
         }
 
         private void add_promo(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new MenuNavbar(new ActionPromos());
+            Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationPromo());
 
         }
     }
