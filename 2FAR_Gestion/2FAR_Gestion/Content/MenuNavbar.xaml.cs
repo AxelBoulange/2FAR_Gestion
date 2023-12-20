@@ -21,7 +21,7 @@ namespace _2FAR_Gestion.Content
         private void CreateTP()
     {
 
-        this.frameContent.Content = new CreationTp();
+        this.frameContent.Content = new CreationModificationTp();
     }
     private void ListTP()
     {
@@ -33,7 +33,7 @@ namespace _2FAR_Gestion.Content
     }
     private void VoirPromos()
     {
-        this.frameContent.Content = new VoirPromos();
+        this.frameContent.Content = new ListePromos();
     }
     private void DemandeValidation()
     {

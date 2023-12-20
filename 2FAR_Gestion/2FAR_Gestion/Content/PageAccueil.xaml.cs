@@ -15,8 +15,7 @@ namespace _2FAR_Gestion
         {
             if (this.Parent is MainWindow mw)
             {
-                mw.Content = new MenuNavbar(new CreationTp());
-                
+                mw.Content = new MenuNavbar(new CreationModificationTp());
             }
         }
         private void ListTpPage (object sender, RoutedEventArgs e)
@@ -37,7 +36,7 @@ namespace _2FAR_Gestion
         {
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new MenuNavbar(new VoirPromos());
+                mw.Content = new MenuNavbar(new ListePromos());
             }
         }
         private void DemandeValidationPage ( object sender, RoutedEventArgs e)
