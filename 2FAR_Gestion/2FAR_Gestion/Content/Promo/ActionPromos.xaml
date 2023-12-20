@@ -39,7 +39,7 @@
         <Label x:Name="lb_nomPromo" Foreground="White" Content="Nom de la promo :" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
         <TextBox x:Name="tbx_nomPromo" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="15,0,15,10"/>
 
-        <Button Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" MinWidth="300" MaxWidth="400" MinHeight="10" MaxHeight="40"  Content="Valider" Foreground="White" Background="#5e17eb"  BorderBrush="White" BorderThickness="2" FontSize="18px"/>
+        <Button Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" MinWidth="300" MaxWidth="400" MinHeight="10" MaxHeight="40"  Content="Valider" Foreground="White" Background="#5e17eb"  BorderBrush="White" BorderThickness="2" FontSize="18px" Click="Button_Click"/>
 
     </Grid>
 
