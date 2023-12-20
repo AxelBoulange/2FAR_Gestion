@@ -104,7 +104,7 @@ namespace _2FAR_Gestion
                         }
 
                     }
-                    Application.Current.MainWindow.Content = new MenuNavbar(new VoirTp((TP)tp));
+                    Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
                 }
 
             }

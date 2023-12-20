@@ -21,8 +21,10 @@ namespace _2FAR_Gestion.Content.TP
     /// </summary>
     public partial class VoirTp : Page
     {
-        public VoirTp(_2FAR_Library.TP tp)
+        _2FAR_Library.TP tp;
+        public VoirTp(_2FAR_Library.TP letp)
         {
+            tp = letp;
             InitializeComponent();
         }
     }
