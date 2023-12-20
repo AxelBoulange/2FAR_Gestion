@@ -51,7 +51,7 @@
         <Button Grid.Column="1" Grid.Row="2" Background="#5e17eb" Click="VoirPromosPage" Foreground="White">
             <iconPacks:PackIconModern Kind="PeopleMultiple" Height="80" Width="80"/>
         </Button>
-        <Label Content="Voir Promotions" Grid.Column="1" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <Label Content="Liste Promotions" Grid.Column="1" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Center"/>
 
         <Button Grid.Column="3" Grid.Row="2" Background="#5e17eb" Click="DemandeValidationPage" Foreground="White">
             <iconPacks:PackIconModern Kind="Check" Height="80" Width="80"/>

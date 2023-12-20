@@ -36,9 +36,8 @@ namespace _2FAR_Gestion
         {
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
             {
-                    Application.Current.MainWindow.Content = new MenuNavbar(new VoirTp((TP)tp));
+                Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
             }
-
         }
         private void modifier(object o, EventArgs e)
         {
@@ -46,7 +45,6 @@ namespace _2FAR_Gestion
             {
                 Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationTp(Ados.listeAttributions.Where(at => at.tp.idTP == tp.idTP).First()));
             }
-
         }
 
         private void supprimer(object o, EventArgs e)
@@ -106,18 +104,8 @@ namespace _2FAR_Gestion
                         }
 
                     }
-                    Application.Current.MainWindow.Content = new MenuNavbar(new VoirTp((TP)tp));
+                    Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
                 }
-
-            }
-            else if (result == MessageBoxResult.Cancel)
-            {
-                
-            }
-            else
-            {
-                //impossible mais oklm
-                MessageBox.Show("Erreur Inconnue");
             }
         }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using _2FAR_Library;
 
 namespace _2FAR_Gestion
@@ -10,16 +12,28 @@ namespace _2FAR_Gestion
     {
         public DemandeValidation()
         {
+            //regardes les attentes de validation et les valider qui ont isJuste = false
+            
             InitializeComponent();
-            Dictionary<string,Action> actionsButton = new Dictionary<string,Action>() { {"Valider",valider}};
-            foreach (var attendreValidation in Ados.listeAttenteValidations)
+            Dictionary<string,Action<object, EventArgs>> actionsButton = new Dictionary<string,Action<object, EventArgs>>() { {"Valider",Valider},{"Rejeter",Rejeter}};
+            foreach (var attenteValidation in Ados.listeAttenteValidations)
             {
-                //listCartes.Children.Add(new Carte(attendreValidation.dte_demande + " | " + MainWindow.listeTP.Where(Tp => Tp.idTP == attendreValidation.tache.fk_id_tp ).First().nomTP + " | " + MainWindow.listePromotions.Where(promo => promo.idPromo == attendreValidation.utilisateur.fk_id_promo ).First().nomPromo, attendreValidation.tache.descriptionTache + " | " + attendreValidation.utilisateur.nomUtilisateur.Split().First() + " " + attendreValidation.utilisateur.prenomUtilisateur, actionsButton, 18,25));
+                listCartes.Children.Add(new Carte(attenteValidation.utilisateur.nomUtilisateur + "\n" + attenteValidation.utilisateur.nomPromo, attenteValidation.tache.titreTache, actionsButton, 25, 20, attenteValidation){Margin = new Thickness(20,10,20,10)});
             }
         }
-        public void valider()
+        public void Valider(object o, EventArgs e)
         {
-        
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.AttendreValidation attendreValidation)
+            {
+                
+            }
+        }
+        public void Rejeter(object o, EventArgs e)
+        {
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.AttendreValidation attendreValidation)
+            {
+                
+            }
         }
 
     }
