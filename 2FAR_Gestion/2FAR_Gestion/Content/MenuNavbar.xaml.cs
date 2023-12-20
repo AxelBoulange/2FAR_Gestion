@@ -21,7 +21,7 @@ namespace _2FAR_Gestion.Content
         private void CreateTP()
     {
 
-        this.frameContent.Content = new CreationTp();
+        this.frameContent.Content = new CreationModificationTp();
     }
     private void ListTP()
     {

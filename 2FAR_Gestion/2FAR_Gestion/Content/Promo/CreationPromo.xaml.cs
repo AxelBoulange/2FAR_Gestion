@@ -19,15 +19,15 @@ namespace _2FAR_Gestion.Content.Promo
     /// <summary>
     /// Logique d'interaction pour ActionPromos.xaml
     /// </summary>
-    public partial class ActionPromos : Page
+    public partial class CreationPromo : Page
     {
         //_2FAR_Library.Promo prom;
 
-        public ActionPromos()
+        public CreationPromo()
         {
             loading("ajouter une promo");
         }
-        public ActionPromos(_2FAR_Library.Promo p)
+        public CreationPromo(_2FAR_Library.Promo p)
         {
 
             loading("Modifier une promo");

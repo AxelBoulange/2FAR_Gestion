@@ -20,10 +20,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="11*"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" Content="Liste des TP de la promotion" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
