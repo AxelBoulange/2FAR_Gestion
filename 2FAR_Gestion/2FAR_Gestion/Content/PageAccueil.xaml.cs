@@ -37,7 +37,7 @@ namespace _2FAR_Gestion
         {
             if(this.Parent is MainWindow mw)
             {
-                mw.Content = new MenuNavbar(new VoirPromos());
+                mw.Content = new MenuNavbar(new ListePromos());
             }
         }
         private void DemandeValidationPage ( object sender, RoutedEventArgs e)
