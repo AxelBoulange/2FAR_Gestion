@@ -8,6 +8,7 @@ using _2FAR_Library;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using System.Windows.Controls;
 
 namespace _2FAR_Gestion
 {
@@ -17,15 +18,14 @@ namespace _2FAR_Gestion
         public CreationModificationTp()
         {
             InitializeComponent();
-            
+            dtp_date.SelectedDate = DateTime.Now;
             List<string> promo_string = new List<string>();
             foreach (var item in Ados.listePromotions)
             {
                 promo_string.Add(item.nomPromo);
             }
             cbb_promo_tp.ItemsSource = promo_string;
-
-
+                    
         }
         
         public CreationModificationTp(_2FAR_Library.AttribuerTP attribuertp)
@@ -103,6 +103,38 @@ namespace _2FAR_Gestion
                     Application.Current.MainWindow.Content = new MenuNavbar(new CreationTachesTp(Ados.listeTP.Last()));
                 }
             }
+        }
+
+        private void fontchange(object sender, SizeChangedEventArgs e ) 
+        {
+            AdjustDatePickerFontSize();
+        }
+
+        private void AdjustDatePickerFontSize()
+        {
+            // Ajuster la taille de police en fonction de la taille de la fenêtre
+            double newFontSize = CalculateResponsiveFontSize();
+
+            // Appliquer la nouvelle taille de police au DatePicker
+            dtp_date.FontSize = newFontSize;
+            cbb_promo_tp.FontSize = newFontSize-4;
+        }
+
+        private double CalculateResponsiveFontSize()
+        {
+            // Vous pouvez définir votre propre logique pour calculer la taille de police en fonction de la taille de la fenêtre,
+            // la résolution de l'écran, ou tout autre critère.
+
+            // Par exemple, vous pouvez utiliser une formule proportionnelle en fonction de la largeur de la fenêtre :
+            double ratio = this.ActualWidth / 800.0; // Ajustez 800 en fonction de vos besoins
+            double baseFontSize = 15; // Taille de police de base
+            double newFontSize = baseFontSize * ratio;
+
+            // Assurez-vous que la nouvelle taille de police ne devient pas trop petite ou trop grande
+            newFontSize = Math.Max(newFontSize, 15.0); // Taille minimale
+            newFontSize = Math.Min(newFontSize, 35.0); // Taille maximale
+
+            return newFontSize;
         }
     }
  }
