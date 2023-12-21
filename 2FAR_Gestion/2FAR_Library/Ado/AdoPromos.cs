@@ -43,6 +43,7 @@ namespace _2FAR_Library.Ado
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur lors du chargement de l'ado promotion", "vérification", MessageBoxButton.OK);
+                Application.Current.Shutdown();
             }
             return promotions;
 
