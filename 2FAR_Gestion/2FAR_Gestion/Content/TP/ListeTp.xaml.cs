@@ -29,7 +29,7 @@ namespace _2FAR_Gestion
                         count++;
                     }
                 }
-                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\n nombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14, tp));
+                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\nnombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14, tp));
             }
         }
         private void consulter(object o, EventArgs e)
