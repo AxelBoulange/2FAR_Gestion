@@ -21,6 +21,7 @@ namespace _2FAR_Gestion
 
             List<string> labelPromo = new List<string>();
 
+            // afficher dans la combobox la list des promo par leurs nom
             foreach (_2FAR_Library.Promo p in Ados.listePromotions)
             {
                 labelPromo.Add(p.nomPromo);
@@ -66,7 +67,7 @@ namespace _2FAR_Gestion
             dtg_liste_utilisateur.ItemsSource =  elevesfiltrer;
         }
         
-        //fonction que filtre les eleves en fonction des information selectionner par l'utilisateur               Retourne une liste d'utilisateurs
+        //fonction que filtre les eleves en fonction des information selectionner par l'utilisateur Retourne une liste d'utilisateurs
         private List<_2FAR_Library.Utilisateur> FiltrerEleves(string texteRecherche)
         {
             //verification qu'une promotion est séléctioné, si c'est le cas, recherche en fonction de la promotion 
@@ -114,7 +115,7 @@ namespace _2FAR_Gestion
                 return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
         }
         
-        //vider tout les input
+        //Recharge la page pour vidé tout les inputs
         private void remise_a_zero(object sender, EventArgs e)
         {
             if (tbx_recherche is TextBox)
