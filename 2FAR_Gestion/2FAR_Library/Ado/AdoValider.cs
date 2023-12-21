@@ -44,6 +44,7 @@ namespace _2FAR_Library.Ado
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur lors du chargement de l'ado Valider", "Vérification", MessageBoxButton.OK);
+                Application.Current.Shutdown();
             }
             return validerListe;
 

@@ -42,6 +42,7 @@ namespace _2FAR_Library.Ado
             catch 
             {
                 MessageBox.Show("Erreur lors du chargement de l'ado TP Attribuer", "Vérification", MessageBoxButton.OK);
+                Application.Current.Shutdown();
             }
             return TPAttribuerListe;
 

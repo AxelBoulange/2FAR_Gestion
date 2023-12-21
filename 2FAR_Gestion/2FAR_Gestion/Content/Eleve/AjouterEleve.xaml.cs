@@ -15,7 +15,15 @@ namespace _2FAR_Gestion.Content.Eleve
             //verification qu'il y a au moin une promotion sinon erreur
             if (Ados.listePromotions != null)
             {
-                cbb_promo.ItemsSource = Ados.listePromotions;
+
+                List<string> labelPromo = new List<string>();
+
+                foreach (_2FAR_Library.Promo p in Ados.listePromotions)
+                {
+                    labelPromo.Add(p.nomPromo);
+                }
+
+                cbb_promo.ItemsSource = labelPromo;
                 cbb_promo.SelectedItem = cbb_promo.Items[0];
             }
             else

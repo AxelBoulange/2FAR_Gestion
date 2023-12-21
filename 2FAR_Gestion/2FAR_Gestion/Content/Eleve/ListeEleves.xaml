@@ -33,7 +33,7 @@
         <Label Grid.Row="1" Grid.Column="1" MinWidth="120" MaxWidth="120" MaxHeight="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 20" x:Name="lbl_recherche" Content="Rechercher un élève" Visibility="Visible" />
 
         <ComboBox x:Name="cbb_promotion" Grid.Row="1" Grid.Column="2" MinWidth="200" MaxWidth="250" MaxHeight="30" HorizontalAlignment="Left" Margin="10 20" FontSize="18" FontWeight="Bold" DropDownOpened="cbb_promo_invisible" SelectionChanged="cbb_promotion_selection_change"/>
-        <TextBlock Grid.Row="1" Grid.Column="2" MinWidth="180" MaxWidth="220" MaxHeight="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 20" x:Name="lbl_promotion" Text="Sélectionnez une promo" Visibility="Visible" />
+        <TextBlock Grid.Row="1" Grid.Column="2" MinWidth="120" MaxWidth="180" MaxHeight="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 20" x:Name="lbl_promotion" Text="Sélectionnez une promo" Visibility="Visible" />
         <Button Grid.Row="1" Grid.Column="2" MinWidth="30" MaxWidth="60" MinHeight="30" MaxHeight="30" HorizontalAlignment="Right" Background="#5e17eb" Click="remise_a_zero">
             <iconPacks:PackIconModern Kind="CheckmarkCross" Foreground="White"  Height="auto" Width="auto" MaxHeight="20" MaxWidth="20"/>
         </Button>

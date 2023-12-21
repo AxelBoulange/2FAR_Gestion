@@ -18,7 +18,17 @@ namespace _2FAR_Gestion
         public ListeEleves()
         {
             InitializeComponent();
-            cbb_promotion.ItemsSource = Ados.listePromotions;
+
+            List<string> labelPromo = new List<string>();
+
+            // afficher dans la combobox la list des promo par leurs nom
+            foreach (_2FAR_Library.Promo p in Ados.listePromotions)
+            {
+                labelPromo.Add(p.nomPromo);
+            }
+
+            cbb_promotion.ItemsSource = labelPromo;
+
             dtg_liste_utilisateur.ItemsSource = Ados.listeUtilisateurs;
         }
         
@@ -57,7 +67,7 @@ namespace _2FAR_Gestion
             dtg_liste_utilisateur.ItemsSource =  elevesfiltrer;
         }
         
-        //fonction que filtre les eleves en fonction des information selectionner par l'utilisateur               Retourne une liste d'utilisateurs
+        //fonction que filtre les eleves en fonction des information selectionner par l'utilisateur Retourne une liste d'utilisateurs
         private List<_2FAR_Library.Utilisateur> FiltrerEleves(string texteRecherche)
         {
             //verification qu'une promotion est séléctioné, si c'est le cas, recherche en fonction de la promotion 
@@ -93,27 +103,27 @@ namespace _2FAR_Gestion
         //Fonction pour filtrer les éléves par promo
         private List<_2FAR_Library.Utilisateur> FiltrerElevesParPromo(string nomDePromo)
         {
-            //si la recherche d'eleve ne retourne quelque chose, retourne les eleves de cette liste qui on la meme promo que celle passer en paramettre
-            if (FiltrerEleves != null)
+            //si la recherche d'eleve retourne quelque chose, retourne les eleves de cette liste qui on la meme promo que celle passer en paramettre
+            if (!string.IsNullOrEmpty(tbx_recherche.Text))
             {
                 List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_recherche.Text);
                 return elevesfiltrer.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
 
             }
-            // sinon si un item est selectionner dans la liste de promotion, retourne les eleves de cette liste qui on la meme promo que celle selectioné dans la liste de promo
-            else if (cbb_promotion.Text != "")
-                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
             // sinon, retourne les eleves de cette liste qui on la meme promo que celle selectioné dans la liste de promo
             else
                 return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
         }
         
-        //vider tout les input
+        //Recharge la page pour vidé tout les inputs
         private void remise_a_zero(object sender, EventArgs e)
         {
-            if (tbx_recherche is TextBox) 
-                tbx_recherche.Text= string.Empty;
-            dtg_liste_utilisateur.ItemsSource = Ados.listeUtilisateurs;
+            if (tbx_recherche is TextBox)
+            {
+                Application.Current.MainWindow.Content = new MenuNavbar(new ListeEleves());
+
+            }
+                
         }
     }
 }
