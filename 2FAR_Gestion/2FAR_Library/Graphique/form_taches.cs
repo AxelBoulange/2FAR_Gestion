@@ -284,6 +284,7 @@ namespace _2FAR_Library
             return ckb_bonus;
         }
 
+        // défini les valeurs entré par l'utilisateur
         public void GetFieldValues(CheckBox ckb_bonus)
         {
                 ordre = Convert.ToInt32(nud_ordre.Value);
@@ -294,6 +295,7 @@ namespace _2FAR_Library
                 bonus = Convert.ToBoolean(ckb_bonus.IsChecked);
         }
 
+        // vérifie si les champs sont complet ou conforme 
         public Boolean ChampsComplet(double? ordre, string intitule, string desc, double? points)
         {
             if (ordre < 0 || ordre > 20  || intitule == string.Empty || intitule == null || intitule == "" || desc == string.Empty || desc == null || desc == "" || points < 0 || points >5)
