@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using _2FAR_Library;
 using _2FAR_Gestion.Content;
-using _2FAR_Gestion.Content.Promo;
+using _2FAR_Gestion.Content.Tache;
 using System.Windows.Controls;
 using _2FAR_Gestion.Content.TP;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -15,7 +15,7 @@ namespace _2FAR_Gestion
     {
         public ListeTp()
         {
-            Dictionary<string,Action<object, EventArgs>> actionsButton = new Dictionary<string,Action<object, EventArgs>> { {"Consulter",consulter},{"Modifier",modifier},{"Supprimer",supprimer}};
+            Dictionary<string,Action<object, EventArgs>> actionsBoutton = new Dictionary<string,Action<object, EventArgs>> { {"Voir Les Taches",consulter},{"Modifier",modifier},{"Supprimer",supprimer}};
             
             InitializeComponent();
 
@@ -29,14 +29,14 @@ namespace _2FAR_Gestion
                         count++;
                     }
                 }
-                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\n nombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14, tp));
+                this.stp_liste_tp.Children.Add(new Carte(tp.nomTP + "\nTaches :" + count , tp.descriptionTP, actionsBoutton, 15, 14, tp));
             }
         }
         private void consulter(object o, EventArgs e)
         {
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
             {
-                Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
+                Application.Current.MainWindow.Content = new MenuNavbar(new ListeTaches((TP)tp));
             }
         }
         private void modifier(object o, EventArgs e)
@@ -49,7 +49,7 @@ namespace _2FAR_Gestion
 
         private void supprimer(object o, EventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer ce TP", "Vérification", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
                 if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)

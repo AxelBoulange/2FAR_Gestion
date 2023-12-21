@@ -14,75 +14,63 @@ namespace _2FAR_Gestion
 {
     public partial class ListeEleves 
     {
+        //Constructeur de la liste des éléves
         public ListeEleves()
         {
             InitializeComponent();
-
-            List<string> promo_string = new List<string>();
-            foreach (var item in Ados.listePromotions)
-            {
-                promo_string.Add(item.nomPromo);
-            }
-            cbb_promo.ItemsSource = promo_string;
-            
-            
-            List<string> nomPromo = new List<string>();
-            foreach (Promo p in Ados.listePromotions)
-            {
-                foreach (_2FAR_Library.Utilisateur u in Ados.listeUtilisateurs)
-                {
-                    if (u.fk_id_promo == p.idPromo)
-                    {
-                        nomPromo.Add(p.nomPromo);
-                    }
-                }
-            };
-            datagrid.ItemsSource = Ados.listeUtilisateurs;
+            cbb_promotion.ItemsSource = Ados.listePromotions;
+            dtg_liste_utilisateur.ItemsSource = Ados.listeUtilisateurs;
         }
-
-        public void add_eleve(object sender, RoutedEventArgs e)
+        
+        // Aller sur la page d'ajout d'éléves
+        public void ajouter_eleve(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Content = new MenuNavbar(new AjouterEleve());
         }
-
-        private void cbb_promo_Drop(object sender, EventArgs e)
+        
+        //mettre la liste de promotion en invisible
+        private void cbb_promo_invisible(object sender, EventArgs e)
         {
-            cbb_text.Visibility = Visibility.Hidden;
+            lbl_promotion.Visibility = Visibility.Hidden;
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        //action quand la texte box de recherche est cliqué
+        private void tbx_recherche_est_cible(object sender, RoutedEventArgs e)
         {
-            tbx_search.Clear();
-            search_text.Visibility= Visibility.Hidden;
+            tbx_recherche.Clear();
+            lbl_recherche.Visibility= Visibility.Hidden;
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        //action quand la texte box de recherche n'est plus ciblé dans l'application et que l'utilisateur recherche au moin 1 charactère
+        private void tbx_recherche_nest_plus_cible(object sender, RoutedEventArgs e)
         {
-            if (tbx_search.Text.Length < 1)
+            if (tbx_recherche.Text.Length < 1)
             {
-                search_text.Visibility = Visibility.Visible;
-
+                lbl_recherche.Visibility = Visibility.Visible;
             }
         }
-
-        private void tbx_search_TextChanged(object sender, TextChangedEventArgs e)
+        
+        //action quand l'input de la texte box de recherche est changer
+        private void tbx_recherche_texte_change(object sender, TextChangedEventArgs e)
         {
-            string text = tbx_search.Text;
-            List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(text);
-            datagrid.ItemsSource =  elevesfiltrer;
+            List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_recherche.Text);
+            dtg_liste_utilisateur.ItemsSource =  elevesfiltrer;
         }
+        
+        //fonction que filtre les eleves en fonction des information selectionner par l'utilisateur               Retourne une liste d'utilisateurs
         private List<_2FAR_Library.Utilisateur> FiltrerEleves(string texteRecherche)
         {
-            if (cbb_promo.Text != "")
+            //verification qu'une promotion est séléctioné, si c'est le cas, recherche en fonction de la promotion 
+            if (cbb_promotion.Text != "")
             {
-                Promo p = Ados.listePromotions.Where(p => p.nomPromo == cbb_promo.Text).First();
-                List<_2FAR_Library.Utilisateur> user = Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == p.idPromo).ToList();
-                return user.Where(Utilisateur =>
+                List<_2FAR_Library.Utilisateur> utilisateurs = Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == cbb_promotion.Text).First().idPromo).ToList();
+                return utilisateurs.Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.mailUtilisateur.ToLower().Contains(texteRecherche.ToLower()))
             .ToList();
             }
+            //sinon, recherche uniquement en fonction du champ de la texte box
             else
             return AdoUtilisateur.getAdoUtilisateur(Connexion.GetConn()).Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
@@ -93,34 +81,39 @@ namespace _2FAR_Gestion
 
 
 
-
-        private void cbb_promo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //action quand la selection de la liste de promotion est changer
+        private void cbb_promotion_selection_change(object sender, SelectionChangedEventArgs e)
         {
-            string item = (string)cbb_promo.SelectedItem;
-            List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerElevesByPromo(item);
-            datagrid.ItemsSource = elevesfiltrer;
+            string item = (string)cbb_promotion.SelectedItem;
+            List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerElevesParPromo(item);
+            dtg_liste_utilisateur.ItemsSource = elevesfiltrer;
         }
 
-        private List<_2FAR_Library.Utilisateur> FiltrerElevesByPromo(string item)
+        
+        //Fonction pour filtrer les éléves par promo
+        private List<_2FAR_Library.Utilisateur> FiltrerElevesParPromo(string nomDePromo)
         {
+            //si la recherche d'eleve ne retourne quelque chose, retourne les eleves de cette liste qui on la meme promo que celle passer en paramettre
             if (FiltrerEleves != null)
             {
-                List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_search.Text);
-                return elevesfiltrer.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
+                List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_recherche.Text);
+                return elevesfiltrer.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
 
             }
+            // sinon si un item est selectionner dans la liste de promotion, retourne les eleves de cette liste qui on la meme promo que celle selectioné dans la liste de promo
+            else if (cbb_promotion.Text != "")
+                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
+            // sinon, retourne les eleves de cette liste qui on la meme promo que celle selectioné dans la liste de promo
             else
-            if (cbb_promo.Text != "")
-                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
-            else
-                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
         }
-
-        private void reset(object sender, EventArgs e)
+        
+        //vider tout les input
+        private void remise_a_zero(object sender, EventArgs e)
         {
-            if (tbx_search is TextBox) 
-                tbx_search.Text= string.Empty;
-            datagrid.ItemsSource = Ados.listeUtilisateurs;
+            if (tbx_recherche is TextBox) 
+                tbx_recherche.Text= string.Empty;
+            dtg_liste_utilisateur.ItemsSource = Ados.listeUtilisateurs;
         }
     }
 }

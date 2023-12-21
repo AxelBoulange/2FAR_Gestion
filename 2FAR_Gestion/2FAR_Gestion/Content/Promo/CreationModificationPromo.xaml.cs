@@ -21,52 +21,58 @@ namespace _2FAR_Gestion.Content.Promo
     /// </summary>
     public partial class CreationModificationPromo : Page
     {
-        public string oldName { get; set; } = String.Empty;
-
+        private string ancienNom = String.Empty;
+        
+        //construction pour la création d'une promotion
         public CreationModificationPromo()
         {
-            loading("ajouter une promo");
+            InitializeComponent();
         }
 
+        //constructeur pour la modification d'une promotion
         public CreationModificationPromo(_2FAR_Library.Promo p)
         {
-
-            loading("Modifier une promo");
-            oldName = p.nomPromo;
-            tbx_nomPromo.Text = p.nomPromo;
-
-        }
-
-
-
-        void loading(string title)
-        {
+            ancienNom = p.nomPromo;
             InitializeComponent();
 
-            lb_title.Content = title;
+            lb_title.Content = "Modifier Une Promotion";
+            tbx_nomPromo.Text = p.nomPromo;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //btn ajouter / modifier clické
+        private void Boutton_clicke(object sender, RoutedEventArgs e)
         {
             //vérifier que l'entrée utilisateur est valide
             if (string.IsNullOrEmpty(tbx_nomPromo.Text))
             {
                 //si entrée vide, l'indique à l'aide d'une messageBox
                 MessageBox.Show("Veuillez remplir un nom avant d'ajouter");
+                return;
             }
             else
             {
-                if (oldName != string.Empty && tbx_nomPromo.Text == oldName)
+                //verifier que la promotion n'existe pas deja
+                foreach (var p in Ados.listePromotions)
                 {
-                    MessageBox.Show("Cette promotion existe déjà.");
+                    if (p.nomPromo == tbx_nomPromo.Text)
+                    {
+                        MessageBox.Show("Cette promotion existe déjà.");
+                        return;
+                    }
+                }
+                if (ancienNom != String.Empty)
+                {
+                    //sinon, si la variable "ancien nom" a une valeur, renomer la promotion avec le nouveau nom
+                    Ados.listePromotions.Where(p => p.nomPromo == ancienNom).First().nomPromo = tbx_nomPromo.Text;
                 }
                 else
                 {
-                    Ados.listePromotions.Add(new _2FAR_Library.Promo(Ados.listePromotions.Where(p => p.nomPromo == oldName).First().idPromo, tbx_nomPromo.Text));
-                    Ados.listePromotions.Remove(Ados.listePromotions.Where(p => p.nomPromo == oldName).First());
-                    Application.Current.MainWindow.Content = new ListePromos();
+                    //sinon, cree la promotion
+                    Ados.listePromotions.Add(new _2FAR_Library.Promo(Ados.listePromotions.Last().idPromo + 1, tbx_nomPromo.Text));
                 }
             }
+            //renvoyer sur la liste des promotions
+            Application.Current.MainWindow.Content = new MenuNavbar(new ListePromos());
         }
     }
 }

@@ -10,10 +10,10 @@ namespace _2FAR_Gestion
 
     public partial class DemandeValidation
     {
-        public Dictionary<string,Action<object, EventArgs>> actionsButton { get; set; }
+        public Dictionary<string,Action<object, EventArgs>> actionsBoutton { get; set; }
         public DemandeValidation()
         {
-            actionsButton = new Dictionary<string, Action<object, EventArgs>>() { { "Valider", Valider }, { "Rejeter", Rejeter } };
+            actionsBoutton = new Dictionary<string, Action<object, EventArgs>>() { { "Valider", Valider }, { "Rejeter", Rejeter } };
             InitializeComponent();
             AffichageListe();
         }
@@ -40,10 +40,10 @@ namespace _2FAR_Gestion
         }
         private void AffichageListe()
         {
-            listCartes.Children.Clear();
+            stp_liste_demande.Children.Clear();
             foreach (var attenteValidation in Ados.listeAttenteValidations)
             {
-                listCartes.Children.Add(new Carte(attenteValidation.utilisateur.nomUtilisateur + "\n" + attenteValidation.utilisateur.nomPromo, attenteValidation.tache.titreTache, actionsButton, 25, 20, attenteValidation){Margin = new Thickness(20,10,20,10)});
+                stp_liste_demande.Children.Add(new Carte(attenteValidation.utilisateur.nomUtilisateur + "\n" + attenteValidation.utilisateur.nomPromo, attenteValidation.tache.titreTache, actionsBoutton, 25, 20, attenteValidation){Margin = new Thickness(20,10,20,10)});
             }
         }
     }

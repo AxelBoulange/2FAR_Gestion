@@ -34,7 +34,7 @@ namespace _2FAR_Gestion
             this.attribuerTp = attribuertp;
             
             InitializeComponent();
-            btnValidation.Content = " Valider la Modification du TP";
+            btn_Validation.Content = " Valider la Modification du TP";
 
             List<string> promo_string = new List<string>();
             foreach (var item in Ados.listePromotions)
@@ -100,7 +100,7 @@ namespace _2FAR_Gestion
                         Ados.listeTP.Add(new TP(Ados.listeTP.Last().idTP + 1, tbx_nom_tp.Text, tbx_description_tp.Text));
                         Ados.listeAttributions.Add(new TPAttribuer(date, true, Ados.listeTP.Last(), promoEleve));
                     }
-                    Application.Current.MainWindow.Content = new MenuNavbar(new CreationTachesTp());
+                    Application.Current.MainWindow.Content = new MenuNavbar(new CreationTachesTp(Ados.listeTP.Last()));
                 }
             }
         }

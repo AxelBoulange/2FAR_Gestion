@@ -14,7 +14,7 @@ namespace _2FAR_Gestion
     {
         public ListePromos()
         {
-            Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "voir les tps", voir_Les_Tps }, { "modifier", modifier }, { "supprimer", supprimer } };
+            Dictionary<string, Action<object, EventArgs>> actionsBoutton = new Dictionary<string, Action<object, EventArgs>> { { "Voir les tps", Voir_Les_Tps }, { "Modifier", Modifier }, { "Supprimer", Supprimer } };
 
             InitializeComponent();
 
@@ -27,18 +27,18 @@ namespace _2FAR_Gestion
                         count++;
                     }
                  }
-                this.listCartes.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsButton, 18, 25, promo));
+                this.stp_liste_promotion.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsBoutton, 18, 25, promo));
             }
         }
 
-        private void voir_Les_Tps(object o, EventArgs e)
+        private void Voir_Les_Tps(object o, EventArgs e)
         {
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.Promo promo)
             { 
                 Application.Current.MainWindow.Content = new MenuNavbar(new ListeTpPromos((Promo)promo));
             }
         }
-        private void modifier(object o, EventArgs e)
+        private void Modifier(object o, EventArgs e)
         {
 
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.Promo promo)
@@ -48,7 +48,7 @@ namespace _2FAR_Gestion
             }
         }
 
-        private void supprimer(object o, EventArgs e)
+        private void Supprimer(object o, EventArgs e)
         {
             //supprimer la promo et les tp associés
             MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
@@ -127,7 +127,7 @@ namespace _2FAR_Gestion
             }
         }
 
-        private void add_promo(object sender, RoutedEventArgs e)
+        private void Ajouter_Promo(object sender, RoutedEventArgs e)
         {
 
             Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationPromo());
