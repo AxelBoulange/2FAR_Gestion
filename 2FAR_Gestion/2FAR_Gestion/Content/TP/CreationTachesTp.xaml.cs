@@ -19,7 +19,7 @@ namespace _2FAR_Gestion.Content.TP
             tp = letp;
 
             InitializeComponent();
-            stp_liste_taches.Children.Add(new Form_taches());
+            stp_tache.Children.Add(new Form_taches());
 
         }
 
@@ -27,7 +27,9 @@ namespace _2FAR_Gestion.Content.TP
 
         public void create_taches(object o, EventArgs e) 
         {
-            foreach (Form_taches t in stack_form.Children)
+            bool valide = false;
+            
+            foreach (Form_taches t in stp_tache.Children)
             {
                 t.GetFieldValues(t.GetCkb_bonus());
 
@@ -35,7 +37,7 @@ namespace _2FAR_Gestion.Content.TP
 
                 if (t.valide == true)
                 {
-                    Ados.listeTaches.Add(new Tache(Ados.listeTaches.Last().idTache + 1, t.desc, t.checkpoint, t.ordre, t.points, t.bonus, true, tp.idTP, t.intitule ));
+                    Ados.listeTaches.Add(new _2FAR_Library.Tache(Ados.listeTaches.Last().idTache + 1, t.desc, t.checkpoint, t.ordre, t.points, t.bonus, true, tp.idTP, t.intitule ));
                     tp.tacheList.Add(Ados.listeTaches.Last());
                     foreach (_2FAR_Library.AttribuerTP attribuer in Ados.listeAttributions )
                     {
@@ -48,25 +50,29 @@ namespace _2FAR_Gestion.Content.TP
                                     foreach (_2FAR_Library.Utilisateur u in p.utilisateurList)
                                     {
                                         Ados.listeAvancementTaches.Add(new AvancementTache(0, Ados.listeTaches.Last(), u));
-
+                                        valide = true;
                                     }
                                 }
                             }
                         }
-                            MessageBoxResult result = MessageBox.Show("Créations validé", "Vérification", MessageBoxButton.OK);
                     }
+                    
                 }
                 else {
                     MessageBoxResult result = MessageBox.Show("Erreur, les champs ne sont pas remplis ou ne respecte pas les conditions", "Vérification", MessageBoxButton.OKCancel);
-
+                    break;
 
                 };
+            }
+            if (valide == true)
+            {
+                MessageBoxResult result = MessageBox.Show("Créations validé", "Vérification", MessageBoxButton.OK);
             }
         }
 
         private void add_form(object sender, RoutedEventArgs e)
         {
-            stp_liste_taches.Children.Add(new Form_taches());
+            stp_tache.Children.Add(new Form_taches());
 
         }
     }
