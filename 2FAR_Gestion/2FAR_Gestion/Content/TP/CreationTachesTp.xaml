@@ -29,7 +29,7 @@
         <Label Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="Black" Content="Création des taches"/>
 
         <ScrollViewer Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="4">
-            <StackPanel x:Name="stp_liste_taches" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <StackPanel x:Name="stp_tache" Width="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </ScrollViewer>
 
         <Button Grid.Column="1" Grid.Row="3" Margin="100,10" BorderBrush="White" Background="#5e17eb" Click="add_form">
