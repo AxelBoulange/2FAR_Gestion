@@ -48,7 +48,7 @@ namespace _2FAR_Gestion
                 var promo = c.objectCarte;
                 if (promo is _2FAR_Library.Promo)
                 {
-                    Application.Current.MainWindow.Content = new MenuNavbar(new ActionPromos((Promo)promo));
+                    Application.Current.MainWindow.Content = new MenuNavbar(new CreationPromo((Promo)promo));
                 }
             }
         }
@@ -140,7 +140,7 @@ namespace _2FAR_Gestion
 
         private void add_promo(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new MenuNavbar(new ActionPromos());
+            Application.Current.MainWindow.Content = new MenuNavbar(new ListePromos());
 
         }
     }
