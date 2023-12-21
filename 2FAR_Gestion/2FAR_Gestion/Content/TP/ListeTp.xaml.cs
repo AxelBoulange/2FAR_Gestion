@@ -29,7 +29,7 @@ namespace _2FAR_Gestion
                         count++;
                     }
                 }
-                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\n nombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14, tp));
+                this.stp_liste_tp.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\nnombre de tache :" + count , tp.descriptionTP, actionsBoutton, 15, 14, tp));
             }
         }
         private void consulter(object o, EventArgs e)
@@ -38,24 +38,39 @@ namespace _2FAR_Gestion
             {
                 Application.Current.MainWindow.Content = new MenuNavbar(new ListTaches((TP)tp));
             }
-
         }
         private void modifier(object o, EventArgs e)
         {
-            this.listCartes.Children.Clear();
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
+            {
+                Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationTp(Ados.listeAttributions.Where(at => at.tp.idTP == tp.idTP).First()));
+            }
         }
 
         private void supprimer(object o, EventArgs e)
         {
-
             MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
                 if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
                 {
                     var tp = c.objectCarte;
+                    var idtp = 0;
+
                     if (tp is _2FAR_Library.TP)
                     {
+
+                        // Utilisation d'une boucle for inversée pour éviter les problèmes de modification de la liste
+                        for (int i = Ados.listeTP.Count - 1; i >= 0; i--)
+                        {
+                            if (Ados.listeTP[i] == (TP)tp)
+                            {
+                                Ados.listeTP[i].idTP = idtp;
+                                Ados.listeTP.RemoveAt(i);
+                            }
+                        }
+
+
                         // Utilisation d'une boucle for inversée pour éviter les problèmes de modification de la liste
                         for (int i = Ados.listeAttributions.Count - 1; i >= 0; i--)
                         {
@@ -67,33 +82,36 @@ namespace _2FAR_Gestion
                             }
                         }
 
+
                         // Utilisation d'une boucle for inversée pour éviter les problèmes de modification de la liste
-                        for (int i = Ados.listeTP.Count - 1; i >= 0; i--)
+                        for (int i = Ados.listeTaches.Count - 1; i >= 0; i--)
                         {
-                            if (Ados.listeTP[i] == (TP)tp)
+                            var t = Ados.listeTaches[i];
+                            if (t.fk_id_tp == idtp )
                             {
-                                Ados.listeTP.RemoveAt(i);
+                                Ados.listeTaches.RemoveAt(i);
                             }
                         }
-                    }
-                    Application.Current.MainWindow.Content = new MenuNavbar(new VoirTp((TP)tp));
-                }
 
-            }
-            else if (result == MessageBoxResult.Cancel)
-            {
-                
-            }
-            else
-            {
-                //impossible mais oklm
-                MessageBox.Show("Erreur Inconnue");
+                        // Utilisation d'une boucle for inversée pour éviter les problèmes de modification de la liste
+                        for (int i = Ados.listeAttenteValidations.Count - 1; i >= 0; i--)
+                        {
+                            var v = Ados.listeAttenteValidations[i];
+                            if (v.tache.fk_id_tp == idtp)
+                            {
+                                Ados.listeAttenteValidations.RemoveAt(i);
+                            }
+                        }
+
+                    }
+                    Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
+                }
             }
         }
 
         private void add_tp(object sender, EventArgs e)
         {
-            Application.Current.MainWindow.Content = new MenuNavbar(new CreationTp());
+            Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationTp());
         }
     }
 }

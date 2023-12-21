@@ -72,7 +72,6 @@ namespace _2FAR_Gestion
                 cmdInsert.Parameters.Clear();
             }
 
-
             foreach (Utilisateur u in Ados.listeUtilisateurs)
             {
                 string sqlUtilisateur = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, mail_utilisateur, mdp_utilisateur, is_admin, fk_id_promo) VALUES (@nom_utilisateur, @prenom_utilisateur, @mail_utilisateur, @mdp_utilisateur, @is_admin, @fk_id_promo)";

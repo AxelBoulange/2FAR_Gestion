@@ -10,19 +10,14 @@
       Title="DemandeValidation">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="20*"/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="11*"/>
         </Grid.RowDefinitions>
         
-        <Label Grid.Row="0" Grid.Column="1" Content="Liste des demandes de validation" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <ScrollViewer x:Name="cartes" Grid.Row="1" Grid.Column="1" >
-            <StackPanel x:Name="listCartes"/>
+        <Label Grid.Row="0" Content="Liste des demandes de validation" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="stp_liste_demande"/>
         </ScrollViewer>
     </Grid>
 </Page>

@@ -9,6 +9,7 @@ namespace _2FAR_Library.Ado
 {
      public class AdoAttribuerTP : AdoTP
     {
+
         public static List<AttribuerTP>  getAdoAttribuerTP(SqlConnection connexion, List<TP> toutLesTps, List<Promo> touteLesPromotions)
         {
             string sql = "SELECT * FROM etre_attribuer";

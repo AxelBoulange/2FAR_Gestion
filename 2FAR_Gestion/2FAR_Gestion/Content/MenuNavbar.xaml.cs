@@ -13,31 +13,29 @@ namespace _2FAR_Gestion.Content
         public MenuNavbar( Page contentPage)
         {
             InitializeComponent();
-            this.frameGrid.Children.Add(new NavBar(CreateTP, ListTP, VoirEleve, VoirPromos, DemandeValidation));
-            this.frameContent.Content = contentPage;
+            this.grd_Menu.Children.Add(new NavBar(CreerTP, ListeTP, ListeEleve, ListePromos, ListeDemandeValidation));
+            this.frm_Page.Content = contentPage;
         }
-
-
-        private void CreateTP()
-    {
-
-        this.frameContent.Content = new CreationTp();
+        
+        private void CreerTP()
+        {
+            this.frm_Page.Content = new CreationModificationTp();
+        }
+        private void ListeTP()
+        {
+            this.frm_Page.Content = new ListeTp();
+        }
+        private void ListeEleve()
+        {
+            this.frm_Page.Content = new ListeEleves();
+        }
+        private void ListePromos()
+        {
+            this.frm_Page.Content = new ListePromos();
+        }
+        private void ListeDemandeValidation()
+        {
+            this.frm_Page.Content = new DemandeValidation();
+        }
     }
-    private void ListTP()
-    {
-        this.frameContent.Content = new ListeTp();
-    }
-    private void VoirEleve()
-    {
-        this.frameContent.Content = new ListeEleves();
-    }
-    private void VoirPromos()
-    {
-        this.frameContent.Content = new VoirPromos();
-    }
-    private void DemandeValidation()
-    {
-        this.frameContent.Content = new DemandeValidation();
-    }
-}
 }

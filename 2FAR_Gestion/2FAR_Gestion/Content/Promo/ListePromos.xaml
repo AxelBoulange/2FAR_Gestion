@@ -1,4 +1,4 @@
-﻿<Page x:Class="_2FAR_Gestion.VoirPromos"
+﻿<Page x:Class="_2FAR_Gestion.ListePromos"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -28,8 +28,8 @@
         </Button>
 
         <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Liste des promotions" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <ScrollViewer x:Name="cartes" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" >
-            <StackPanel x:Name="listCartes"/>
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" >
+            <StackPanel x:Name="stp_liste_promotion"/>
         </ScrollViewer>
     </Grid>
 </Page>

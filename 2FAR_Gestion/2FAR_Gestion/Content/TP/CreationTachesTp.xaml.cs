@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using _2FAR_Library;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using _2FAR_Library.Graphique;
+using System;
+using System.Windows;
 
 namespace _2FAR_Gestion.Content.TP
 {
@@ -22,7 +13,23 @@ namespace _2FAR_Gestion.Content.TP
     {
         public CreationTachesTp()
         {
+
             InitializeComponent();
+            stp_liste_taches.Children.Add(new Form_taches());
+
+        }
+
+   
+
+        public void create_taches(object o, EventArgs e) 
+        { 
+        
+        }
+
+        private void add_form(object sender, RoutedEventArgs e)
+        {
+            stp_liste_taches.Children.Add(new Form_taches());
+
         }
     }
 }
