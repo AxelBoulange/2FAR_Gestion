@@ -125,7 +125,7 @@ namespace _2FAR_Gestion
             }
         }
 
-        private void add_promo(object sender, RoutedEventArgs e)
+        private void Ajouter_Promo(object sender, RoutedEventArgs e)
         {
 
             Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationPromo());

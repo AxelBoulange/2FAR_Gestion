@@ -66,7 +66,7 @@ namespace _2FAR_Gestion.Content.Promo
                 else
                 {
                     //sinon, cree la promotion
-                    Ados.listePromotions.Add(new _2FAR_Library.Promo(Ados.listePromotions.Where(p => p.nomPromo == ancienNom).First().idPromo, tbx_nomPromo.Text));
+                    Ados.listePromotions.Add(new _2FAR_Library.Promo(Ados.listePromotions.Last().idPromo + 1, tbx_nomPromo.Text));
                 }
             }
             //renvoyer sur la liste des promotions

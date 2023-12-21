@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
 
-        <Button Grid.Column="4" Height="40" Width="40" Background="#5e17eb" Click="add_promo" >
+        <Button Grid.Column="4" Height="40" Width="40" Background="#5e17eb" Click="Ajouter_Promo" >
             <iconPacks:PackIconModern Foreground="White" Kind="Add"/>
         </Button>
 
