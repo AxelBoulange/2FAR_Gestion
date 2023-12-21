@@ -16,9 +16,9 @@ public partial class ListeTpPromos
     public ListeTpPromos(_2FAR_Library.Promo promo)
     {
         InitializeComponent();
-        foreach (var attribuerTp in Ados.listeAttributions)
-            if (attribuerTp.promotion.idPromo == promo.idPromo)
-                stp_liste_tp.Children.Add(new Carte(attribuerTp.tp.nomTP, attribuerTp.tp.descriptionTP, new Dictionary<string, Action<object, EventArgs>>{{"Statistiques",statistiques},{"Modifier",modifier}},20,15,attribuerTp.tp));
+        foreach (var TPAttribuer in Ados.listeAttributions)
+            if (TPAttribuer.promotion.idPromo == promo.idPromo)
+                stp_liste_tp.Children.Add(new Carte(TPAttribuer.tp.nomTP, TPAttribuer.tp.descriptionTP, new Dictionary<string, Action<object, EventArgs>>{{"Statistiques",statistiques},{"Modifier",modifier}},20,15,TPAttribuer.tp));
     }
 
     private void statistiques(object o, EventArgs e)

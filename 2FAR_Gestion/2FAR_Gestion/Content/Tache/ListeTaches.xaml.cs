@@ -19,9 +19,9 @@ namespace _2FAR_Gestion.Content.Tache
             leTP = tp;
             InitializeComponent();
 
-            if(tp.tacheList !=  null)
+            if(tp.tachesListe !=  null)
             {
-                foreach(var tache in tp.tacheList)
+                foreach(var tache in tp.tachesListe)
                 {
                     this.stp_liste_tache.Children.Add(new Carte(tache.titreTache, tache.descriptionTache, new Dictionary<string, Action<object, EventArgs>> { { "Supprimer", supprimer } }, 15, 14, tache));
                 }
@@ -38,9 +38,9 @@ namespace _2FAR_Gestion.Content.Tache
                 if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.Tache tache)
                 {
 
-                    var taches = Ados.listeTP.Where(tp => tp.idTP == leTP.idTP).First().tacheList;
+                    var taches = Ados.listeTP.Where(tp => tp.idTP == leTP.idTP).First().tachesListe;
                     taches.Remove(taches.Where(t => t.idTache == tache.idTache).First());
-                    Ados.listeTP.Where(tp => tp.idTP == leTP.idTP).First().tacheList = taches;
+                    Ados.listeTP.Where(tp => tp.idTP == leTP.idTP).First().tachesListe = taches;
 
                     Ados.listeTaches.Remove(Ados.listeTaches.Where(t => t.idTache == tache.idTache).First());
 

@@ -9,9 +9,9 @@ namespace _2FAR_Library
         public string descriptionTP { get; set; }
 
 
-        public TP(List<Tache> tachelist, int idtp, string nomtp, string descriptiontp)
+        public TP(List<Tache> tachesListe, int idtp, string nomtp, string descriptiontp)
         {
-            this.tachesListe = tachelist;
+            this.tachesListe = tachesListe;
             this.idTP = idtp;
             this.nomTP = nomtp;
             this.descriptionTP = descriptiontp;
