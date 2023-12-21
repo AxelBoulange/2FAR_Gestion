@@ -40,9 +40,11 @@ namespace _2FAR_Gestion
         }
         private void modifier(object o, EventArgs e)
         {
+
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.Promo promo)
             { 
                 Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationPromo(promo));
+
             }
         }
 
@@ -125,7 +127,9 @@ namespace _2FAR_Gestion
 
         private void add_promo(object sender, RoutedEventArgs e)
         {
+
             Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationPromo());
+
 
         }
     }
