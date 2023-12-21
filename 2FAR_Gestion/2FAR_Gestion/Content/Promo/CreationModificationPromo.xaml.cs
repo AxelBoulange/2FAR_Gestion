@@ -22,12 +22,14 @@ namespace _2FAR_Gestion.Content.Promo
     public partial class CreationModificationPromo : Page
     {
         private string ancienNom = String.Empty;
-        //Création d'une promotion
+        
+        //construction pour la création d'une promotion
         public CreationModificationPromo()
         {
             InitializeComponent();
         }
 
+        //constructeur pour la modification d'une promotion
         public CreationModificationPromo(_2FAR_Library.Promo p)
         {
             ancienNom = p.nomPromo;
@@ -37,7 +39,7 @@ namespace _2FAR_Gestion.Content.Promo
             tbx_nomPromo.Text = p.nomPromo;
         }
 
-
+        //btn ajouter / modifier clické
         private void Boutton_clicke(object sender, RoutedEventArgs e)
         {
             //vérifier que l'entrée utilisateur est valide

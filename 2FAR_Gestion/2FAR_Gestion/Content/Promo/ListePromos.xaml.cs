@@ -65,6 +65,7 @@ namespace _2FAR_Gestion
                         // Utilisation d'une boucle for inversée pour éviter les problèmes de modification de la liste
                         for (int i = Ados.listePromotions.Count - 1; i >= 0; i--)
                         {
+                            //Supprimer les TPAttribuer de la promo
                             for (int j = Ados.listeAttributions.Count - 1; j >= 0; j--)
                             {
                                 if (Ados.listeAttributions[j].promotion.idPromo == Ados.listePromotions[i].idPromo)
@@ -72,7 +73,7 @@ namespace _2FAR_Gestion
                                     Ados.listeAttributions.Remove(Ados.listeAttributions[j]);
                                 }
                             }
-                            
+                            //Supprimer la promo
                             if (Ados.listePromotions[i] == (Promo)promo)
                             {
                                 p = Ados.listePromotions[i];
@@ -83,7 +84,7 @@ namespace _2FAR_Gestion
                         }
                         for (int i = Ados.listeUtilisateurs.Count - 1; i >= 0; i--)
                         {
-
+                            //supprimer les attenteValidation relatives aux eleves de la promo supprimée
                             for (int j = Ados.listeAttenteValidations.Count - 1; j >= 0; j-- )
                             {
                                 if (Ados.listeUtilisateurs[i].idUtilisateur == Ados.listeAttenteValidations[j].utilisateur.idUtilisateur)
@@ -91,6 +92,7 @@ namespace _2FAR_Gestion
                                     Ados.listeAttenteValidations.Remove(Ados.listeAttenteValidations[j]);
                                 }
                             }
+                            //supprimer les avancementTaches relatifs aux eleves de la promo supprimée
                             for (int j = Ados.listeAvancementTaches.Count - 1; j >= 0; j-- )
                             {
                                 if (Ados.listeUtilisateurs[i].idUtilisateur == Ados.listeAvancementTaches[j].utilisateur.idUtilisateur)
@@ -98,6 +100,7 @@ namespace _2FAR_Gestion
                                     Ados.listeAvancementTaches.Remove(Ados.listeAvancementTaches[j]);
                                 }
                             }
+                            //supprimer les validation relatives aux eleves de la promo supprimée
                             for(int j = Ados.listeValidations.Count - 1; j >= 0; j--)
                             {
                                 if (Ados.listeUtilisateurs[i].idUtilisateur == Ados.listeValidations[j].utilisateurValider.idUtilisateur)
@@ -105,8 +108,7 @@ namespace _2FAR_Gestion
                                     Ados.listeValidations.Remove(Ados.listeValidations[j]);
                                 }
                             }
-
-
+                            //supprimer les eleves de la promo supprimée
                             foreach (Utilisateur u in p.utilisateurList)
                             {
                                 if (Ados.listeUtilisateurs[i].idUtilisateur == u.idUtilisateur)

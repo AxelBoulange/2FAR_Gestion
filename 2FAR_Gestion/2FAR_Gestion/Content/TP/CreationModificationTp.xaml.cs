@@ -14,7 +14,7 @@ namespace _2FAR_Gestion
 {
     public partial class CreationModificationTp
     {
-        private AttribuerTP attribuerTp { get; set; } = null;
+        private TPAttribuer TPAttribuer { get; set; } = null;
         public CreationModificationTp()
         {
             InitializeComponent();
@@ -28,10 +28,10 @@ namespace _2FAR_Gestion
                     
         }
         
-        public CreationModificationTp(_2FAR_Library.AttribuerTP attribuertp)
+        public CreationModificationTp(_2FAR_Library.TPAttribuer TPAttribuer)
         {
 
-            this.attribuerTp = attribuertp;
+            this.TPAttribuer = TPAttribuer;
             
             InitializeComponent();
             btn_Validation.Content = " Valider la Modification du TP";
@@ -43,17 +43,17 @@ namespace _2FAR_Gestion
             }
             cbb_promo_tp.ItemsSource = promo_string;
             
-            tbx_nom_tp.Text = attribuerTp.tp.nomTP;
-            tbx_description_tp.Text = attribuerTp.tp.descriptionTP;
+            tbx_nom_tp.Text = TPAttribuer.tp.nomTP;
+            tbx_description_tp.Text = TPAttribuer.tp.descriptionTP;
 
-            if (promo_string.Contains(attribuerTp.promotion.nomPromo))
+            if (promo_string.Contains(TPAttribuer.promotion.nomPromo))
             {
-                cbb_promo_tp.SelectedItem = attribuerTp.promotion.nomPromo;
+                cbb_promo_tp.SelectedItem = TPAttribuer.promotion.nomPromo;
             }
 
-            if (attribuerTp.dte_fin.HasValue)
+            if (TPAttribuer.dte_fin.HasValue)
             {
-                dtp_date.SelectedDate = attribuertp.dte_fin.Value;
+                dtp_date.SelectedDate = TPAttribuer.dte_fin.Value;
             }
         }
 
@@ -82,23 +82,23 @@ namespace _2FAR_Gestion
                 else
                 {
                     date = (DateTime)dtp_date.SelectedDate;
-                    if (attribuerTp != null)
+                    if (TPAttribuer != null)
                     {
-                        Ados.listeTP.Remove(Ados.listeTP.Where(Tp => Tp.idTP == attribuerTp.tp.idTP).First());
-                        Ados.listeTP.Add(new TP(attribuerTp.tp.idTP, tbx_nom_tp.Text, tbx_description_tp.Text));
-                        if (cbb_promo_tp.SelectedItem != attribuerTp.promotion.nomPromo)
+                        Ados.listeTP.Remove(Ados.listeTP.Where(Tp => Tp.idTP == TPAttribuer.tp.idTP).First());
+                        Ados.listeTP.Add(new TP(TPAttribuer.tp.idTP, tbx_nom_tp.Text, tbx_description_tp.Text));
+                        if (cbb_promo_tp.SelectedItem != TPAttribuer.promotion.nomPromo)
                         {
                             Ados.listeAttributions.Remove(Ados.listeAttributions.Where(at =>
-                                at.promotion.nomPromo == attribuerTp.promotion.nomPromo &&
-                                at.tp.idTP == attribuerTp.tp.idTP).First());
-                            Ados.listeAttributions.Add(new AttribuerTP(dtp_date.SelectedDate.Value, attribuerTp.is_actif, Ados.listeTP.Where(Tp => Tp.idTP == attribuerTp.tp.idTP).First(),Ados.listePromotions.Where(Promo => Promo.nomPromo == cbb_promo_tp.SelectedItem).First() ));
+                                at.promotion.nomPromo == TPAttribuer.promotion.nomPromo &&
+                                at.tp.idTP == TPAttribuer.tp.idTP).First());
+                            Ados.listeAttributions.Add(new TPAttribuer(dtp_date.SelectedDate.Value, TPAttribuer.is_actif, Ados.listeTP.Where(Tp => Tp.idTP == TPAttribuer.tp.idTP).First(),Ados.listePromotions.Where(Promo => Promo.nomPromo == cbb_promo_tp.SelectedItem).First() ));
                             Application.Current.MainWindow.Content = new PageAccueil();
                         }
                     }
                     else
                     {
                         Ados.listeTP.Add(new TP(Ados.listeTP.Last().idTP + 1, tbx_nom_tp.Text, tbx_description_tp.Text));
-                        Ados.listeAttributions.Add(new AttribuerTP(date, true, Ados.listeTP.Last(), promoEleve));
+                        Ados.listeAttributions.Add(new TPAttribuer(date, true, Ados.listeTP.Last(), promoEleve));
                     }
                     Application.Current.MainWindow.Content = new MenuNavbar(new CreationTachesTp(Ados.listeTP.Last()));
                 }

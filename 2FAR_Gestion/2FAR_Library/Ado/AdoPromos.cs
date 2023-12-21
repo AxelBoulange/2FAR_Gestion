@@ -4,31 +4,48 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace _2FAR_Library.Ado
 {
+        /*
+        * Entrée : connexion, listeUtilisateurs
+        * Sortie : listePromotions
+        */
     public class AdoPromos : AdoUtilisateur
     {
-        public static List<Promo> getAdoPromos(SqlConnection connexion, List<Utilisateur> toutLesUtilisateurs) 
+       
+        public static List<Promo> getAdoPromos(SqlConnection connexion, List<Utilisateur> tousLesUtilisateurs) 
         {
-            string sql = "SELECT * FROM promotion";
-            SqlCommand cmd = new SqlCommand(sql, connexion);
+
             List<Promo> promotions = new List<Promo>();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-                promotions.Add(new Promo(reader.GetInt32(0), reader.GetString(1)));
-            foreach (Promo p in promotions) 
-            { 
-                foreach(Utilisateur u in toutLesUtilisateurs)
+
+            try
+            {
+                string sql = "SELECT * FROM promotion";
+                SqlCommand cmd = new SqlCommand(sql, connexion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                    promotions.Add(new Promo(reader.GetInt32(0), reader.GetString(1)));
+                foreach (Promo p in promotions)
                 {
-                    if(u.fk_id_promo == p.idPromo)
+                    foreach (Utilisateur u in tousLesUtilisateurs)
                     {
-                        p.utilisateurList.Add(u);
+                        if (u.fk_id_promo == p.idPromo)
+                        {
+                            p.utilisateurList.Add(u);
+                        }
                     }
                 }
+                connexion.Close();
+                return promotions;
             }
-            connexion.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du chargement de l'ado promotion", "vérification", MessageBoxButton.OK);
+            }
             return promotions;
+
         }
     }
 }

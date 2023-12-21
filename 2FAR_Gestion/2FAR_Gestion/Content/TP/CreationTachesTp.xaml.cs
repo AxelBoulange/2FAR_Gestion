@@ -38,8 +38,8 @@ namespace _2FAR_Gestion.Content.TP
                 if (t.valide == true)
                 {
                     Ados.listeTaches.Add(new _2FAR_Library.Tache(Ados.listeTaches.Last().idTache + 1, t.desc, t.checkpoint, t.ordre, t.points, t.bonus, true, tp.idTP, t.intitule ));
-                    tp.tacheList.Add(Ados.listeTaches.Last());
-                    foreach (_2FAR_Library.AttribuerTP attribuer in Ados.listeAttributions )
+                    tp.tachesListe.Add(Ados.listeTaches.Last());
+                    foreach (_2FAR_Library.TPAttribuer attribuer in Ados.listeAttributions )
                     {
                         if (attribuer.tp == tp)
                         {

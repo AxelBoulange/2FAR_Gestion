@@ -29,7 +29,7 @@ namespace _2FAR_Gestion
                         count++;
                     }
                 }
-                this.stp_liste_tp.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\nnombre de tache :" + count , tp.descriptionTP, actionsBoutton, 15, 14, tp));
+                this.stp_liste_tp.Children.Add(new Carte(tp.nomTP + "\nTaches :" + count , tp.descriptionTP, actionsBoutton, 15, 14, tp));
             }
         }
         private void consulter(object o, EventArgs e)
@@ -49,7 +49,7 @@ namespace _2FAR_Gestion
 
         private void supprimer(object o, EventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer ce TP", "Vérification", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
                 if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
