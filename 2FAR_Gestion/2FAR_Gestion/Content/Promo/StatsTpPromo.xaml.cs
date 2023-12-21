@@ -59,29 +59,26 @@ public class ConstructeurDeGrid : Grid
         //Sinon, cree une ligne de statistique pour la tache
         else
         {
-
                 int pasCommence = 0;
                 int infCinquante = 0;
                 int supCinquante = 0;
                 int finit = 0;
                 
                 //calcule de la ou en  sont les élèves pour la tache du tp (nombre deleves par "palier")
-                foreach (var avancementTache in Ados.listeAvancementTaches)
+                foreach (var avancementTache in Ados.listeAvancementTaches.Where(ta => ta.tache.idTache == t.idTache))
                 {
-                    if (t.fk_id_tp == avancementTache.tache.idTache)
-                    {
-                        if (avancementTache.taux_avancement == 0)
-                            pasCommence += 1;
+                    if (avancementTache.taux_avancement == 0)
+                        pasCommence += 1;
 
-                        else if (avancementTache.taux_avancement < 50)
-                            infCinquante += 1;
+                    else if (avancementTache.taux_avancement < 50)
+                        infCinquante += 1;
 
-                        else if (avancementTache.taux_avancement >= 50 && avancementTache.taux_avancement < 100)
-                            supCinquante += 1;
+                    else if (avancementTache.taux_avancement >= 50 && avancementTache.taux_avancement < 100)
+                        supCinquante += 1;
 
-                        else
-                            finit += 1;
-                    }
+                    else
+                        finit += 1;
+                    
                 }
                 
                 //ecrire toute les données dans des labels préformaté et les mettres à la bonne place dans la grid
