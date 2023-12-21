@@ -15,6 +15,8 @@ namespace _2FAR_Gestion
     public partial class CreationModificationTp
     {
         private TPAttribuer TPAttribuer { get; set; } = null;
+        
+        //constructeur pour la création d'un tp
         public CreationModificationTp()
         {
             InitializeComponent();
@@ -28,6 +30,7 @@ namespace _2FAR_Gestion
                     
         }
         
+        //constructeur pour la modification d'un tp
         public CreationModificationTp(_2FAR_Library.TPAttribuer TPAttribuer)
         {
 
@@ -36,6 +39,7 @@ namespace _2FAR_Gestion
             InitializeComponent();
             btn_Validation.Content = " Valider la Modification du TP";
 
+            //recuperation des nom de promotions
             List<string> promo_string = new List<string>();
             foreach (var item in Ados.listePromotions)
             {
@@ -46,27 +50,32 @@ namespace _2FAR_Gestion
             tbx_nom_tp.Text = TPAttribuer.tp.nomTP;
             tbx_description_tp.Text = TPAttribuer.tp.descriptionTP;
 
+            //selection de la promotion du tpattribuer si elle existe dans la liste
             if (promo_string.Contains(TPAttribuer.promotion.nomPromo))
             {
                 cbb_promo_tp.SelectedItem = TPAttribuer.promotion.nomPromo;
             }
-
+            
+            //date du datepicker = date du tpattribuer
             if (TPAttribuer.dte_fin.HasValue)
             {
                 dtp_date.SelectedDate = TPAttribuer.dte_fin.Value;
             }
         }
 
+        //creation/modification du tp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DateTime date;
 
+            //verfication que tt les champs sont remplits
             if (string.IsNullOrWhiteSpace(tbx_nom_tp.Text) || string.IsNullOrWhiteSpace(tbx_description_tp.Text) || string.IsNullOrWhiteSpace(cbb_promo_tp.Text) || cbb_promo_tp.SelectedItem == null || /*dtp_date.SelectedDate < DateTime.Now ||*/ dtp_date.SelectedDate == null)
             {
                 MessageBox.Show("Erreur, tout les champs sont obligatoire", "Vérification", MessageBoxButton.OK);
             }
+            //si la verification est passer sans echec
             else
             {
+                //verification que la prommotion de l'élève existe
                 _2FAR_Library.Promo promoEleve = null;
                 foreach (var p in Ados.listePromotions)
                 {
@@ -75,36 +84,36 @@ namespace _2FAR_Gestion
                         promoEleve = p; 
                     }
                 }
+                //si elle n'este pas:
                 if (promoEleve == null)
                 {
                     MessageBox.Show("Erreur, la promo n'existe pas", "Vérification", MessageBoxButton.OK);
                 }
+                //si elle existe:
                 else
                 {
-                    date = (DateTime)dtp_date.SelectedDate;
+                    //si cest une modification, recreer le tp et l'atribution avec les nouvelles infomations mais les anciens ids et renvoyer sur la liste de tp
                     if (TPAttribuer != null)
                     {
                         Ados.listeTP.Remove(Ados.listeTP.Where(Tp => Tp.idTP == TPAttribuer.tp.idTP).First());
                         Ados.listeTP.Add(new TP(TPAttribuer.tp.idTP, tbx_nom_tp.Text, tbx_description_tp.Text));
-                        if (cbb_promo_tp.SelectedItem != TPAttribuer.promotion.nomPromo)
-                        {
-                            Ados.listeAttributions.Remove(Ados.listeAttributions.Where(at =>
-                                at.promotion.nomPromo == TPAttribuer.promotion.nomPromo &&
-                                at.tp.idTP == TPAttribuer.tp.idTP).First());
-                            Ados.listeAttributions.Add(new TPAttribuer(dtp_date.SelectedDate.Value, TPAttribuer.is_actif, Ados.listeTP.Where(Tp => Tp.idTP == TPAttribuer.tp.idTP).First(),Ados.listePromotions.Where(Promo => Promo.nomPromo == cbb_promo_tp.SelectedItem).First() ));
-                            Application.Current.MainWindow.Content = new PageAccueil();
-                        }
+                        
+                        Ados.listeAttributions.Remove(Ados.listeAttributions.Where(at => at.promotion.nomPromo == TPAttribuer.promotion.nomPromo && at.tp.idTP == TPAttribuer.tp.idTP).First());
+                        Ados.listeAttributions.Add(new TPAttribuer(dtp_date.SelectedDate.Value, TPAttribuer.is_actif, Ados.listeTP.Where(Tp => Tp.idTP == TPAttribuer.tp.idTP).First(),Ados.listePromotions.Where(Promo => Promo.nomPromo == cbb_promo_tp.SelectedItem).First() ));
+                        
+                        Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
                     }
+                    //sinon creer le tp et l'atribution et renvoyer sur la liste de tp
                     else
                     {
                         Ados.listeTP.Add(new TP(Ados.listeTP.Last().idTP + 1, tbx_nom_tp.Text, tbx_description_tp.Text));
-                        Ados.listeAttributions.Add(new TPAttribuer(date, true, Ados.listeTP.Last(), promoEleve));
+                        Ados.listeAttributions.Add(new TPAttribuer((DateTime)dtp_date.SelectedDate, true, Ados.listeTP.Last(), promoEleve));
                     }
                     Application.Current.MainWindow.Content = new MenuNavbar(new CreationTachesTp(Ados.listeTP.Last()));
                 }
             }
         }
-
+        
         private void fontchange(object sender, SizeChangedEventArgs e ) 
         {
             AdjustDatePickerFontSize();

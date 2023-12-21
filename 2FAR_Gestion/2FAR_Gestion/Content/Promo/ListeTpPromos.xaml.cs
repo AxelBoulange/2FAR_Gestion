@@ -13,6 +13,7 @@ namespace _2FAR_Gestion.Content.Promo;
 
 public partial class ListeTpPromos
 {
+    //instentiation de la liste des tp en fonction du promotion a l'ouverture de la page.
     public ListeTpPromos(_2FAR_Library.Promo promo)
     {
         InitializeComponent();
@@ -21,6 +22,7 @@ public partial class ListeTpPromos
                 stp_liste_tp.Children.Add(new Carte(TPAttribuer.tp.nomTP, TPAttribuer.tp.descriptionTP, new Dictionary<string, Action<object, EventArgs>>{{"Statistiques",statistiques},{"Modifier",modifier}},20,15,TPAttribuer.tp));
     }
 
+    //afficher la page de statistiques du tp quand le boutton est clické
     private void statistiques(object o, EventArgs e)
     {
         if (o is Btn b && b.Parent is StackPanel s && s.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
@@ -28,6 +30,8 @@ public partial class ListeTpPromos
             Application.Current.MainWindow.Content = new MenuNavbar(new StatsTpPromo(tp));
         }
     }
+    //afficher la page de modification d'un tp quand le boutton est clické
+
     private void modifier(object o, EventArgs e)
     {
         if (o is Btn b && b.Parent is StackPanel s && s.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)

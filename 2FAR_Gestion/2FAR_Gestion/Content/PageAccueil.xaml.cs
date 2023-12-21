@@ -7,10 +7,13 @@ namespace _2FAR_Gestion
 
     public partial class PageAccueil
     {
+        //constructeur de la page d'acceuil (1ere page que l'utilisateur voit en ouvrant l'application)
         public PageAccueil()
         {
             InitializeComponent();
         }
+        
+        //aller sur la page de creation d'un tp
         private void CreationTpPage(object sender, RoutedEventArgs e)
         {
             if (this.Parent is MainWindow mw)
@@ -18,27 +21,33 @@ namespace _2FAR_Gestion
                 mw.Content = new MenuNavbar(new CreationModificationTp());
             }
         }
-        private void ListTpPage (object sender, RoutedEventArgs e)
+        //aller sur la page qui liste les tps
+        private void ListeTpPage (object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)
             {
                 mw.Content = new MenuNavbar(new ListeTp());
             }
         }
-        private void VoirElevePage (object sender, RoutedEventArgs e)
+        //aller sur la page qui liste les élèves
+        private void ListeElevePage (object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)
             {
                 mw.Content = new MenuNavbar(new ListeEleves());
             }
         }
-        private void VoirPromosPage ( object sender, RoutedEventArgs e)
+        
+        //aller sur la page qui liste les promotions
+        private void ListePromosPage(object sender, RoutedEventArgs e)
         {
-            if(this.Parent is MainWindow mw)
+            if (this.Parent is MainWindow mw)
             {
                 mw.Content = new MenuNavbar(new ListePromos());
             }
         }
+
+        //aller sur la page qui liste les demande de validation
         private void DemandeValidationPage ( object sender, RoutedEventArgs e)
         {
             if(this.Parent is MainWindow mw)

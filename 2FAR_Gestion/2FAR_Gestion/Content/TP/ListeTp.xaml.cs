@@ -8,17 +8,21 @@ using System.Windows.Controls;
 using _2FAR_Gestion.Content.TP;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Linq;
+using _2FAR_Gestion.Content.Promo;
+using _2FAR_Library.Graphique;
 
 namespace _2FAR_Gestion
 {
     public partial class ListeTp
     {
+        //constructeur de la liste des tps
         public ListeTp()
         {
-            Dictionary<string,Action<object, EventArgs>> actionsBoutton = new Dictionary<string,Action<object, EventArgs>> { {"Voir Les Taches",consulter},{"Modifier",modifier},{"Supprimer",supprimer}};
+            Dictionary<string,Action<object, EventArgs>> actionsBoutton = new Dictionary<string,Action<object, EventArgs>> { {"Voir Les Taches",consulter},{"Modifier",modifier},{"Statistiques",statistiques},{"Supprimer",supprimer}};
             
             InitializeComponent();
-
+            
+            //ajouter chaques tp dans la liste des tps avec leur nombre de taches
             foreach (var tp in Ados.listeTP)
             {
                 int count = 0;
@@ -32,6 +36,8 @@ namespace _2FAR_Gestion
                 this.stp_liste_tp.Children.Add(new Carte(tp.nomTP + "\nTaches :" + count , tp.descriptionTP, actionsBoutton, 15, 14, tp));
             }
         }
+        
+        //quand le boutton voir les taches du tp est cliqué, aller sur la page listeTaches avec en parrametre le tp en question
         private void consulter(object o, EventArgs e)
         {
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
@@ -39,6 +45,7 @@ namespace _2FAR_Gestion
                 Application.Current.MainWindow.Content = new MenuNavbar(new ListeTaches((TP)tp));
             }
         }
+        //quand le boutton modifier est cliqué, aller sur la page de creation et de modification d'un tp avec en parrametre le tp en question
         private void modifier(object o, EventArgs e)
         {
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
@@ -47,10 +54,11 @@ namespace _2FAR_Gestion
             }
         }
 
+        //quand le boutton supprimer est cliquer, supprimer le tp en question
         private void supprimer(object o, EventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer ce TP", "Vérification", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
+            //verrifier que l'utilisateur veux réelement supprimer le tp
+            if (MessageBox.Show("Étes-Vous sur de vouloir supprimer ce TP", "Vérification", MessageBoxButton.OKCancel)==MessageBoxResult.OK)
             {
                 if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
                 {
@@ -104,6 +112,7 @@ namespace _2FAR_Gestion
                         }
 
                     }
+                    //refraichir la liste des tps
                     Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
                 }
             }
@@ -112,6 +121,15 @@ namespace _2FAR_Gestion
         private void add_tp(object sender, EventArgs e)
         {
             Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationTp());
+        }
+        
+        //afficher la page de statistiques du tp quand le boutton est clické
+        private void statistiques(object o, EventArgs e)
+        {
+            if (o is Btn b && b.Parent is StackPanel s && s.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
+            {
+                Application.Current.MainWindow.Content = new MenuNavbar(new StatsTpPromo(tp));
+            }
         }
     }
 }
