@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using _2FAR_Library;
 using _2FAR_Gestion.Content;
-using _2FAR_Gestion.Content.Promo;
+using _2FAR_Gestion.Content.Tache;
 using System.Windows.Controls;
 using _2FAR_Gestion.Content.TP;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -15,7 +15,7 @@ namespace _2FAR_Gestion
     {
         public ListeTp()
         {
-            Dictionary<string,Action<object, EventArgs>> actionsButton = new Dictionary<string,Action<object, EventArgs>> { {"consulter",consulter},{"modifier",modifier},{"supprimer",supprimer}};
+            Dictionary<string,Action<object, EventArgs>> actionsButton = new Dictionary<string,Action<object, EventArgs>> { {"Voir Les Taches",consulter},{"Modifier",modifier},{"Supprimer",supprimer}};
             
             InitializeComponent();
 
@@ -34,11 +34,9 @@ namespace _2FAR_Gestion
         }
         private void consulter(object o, EventArgs e)
         {
-            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
+            if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
             {
-                var tp = c.objectCarte;
-                if (tp is _2FAR_Library.TP)
-                    Application.Current.MainWindow.Content = new MenuNavbar(new VoirTp((TP)tp));
+                Application.Current.MainWindow.Content = new MenuNavbar(new ListTaches((TP)tp));
             }
 
         }

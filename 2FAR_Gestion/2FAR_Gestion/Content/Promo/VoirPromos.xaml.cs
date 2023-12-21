@@ -28,7 +28,7 @@ namespace _2FAR_Gestion
                 this.listCartes.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsButton, 18, 25, promo));
             }
         }
-
+        
         private void consulter(object o, EventArgs e)
         {
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c)
