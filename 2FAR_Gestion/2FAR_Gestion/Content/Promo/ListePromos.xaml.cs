@@ -14,7 +14,7 @@ namespace _2FAR_Gestion
     {
         public ListePromos()
         {
-            Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "voir les tps", voir_Les_Tps }, { "modifier", modifier }, { "supprimer", supprimer } };
+            Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "Voir les tps", Voir_Les_Tps }, { "Modifier", Modifier }, { "Supprimer", Supprimer } };
 
             InitializeComponent();
 
@@ -31,14 +31,14 @@ namespace _2FAR_Gestion
             }
         }
 
-        private void voir_Les_Tps(object o, EventArgs e)
+        private void Voir_Les_Tps(object o, EventArgs e)
         {
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.Promo promo)
             { 
                 Application.Current.MainWindow.Content = new MenuNavbar(new ListeTpPromos((Promo)promo));
             }
         }
-        private void modifier(object o, EventArgs e)
+        private void Modifier(object o, EventArgs e)
         {
 
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.Promo promo)
@@ -48,7 +48,7 @@ namespace _2FAR_Gestion
             }
         }
 
-        private void supprimer(object o, EventArgs e)
+        private void Supprimer(object o, EventArgs e)
         {
             //supprimer la promo et les tp associés
             MessageBoxResult result = MessageBox.Show("Étes-Vous sur de vouloir supprimer cette promo", "Vérification", MessageBoxButton.OKCancel);
