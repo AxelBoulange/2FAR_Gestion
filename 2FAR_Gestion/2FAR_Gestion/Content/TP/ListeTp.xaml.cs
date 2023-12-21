@@ -36,7 +36,7 @@ namespace _2FAR_Gestion
         {
             if (o is _2FAR_Library.Graphique.Btn b && b.Parent is StackPanel st && st.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
             {
-                Application.Current.MainWindow.Content = new MenuNavbar(new ListTaches((TP)tp));
+                Application.Current.MainWindow.Content = new MenuNavbar(new ListeTaches((TP)tp));
             }
         }
         private void modifier(object o, EventArgs e)

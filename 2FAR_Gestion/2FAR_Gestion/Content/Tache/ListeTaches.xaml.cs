@@ -11,10 +11,10 @@ using System.Linq;
 
 namespace _2FAR_Gestion.Content.Tache
 {
-    public partial class ListTaches
+    public partial class ListeTaches
     {
         _2FAR_Library.TP leTP = null;
-        public ListTaches(_2FAR_Library.TP tp)
+        public ListeTaches(_2FAR_Library.TP tp)
         {
             leTP = tp;
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace _2FAR_Gestion.Content.Tache
             {
                 foreach(var tache in tp.tacheList)
                 {
-                    this.listCartes.Children.Add(new Carte(tache.titreTache, tache.descriptionTache, new Dictionary<string, Action<object, EventArgs>> { { "Supprimer", supprimer } }, 15, 14, tache));
+                    this.stp_liste_tache.Children.Add(new Carte(tache.titreTache, tache.descriptionTache, new Dictionary<string, Action<object, EventArgs>> { { "Supprimer", supprimer } }, 15, 14, tache));
                 }
             }
             else
@@ -45,7 +45,7 @@ namespace _2FAR_Gestion.Content.Tache
                     Ados.listeTaches.Remove(Ados.listeTaches.Where(t => t.idTache == tache.idTache).First());
 
 
-                    Application.Current.MainWindow.Content = new MenuNavbar(new ListTaches(leTP));
+                    Application.Current.MainWindow.Content = new MenuNavbar(new ListeTaches(leTP));
                 }
             }
         }
