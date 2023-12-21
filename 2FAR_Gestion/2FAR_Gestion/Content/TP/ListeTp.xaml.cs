@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using _2FAR_Gestion.Content.TP;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Linq;
+using _2FAR_Gestion.Content.Promo;
+using _2FAR_Library.Graphique;
 
 namespace _2FAR_Gestion
 {
@@ -15,7 +17,7 @@ namespace _2FAR_Gestion
     {
         public ListeTp()
         {
-            Dictionary<string,Action<object, EventArgs>> actionsBoutton = new Dictionary<string,Action<object, EventArgs>> { {"Voir Les Taches",consulter},{"Modifier",modifier},{"Supprimer",supprimer}};
+            Dictionary<string,Action<object, EventArgs>> actionsBoutton = new Dictionary<string,Action<object, EventArgs>> { {"Voir Les Taches",consulter},{"Modifier",modifier},{"Statistiques",statistiques},{"Supprimer",supprimer}};
             
             InitializeComponent();
 
@@ -112,6 +114,15 @@ namespace _2FAR_Gestion
         private void add_tp(object sender, EventArgs e)
         {
             Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationTp());
+        }
+        
+        //afficher la page de statistiques du tp quand le boutton est clické
+        private void statistiques(object o, EventArgs e)
+        {
+            if (o is Btn b && b.Parent is StackPanel s && s.Parent is Grid g && g.Parent is Carte c && c.objectCarte is _2FAR_Library.TP tp)
+            {
+                Application.Current.MainWindow.Content = new MenuNavbar(new StatsTpPromo(tp));
+            }
         }
     }
 }

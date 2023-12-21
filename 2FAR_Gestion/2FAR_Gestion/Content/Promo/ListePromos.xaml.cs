@@ -7,6 +7,7 @@ using _2FAR_Gestion.Content.Promo;
 using System.Windows.Controls;
 using _2FAR_Gestion.Content.TP;
 using System.Linq;
+using _2FAR_Library.Graphique;
 
 namespace _2FAR_Gestion
 {
@@ -121,18 +122,19 @@ namespace _2FAR_Gestion
                     Application.Current.MainWindow.Content = new MenuNavbar(new ListePromos());
                 }
             }
+            //message quand la message box à buggé.
             else if (result != MessageBoxResult.Cancel)
             {
                 MessageBox.Show("Erreur Inconnue");
             }
         }
 
+        //afficher la page de creation de promotion quand le boutton + est clické
         private void Ajouter_Promo(object sender, RoutedEventArgs e)
         {
-
             Application.Current.MainWindow.Content = new MenuNavbar(new CreationModificationPromo());
-
-
         }
+        
+        
     }
 }

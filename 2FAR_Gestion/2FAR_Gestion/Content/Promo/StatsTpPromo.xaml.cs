@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using _2FAR_Library;
@@ -7,121 +8,117 @@ namespace _2FAR_Gestion.Content.Promo;
 
 public partial class StatsTpPromo : Page
 {
-    
+    //constructeur en fonction d'un tp
     public StatsTpPromo(_2FAR_Library.TP tp)
     {
-        List<_2FAR_Library.Tache> tachesDuTp = new List<_2FAR_Library.Tache>();
+        List<_2FAR_Library.Tache> tachesDuTp = Ados.listeTaches.Where(tache => tache.fk_id_tp == tp.idTP).ToList();
 
-        foreach (var tache in Ados.listeTaches)
-        {
-            if (tache.fk_id_tp == tp.idTP)
-                tachesDuTp.Add(tache);
-        }
         InitializeComponent();
+        //affichage des stats si il y a un tp
         if (tachesDuTp != null)
-            Scrv_Stat_Tp.Content = new StatGrid(tachesDuTp);
-    }
-}
-
-public class StatGrid : Grid
-{
-    public StatGrid(List<_2FAR_Library.Tache> taches)
-    {
-        
-        this.ColumnDefinitions.Add(new ColumnDefinition{ Width = new GridLength(1, GridUnitType.Star) } );
-        this.ColumnDefinitions.Add(new ColumnDefinition{ Width = new GridLength(1, GridUnitType.Star) } );
-        this.ColumnDefinitions.Add(new ColumnDefinition{ Width = new GridLength(1, GridUnitType.Star) } );
-        this.ColumnDefinitions.Add(new ColumnDefinition{ Width = new GridLength(1, GridUnitType.Star) } );
-        this.ColumnDefinitions.Add(new ColumnDefinition{ Width = new GridLength(1, GridUnitType.Star) } );
-        this.ColumnDefinitions.Add(new ColumnDefinition{ Width = new GridLength(1, GridUnitType.Star) } );
-        
-        this.RowDefinitions.Add(new RowDefinition{ Height = new GridLength(1, GridUnitType.Auto)} );
-
-        LabelToAdd lbl = new LabelToAdd("Nom", 15,true);
-        Grid.SetColumn(lbl, 0);
-        this.Children.Add(lbl);
-        
-        lbl = new LabelToAdd("0%", 15,true);
-        Grid.SetColumn(lbl, 1);
-        this.Children.Add(lbl);
-        
-        lbl = new LabelToAdd("< 50%", 15,true);
-        Grid.SetColumn(lbl, 2);
-        this.Children.Add(lbl);
-        
-        lbl = new LabelToAdd(">= 50%", 15,true);
-        Grid.SetColumn(lbl, 3);
-        this.Children.Add(lbl);
-        
-        lbl = new LabelToAdd("100%", 15,true);
-        Grid.SetColumn(lbl, 4);
-        this.Children.Add(lbl);
-        
-        lbl = new LabelToAdd("Total", 15,true);
-        Grid.SetColumn(lbl, 5);
-        this.Children.Add(lbl);
-        int row = 2;
-        foreach (var t in taches)
         {
-            int pasCommence = 0;
-            int infCinquante = 0;
-            int supCinquante = 0;
-            int finit = 0;
-            
-            foreach (var avancementTache in Ados.listeAvancementTaches)
+            //creer une entete et l'afficher
+            stp_liste_stats.Children.Add(new ConstructeurDeGrid(null));
+            //pour chaques tache, cree une grid de statistiques et l'afficher
+            foreach (var tache in tachesDuTp)
             {
-                if (t.fk_id_tp == avancementTache.tache.idTache)
-                {
-                    if (avancementTache.taux_avancement == 0)
-                        pasCommence += 1;
-                    
-                    else if (avancementTache.taux_avancement < 50)
-                        infCinquante += 1;
-                    
-                    else if (avancementTache.taux_avancement >= 50 && avancementTache.taux_avancement < 100)
-                        supCinquante += 1;
-                    
-                    else
-                        finit += 1;
-                }
+                stp_liste_stats.Children.Add(new ConstructeurDeGrid(tache));
             }
-            this.RowDefinitions.Add(new RowDefinition{ Height = new GridLength(1, GridUnitType.Auto) } );
-            
-            lbl = new LabelToAdd(t.titreTache, 13,true);
-            Grid.SetColumn(lbl, 0);
-            Grid.SetRow(lbl, row);
-            this.Children.Add(lbl);
-            
-            lbl = new LabelToAdd(pasCommence.ToString(), 13,false);
-            Grid.SetColumn(lbl, 1);
-            Grid.SetRow(lbl, row);
-            this.Children.Add(lbl);
-        
-            lbl = new LabelToAdd(infCinquante.ToString(), 13,false);
-            Grid.SetColumn(lbl, 2);
-            Grid.SetRow(lbl, row);
-            this.Children.Add(lbl);
-        
-            lbl = new LabelToAdd(supCinquante.ToString(), 13,false);
-            Grid.SetColumn(lbl, 3);
-            Grid.SetRow(lbl, row);
-            this.Children.Add(lbl);
-        
-            lbl = new LabelToAdd(finit.ToString(), 13,false);
-            Grid.SetColumn(lbl, 4);
-            Grid.SetRow(lbl, row);
-            this.Children.Add(lbl);
-        
-            lbl = new LabelToAdd((pasCommence+infCinquante+supCinquante+finit).ToString(), 13, false);
-            Grid.SetColumn(lbl, 5);
-            Grid.SetRow(lbl, row);
-            this.Children.Add(lbl);
-
-            row += 1;
+        }
+        //sinon afficher une erreur
+        else
+        {
+            MessageBox.Show("Il n'y a aucune tache dans ce tp");
         }
     }
 }
 
+
+public class ConstructeurDeGrid : Grid
+{
+    public ConstructeurDeGrid(_2FAR_Library.Tache t)
+    {
+        //formatage de la grid (ajout des columns ...)
+        for (int i = 6; i > 0; i--)
+        {
+            ColumnDefinitions.Add(new ColumnDefinition{ Width = new GridLength(1, GridUnitType.Star) } );
+        }
+        RowDefinitions.Add(new RowDefinition{ Height = new GridLength(1, GridUnitType.Auto)} );
+        
+        // si la tache est null, créé une entete
+        if (t == null)
+        {
+            List<string> nomLabelListe = new List<string>() { "Tâche", "0%", "<50%", ">= 50%", "100%", "Total" };
+            foreach (var str in nomLabelListe)
+            {
+                LabelToAdd lbl = new LabelToAdd(str, 15, true);
+                Grid.SetColumn(lbl, nomLabelListe.IndexOf(str));
+                this.Children.Add(lbl);
+            }
+        }
+        //Sinon, cree une ligne de statistique pour la tache
+        else
+        {
+
+                int pasCommence = 0;
+                int infCinquante = 0;
+                int supCinquante = 0;
+                int finit = 0;
+                
+                //calcule de la ou en  sont les élèves pour la tache du tp (nombre deleves par "palier")
+                foreach (var avancementTache in Ados.listeAvancementTaches)
+                {
+                    if (t.fk_id_tp == avancementTache.tache.idTache)
+                    {
+                        if (avancementTache.taux_avancement == 0)
+                            pasCommence += 1;
+
+                        else if (avancementTache.taux_avancement < 50)
+                            infCinquante += 1;
+
+                        else if (avancementTache.taux_avancement >= 50 && avancementTache.taux_avancement < 100)
+                            supCinquante += 1;
+
+                        else
+                            finit += 1;
+                    }
+                }
+                
+                //ecrire toute les données dans des labels préformaté et les mettres à la bonne place dans la grid
+                LabelToAdd lbl = new LabelToAdd(t.titreTache, 13, true);
+                Grid.SetColumn(lbl, 0);
+                Grid.SetRow(lbl, 0);
+                this.Children.Add(lbl);
+                
+                lbl = new LabelToAdd(pasCommence.ToString(), 13, false);
+                Grid.SetColumn(lbl, 1);
+                Grid.SetRow(lbl, 0);
+                this.Children.Add(lbl);
+                
+                lbl = new LabelToAdd(infCinquante.ToString(), 13, false);
+                Grid.SetColumn(lbl, 2);
+                Grid.SetRow(lbl, 0);
+                this.Children.Add(lbl);
+                
+                lbl = new LabelToAdd(supCinquante.ToString(), 13, false);
+                Grid.SetColumn(lbl, 3);
+                Grid.SetRow(lbl, 0);
+                this.Children.Add(lbl);
+                
+                lbl = new LabelToAdd(finit.ToString(), 13, false);
+                Grid.SetColumn(lbl, 4);
+                Grid.SetRow(lbl, 0);
+                this.Children.Add(lbl);
+                
+                lbl = new LabelToAdd((pasCommence + infCinquante + supCinquante + finit).ToString(), 13, false);
+                Grid.SetColumn(lbl, 5);
+                Grid.SetRow(lbl, 0);
+                this.Children.Add(lbl);
+        }
+    }
+}
+
+//creer rapidement des labels préformaté
 public class LabelToAdd : Label
 {
     public LabelToAdd(string text, double size, bool isbold)

@@ -17,6 +17,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <ScrollViewer x:Name="Scrv_Stat_Tp" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="0" Grid.Column="0" />
+        <ScrollViewer VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="0" Grid.Column="0" >
+            <StackPanel x:Name="stp_liste_stats"/>
+        </ScrollViewer>
     </Grid>
 </Page>
