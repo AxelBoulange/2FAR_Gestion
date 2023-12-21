@@ -5,11 +5,9 @@ using _2FAR_Library;
 
 namespace _2FAR_Gestion.Content
 {
-    /// <summary>
-    /// Logique d'interaction pour FrameContent.xaml
-    /// </summary>
     public partial class MenuNavbar
     {
+        //contructeur de navbar avec une page en parramettre qsui serra afficher
         public MenuNavbar( Page contentPage)
         {
             InitializeComponent();
@@ -17,22 +15,27 @@ namespace _2FAR_Gestion.Content
             this.frm_Page.Content = contentPage;
         }
         
+        //aller sur la page de creation d'un tp
         private void CreerTP()
         {
             this.frm_Page.Content = new CreationModificationTp();
         }
+        //aller sur la page qui liste les tps
         private void ListeTP()
         {
             this.frm_Page.Content = new ListeTp();
         }
+        //aller sur la page qui liste les élèves
         private void ListeEleve()
         {
             this.frm_Page.Content = new ListeEleves();
         }
+        //aller sur la page qui liste les promotions
         private void ListePromos()
         {
             this.frm_Page.Content = new ListePromos();
         }
+        //aller sur la page qui liste les demande de validation
         private void ListeDemandeValidation()
         {
             this.frm_Page.Content = new DemandeValidation();
