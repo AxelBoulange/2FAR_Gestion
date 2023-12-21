@@ -67,6 +67,8 @@ namespace _2FAR_Gestion.Content.TP
             if (valide == true)
             {
                 MessageBoxResult result = MessageBox.Show("Créations validé", "Vérification", MessageBoxButton.OK);
+                if (result == MessageBoxResult.OK) {Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
+                }
             }
         }
 

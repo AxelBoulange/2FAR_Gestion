@@ -18,7 +18,16 @@ namespace _2FAR_Gestion
         public ListeEleves()
         {
             InitializeComponent();
-            cbb_promotion.ItemsSource = Ados.listePromotions;
+
+            List<string> labelPromo = new List<string>();
+
+            foreach (_2FAR_Library.Promo p in Ados.listePromotions)
+            {
+                labelPromo.Add(p.nomPromo);
+            }
+
+            cbb_promotion.ItemsSource = labelPromo;
+
             dtg_liste_utilisateur.ItemsSource = Ados.listeUtilisateurs;
         }
         
@@ -111,9 +120,12 @@ namespace _2FAR_Gestion
         //vider tout les input
         private void remise_a_zero(object sender, EventArgs e)
         {
-            if (tbx_recherche is TextBox) 
-                tbx_recherche.Text= string.Empty;
-            dtg_liste_utilisateur.ItemsSource = Ados.listeUtilisateurs;
+            if (tbx_recherche is TextBox)
+            {
+                Application.Current.MainWindow.Content = new MenuNavbar(new ListeEleves());
+
+            }
+                
         }
     }
 }
