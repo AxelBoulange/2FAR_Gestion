@@ -102,16 +102,13 @@ namespace _2FAR_Gestion
         //Fonction pour filtrer les éléves par promo
         private List<_2FAR_Library.Utilisateur> FiltrerElevesParPromo(string nomDePromo)
         {
-            //si la recherche d'eleve ne retourne quelque chose, retourne les eleves de cette liste qui on la meme promo que celle passer en paramettre
-            if (FiltrerEleves != null)
+            //si la recherche d'eleve retourne quelque chose, retourne les eleves de cette liste qui on la meme promo que celle passer en paramettre
+            if (!string.IsNullOrEmpty(tbx_recherche.Text))
             {
                 List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_recherche.Text);
                 return elevesfiltrer.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
 
             }
-            // sinon si un item est selectionner dans la liste de promotion, retourne les eleves de cette liste qui on la meme promo que celle selectioné dans la liste de promo
-            else if (cbb_promotion.Text != "")
-                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
             // sinon, retourne les eleves de cette liste qui on la meme promo que celle selectioné dans la liste de promo
             else
                 return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
