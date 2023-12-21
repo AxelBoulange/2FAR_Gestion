@@ -4,31 +4,48 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace _2FAR_Library.Ado
 {
     public class AdoTP : AdoTache
     {
-        public static List<TP> GetAdoTP(SqlConnection connexion, List<Tache> touteLesTaches)
+        /*
+        * Entrée : connexion, listeTaches
+        * Sortie : listeTP
+        */
+        public static List<TP> GetAdoTP(SqlConnection connexion, List<Tache> toutesLesTaches)
         {
-            string sql = "SELECT * FROM tp;";
-            SqlCommand cmd = new SqlCommand(sql, connexion);
-            List<TP> tpList = new List<TP>();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-                tpList.Add(new TP(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
-            foreach (TP tp in tpList)
+            List<TP> tpListe = new List<TP>();
+
+            try
             {
-                foreach (Tache t in touteLesTaches)
+                string sql = "SELECT * FROM tp;";
+                SqlCommand cmd = new SqlCommand(sql, connexion);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                    tpListe.Add(new TP(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
+                foreach (TP tp in tpListe)
                 {
-                    if(t.fk_id_tp == tp.idTP)
+                    foreach (Tache t in toutesLesTaches)
                     {
-                        tp.tacheList.Add(t);
+                        if (t.fk_id_tp == tp.idTP)
+                        {
+                            tp.tachesListe.Add(t);
+                        }
                     }
                 }
+                connexion.Close();
+                return tpListe;
             }
-            connexion.Close();
-            return tpList;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du chargement de l'ado TP", "Vérification", MessageBoxButton.OK);
+            }
+            return tpListe;
+
+
         }
     }
 }

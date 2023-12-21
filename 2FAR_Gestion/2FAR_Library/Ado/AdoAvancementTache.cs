@@ -4,31 +4,45 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace _2FAR_Library.Ado
 {
     public class AdoAvancementTache : AdoTache
     {
-        public static List<AvancementTache> getAdoAvancementTache(SqlConnection connexion, List<Utilisateur> toutLesUtilisateurs, List<Tache> touteLesTaches)
+        /*
+         * Entrée : connexion, listeUtilisateurs, listeTaches
+         * Sortie : listeAvancementTache
+         */
+        public static List<AvancementTache> getAdoAvancementTache(SqlConnection connexion, List<Utilisateur> tousLesUtilisateurs, List<Tache> toutesLesTaches)
         {
-            string sql = "SELECT * FROM avancement_tache";
-            SqlCommand cmd = new SqlCommand(sql, connexion);
+
             List<AvancementTache> avancementTaches = new List<AvancementTache>();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            try 
             {
-                foreach (Tache t in touteLesTaches)
+                string sql = "SELECT * FROM avancement_tache";
+                SqlCommand cmd = new SqlCommand(sql, connexion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    foreach (Utilisateur u in toutLesUtilisateurs)
+                    foreach (Tache t in toutesLesTaches)
                     {
-                        if (t.idTache == reader.GetInt32(0) && u.idUtilisateur == reader.GetInt32(1))
+                        foreach (Utilisateur u in tousLesUtilisateurs)
                         {
-                            avancementTaches.Add(new AvancementTache(reader.GetInt32(2), t, u));
+                            if (t.idTache == reader.GetInt32(0) && u.idUtilisateur == reader.GetInt32(1))
+                            {
+                                avancementTaches.Add(new AvancementTache(reader.GetInt32(2), t, u));
+                            }
                         }
                     }
                 }
+                connexion.Close();
+                return avancementTaches;
+            } 
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du chargement de l'ado Avancement Tache", "Vérification", MessageBoxButton.OK);
             }
-            connexion.Close();
             return avancementTaches;
         }
 

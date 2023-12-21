@@ -3,7 +3,7 @@ namespace _2FAR_Library
 {
     public class TP
     {
-       public List<Tache>? tacheList {  get; set; }
+       public List<Tache>? tachesListe {  get; set; }
         public int idTP { get; set; }
         public string nomTP { get; set; }
         public string descriptionTP { get; set; }
@@ -11,7 +11,7 @@ namespace _2FAR_Library
 
         public TP(List<Tache> tachelist, int idtp, string nomtp, string descriptiontp)
         {
-            this.tacheList = tachelist;
+            this.tachesListe = tachelist;
             this.idTP = idtp;
             this.nomTP = nomtp;
             this.descriptionTP = descriptiontp;
@@ -19,7 +19,7 @@ namespace _2FAR_Library
 
         public TP(int idtp, string nomtp, string descriptiontp)
         {
-            this.tacheList = new List<Tache>();
+            this.tachesListe = new List<Tache>();
             this.idTP = idtp;
             this.nomTP = nomtp;
             this.descriptionTP = descriptiontp;

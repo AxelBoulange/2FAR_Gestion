@@ -4,34 +4,47 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace _2FAR_Library.Ado
 {
-     public class AdoAttribuerTP : AdoTP
+     public class AdoTPAttribuer : AdoTP
     {
-
-        public static List<AttribuerTP>  getAdoAttribuerTP(SqlConnection connexion, List<TP> toutLesTps, List<Promo> touteLesPromotions)
+        /*
+         * Entrée : connexion, listeTP, listePromotions
+         * Sortie : listeTPAttribuer
+         */
+        public static List<TPAttribuer>  getAdoTPAttribuer(SqlConnection connexion, List<TP> tousLesTps, List<Promo> touteLesPromotions)
         {
-            string sql = "SELECT * FROM etre_attribuer";
-            SqlCommand cmd = new SqlCommand(sql, (SqlConnection)connexion);
-            List<AttribuerTP> attribuerTPList = new List<AttribuerTP>();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            List<TPAttribuer> TPAttribuerListe = new List<TPAttribuer>();
+            try
             {
-                foreach (Promo p in touteLesPromotions)
+                string sql = "SELECT * FROM etre_attribuer";
+                SqlCommand cmd = new SqlCommand(sql, (SqlConnection)connexion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    foreach (TP t in toutLesTps)
+                    foreach (Promo p in touteLesPromotions)
                     {
-                        if (reader.GetInt32(2) == t.idTP && reader.GetInt32(3) == p.idPromo)
+                        foreach (TP t in tousLesTps)
                         {
-                            attribuerTPList.Add(new AttribuerTP(reader.GetDateTime(0), reader.GetBoolean(1),
-                                t, p));
+                            if (reader.GetInt32(2) == t.idTP && reader.GetInt32(3) == p.idPromo)
+                            {
+                                TPAttribuerListe.Add(new TPAttribuer(reader.GetDateTime(0), reader.GetBoolean(1),
+                                    t, p));
+                            }
                         }
                     }
                 }
+                connexion.Close();
+                return TPAttribuerListe;
             }
-            connexion.Close();
-            return attribuerTPList;
+            catch 
+            {
+                MessageBox.Show("Erreur lors du chargement de l'ado TP Attribuer", "Vérification", MessageBoxButton.OK);
+            }
+            return TPAttribuerListe;
+
         }
     }
 }

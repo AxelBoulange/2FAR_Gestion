@@ -7,7 +7,7 @@ namespace _2FAR_Gestion;
 public class Ados
 {
     public static List<AttendreValidation> listeAttenteValidations;
-    public static List<AttribuerTP> listeAttributions;
+    public static List<TPAttribuer> listeAttributions;
     public static List<Valider> listeValidations;
     public static List<AvancementTache> listeAvancementTaches;
     public static List<Promo> listePromotions;
@@ -24,7 +24,7 @@ public class Ados
         listeUtilisateurs = AdoUtilisateur.getAdoUtilisateur(Connexion.GetConn());
         listePromotions = AdoPromos.getAdoPromos(Connexion.GetConn(), listeUtilisateurs); // utilisateurs
 
-        listeAttributions = AdoAttribuerTP.getAdoAttribuerTP(Connexion.GetConn(), listeTP, listePromotions); //TP ET PROMO
+        listeAttributions = AdoTPAttribuer.getAdoTPAttribuer(Connexion.GetConn(), listeTP, listePromotions); //TP ET PROMO
 
         listeAttenteValidations = AdoAttendreValidation.getAdoAttendreValidation(Connexion.GetConn(), listeUtilisateurs, listeTaches); //utilisateurs ET Taches
         listeValidations = AdoValider.getAdoValider(Connexion.GetConn(), listeUtilisateurs, listeTaches); //Utilisateurs taches

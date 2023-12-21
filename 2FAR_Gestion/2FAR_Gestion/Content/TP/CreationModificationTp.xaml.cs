@@ -13,7 +13,7 @@ namespace _2FAR_Gestion
 {
     public partial class CreationModificationTp
     {
-        private AttribuerTP attribuerTp { get; set; } = null;
+        private TPAttribuer attribuerTp { get; set; } = null;
         public CreationModificationTp()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace _2FAR_Gestion
 
         }
         
-        public CreationModificationTp(_2FAR_Library.AttribuerTP attribuertp)
+        public CreationModificationTp(_2FAR_Library.TPAttribuer attribuertp)
         {
 
             this.attribuerTp = attribuertp;
@@ -91,14 +91,14 @@ namespace _2FAR_Gestion
                             Ados.listeAttributions.Remove(Ados.listeAttributions.Where(at =>
                                 at.promotion.nomPromo == attribuerTp.promotion.nomPromo &&
                                 at.tp.idTP == attribuerTp.tp.idTP).First());
-                            Ados.listeAttributions.Add(new AttribuerTP(dtp_date.SelectedDate.Value, attribuerTp.is_actif, Ados.listeTP.Where(Tp => Tp.idTP == attribuerTp.tp.idTP).First(),Ados.listePromotions.Where(Promo => Promo.nomPromo == cbb_promo_tp.SelectedItem).First() ));
+                            Ados.listeAttributions.Add(new TPAttribuer(dtp_date.SelectedDate.Value, attribuerTp.is_actif, Ados.listeTP.Where(Tp => Tp.idTP == attribuerTp.tp.idTP).First(),Ados.listePromotions.Where(Promo => Promo.nomPromo == cbb_promo_tp.SelectedItem).First() ));
                             Application.Current.MainWindow.Content = new PageAccueil();
                         }
                     }
                     else
                     {
                         Ados.listeTP.Add(new TP(Ados.listeTP.Last().idTP + 1, tbx_nom_tp.Text, tbx_description_tp.Text));
-                        Ados.listeAttributions.Add(new AttribuerTP(date, true, Ados.listeTP.Last(), promoEleve));
+                        Ados.listeAttributions.Add(new TPAttribuer(date, true, Ados.listeTP.Last(), promoEleve));
                     }
                     Application.Current.MainWindow.Content = new MenuNavbar(new CreationTachesTp());
                 }

@@ -112,7 +112,7 @@ namespace _2FAR_Gestion
                 cmdInsert.Parameters.Clear();
             }
 
-            foreach (AttribuerTP a in Ados.listeAttributions)
+            foreach (TPAttribuer a in Ados.listeAttributions)
             {
                 string sqlAttributionTP = "INSERT INTO etre_attribuer (dte_fin, is_actif, fk_id_tp, fk_id_promo) VALUES (@dte_fin, @is_actif, @fk_id_tp, @fk_id_promo)";
                 cmdInsert.CommandText = sqlAttributionTP;
