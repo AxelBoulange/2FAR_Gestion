@@ -19,7 +19,7 @@ namespace _2FAR_Gestion.Content.TP
             tp = letp;
 
             InitializeComponent();
-            stack_form.Children.Add(new Form_taches());
+            stp_liste_taches.Children.Add(new Form_taches());
 
         }
 
@@ -66,7 +66,7 @@ namespace _2FAR_Gestion.Content.TP
 
         private void add_form(object sender, RoutedEventArgs e)
         {
-            stack_form.Children.Add(new Form_taches());
+            stp_liste_taches.Children.Add(new Form_taches());
 
         }
     }

@@ -9,6 +9,11 @@ namespace _2FAR_Library.Ado
 {
     public class AdoAttendreValidation : AdoTache
     {
+
+        /*
+         * Entrée : connexion, listeUtilisateur, listeTaches
+         * Sortie : liste des taches en attentes de validation
+         */
         public static List<AttendreValidation> getAdoAttendreValidation(SqlConnection connexion, List<Utilisateur> toutLesUtilisateurs, List<Tache> touteLesTaches)
         {
             string sql = "SELECT * FROM attendre_validation ORDER BY dte_demande DESC;";

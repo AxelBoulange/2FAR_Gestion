@@ -18,7 +18,7 @@ public partial class ListeTpPromos
         InitializeComponent();
         foreach (var attribuerTp in Ados.listeAttributions)
             if (attribuerTp.promotion.idPromo == promo.idPromo)
-                listCartes.Children.Add(new Carte(attribuerTp.tp.nomTP, attribuerTp.tp.descriptionTP, new Dictionary<string, Action<object, EventArgs>>{{"Statistiques",statistiques},{"Modifier",modifier}},20,15,attribuerTp.tp));
+                stp_liste_tp.Children.Add(new Carte(attribuerTp.tp.nomTP, attribuerTp.tp.descriptionTP, new Dictionary<string, Action<object, EventArgs>>{{"Statistiques",statistiques},{"Modifier",modifier}},20,15,attribuerTp.tp));
     }
 
     private void statistiques(object o, EventArgs e)

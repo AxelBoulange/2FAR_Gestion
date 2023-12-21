@@ -10,7 +10,7 @@ public partial class StatsTpPromo : Page
     
     public StatsTpPromo(_2FAR_Library.TP tp)
     {
-        List<Tache> tachesDuTp = new List<Tache>();
+        List<_2FAR_Library.Tache> tachesDuTp = new List<_2FAR_Library.Tache>();
 
         foreach (var tache in Ados.listeTaches)
         {
@@ -19,13 +19,13 @@ public partial class StatsTpPromo : Page
         }
         InitializeComponent();
         if (tachesDuTp != null)
-            ScrvStatTp.Content = new StatGrid(tachesDuTp);
+            Scrv_Stat_Tp.Content = new StatGrid(tachesDuTp);
     }
 }
 
 public class StatGrid : Grid
 {
-    public StatGrid(List<Tache> taches)
+    public StatGrid(List<_2FAR_Library.Tache> taches)
     {
         
         this.ColumnDefinitions.Add(new ColumnDefinition{ Width = new GridLength(1, GridUnitType.Star) } );

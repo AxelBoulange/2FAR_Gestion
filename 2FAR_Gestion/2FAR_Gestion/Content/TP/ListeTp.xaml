@@ -29,8 +29,8 @@
             <iconPacks:PackIconModern Kind="Add" Foreground="White" />
         </Button>
 
-        <ScrollViewer x:Name="cartes" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" >
-            <StackPanel x:Name="listCartes"/>
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" >
+            <StackPanel x:Name="stp_liste_tp"/>
         </ScrollViewer>
     </Grid>
 
