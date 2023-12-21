@@ -19,7 +19,7 @@ public partial class StatsTpPromo : Page
         }
         InitializeComponent();
         if (tachesDuTp != null)
-            ScrvStatTp.Content = new StatGrid(tachesDuTp);
+            Scrv_Stat_Tp.Content = new StatGrid(tachesDuTp);
     }
 }
 

@@ -34,7 +34,7 @@ namespace _2FAR_Gestion
             this.attribuerTp = attribuertp;
             
             InitializeComponent();
-            btnValidation.Content = " Valider la Modification du TP";
+            btn_Validation.Content = " Valider la Modification du TP";
 
             List<string> promo_string = new List<string>();
             foreach (var item in Ados.listePromotions)

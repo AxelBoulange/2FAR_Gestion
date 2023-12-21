@@ -17,6 +17,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <ScrollViewer x:Name="ScrvStatTp" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="0" Grid.Column="0" />
+        <ScrollViewer x:Name="Scrv_Stat_Tp" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="0" Grid.Column="0" />
     </Grid>
 </Page>

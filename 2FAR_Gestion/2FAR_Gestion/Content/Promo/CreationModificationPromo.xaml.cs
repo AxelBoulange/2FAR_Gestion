@@ -38,7 +38,7 @@ namespace _2FAR_Gestion.Content.Promo
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Boutton_clicke(object sender, RoutedEventArgs e)
         {
             //vérifier que l'entrée utilisateur est valide
             if (string.IsNullOrEmpty(tbx_nomPromo.Text))

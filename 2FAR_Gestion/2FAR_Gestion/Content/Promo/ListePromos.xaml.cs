@@ -14,7 +14,7 @@ namespace _2FAR_Gestion
     {
         public ListePromos()
         {
-            Dictionary<string, Action<object, EventArgs>> actionsButton = new Dictionary<string, Action<object, EventArgs>> { { "Voir les tps", Voir_Les_Tps }, { "Modifier", Modifier }, { "Supprimer", Supprimer } };
+            Dictionary<string, Action<object, EventArgs>> actionsBoutton = new Dictionary<string, Action<object, EventArgs>> { { "Voir les tps", Voir_Les_Tps }, { "Modifier", Modifier }, { "Supprimer", Supprimer } };
 
             InitializeComponent();
 
@@ -27,7 +27,7 @@ namespace _2FAR_Gestion
                         count++;
                     }
                  }
-                this.listCartes.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsButton, 18, 25, promo));
+                this.stp_liste_promotion.Children.Add(new Carte("Nombre d'élève : " + count.ToString(), promo.nomPromo, actionsBoutton, 18, 25, promo));
             }
         }
 

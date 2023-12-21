@@ -15,7 +15,7 @@ namespace _2FAR_Gestion
     {
         public ListeTp()
         {
-            Dictionary<string,Action<object, EventArgs>> actionsButton = new Dictionary<string,Action<object, EventArgs>> { {"Consulter",consulter},{"Modifier",modifier},{"Supprimer",supprimer}};
+            Dictionary<string,Action<object, EventArgs>> actionsBoutton = new Dictionary<string,Action<object, EventArgs>> { {"Consulter",consulter},{"Modifier",modifier},{"Supprimer",supprimer}};
             
             InitializeComponent();
 
@@ -29,7 +29,7 @@ namespace _2FAR_Gestion
                         count++;
                     }
                 }
-                this.listCartes.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\nnombre de tache :" + count , tp.descriptionTP, actionsButton, 15, 14, tp));
+                this.stp_liste_tp.Children.Add(new Carte("nom du TP :"+ tp.nomTP + "\nnombre de tache :" + count , tp.descriptionTP, actionsBoutton, 15, 14, tp));
             }
         }
         private void consulter(object o, EventArgs e)
