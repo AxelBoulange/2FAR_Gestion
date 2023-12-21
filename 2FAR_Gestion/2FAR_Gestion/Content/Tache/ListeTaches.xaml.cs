@@ -49,10 +49,6 @@ namespace _2FAR_Gestion.Content.Tache
                 }
             }
         }
-        private void Ajouter_Tache(object sender, EventArgs e)
-        {
-            //Application.Current.MainWindow.Content = new MenuNavbar(new CreationTachesTp());
-        }
     }
  
 }

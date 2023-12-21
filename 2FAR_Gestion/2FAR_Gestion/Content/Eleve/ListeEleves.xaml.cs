@@ -14,55 +14,63 @@ namespace _2FAR_Gestion
 {
     public partial class ListeEleves 
     {
+        //Constructeur de la liste des éléves
         public ListeEleves()
         {
             InitializeComponent();
             cbb_promotion.ItemsSource = Ados.listePromotions;
             dtg_liste_utilisateur.ItemsSource = Ados.listeUtilisateurs;
         }
-
+        
+        // Aller sur la page d'ajout d'éléves
         public void ajouter_eleve(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Content = new MenuNavbar(new AjouterEleve());
         }
-
+        
+        //mettre la liste de promotion en invisible
         private void cbb_promo_invisible(object sender, EventArgs e)
         {
-            cbb_text.Visibility = Visibility.Hidden;
+            lbl_promotion.Visibility = Visibility.Hidden;
         }
 
+        //action quand la texte box de recherche est cliqué
         private void tbx_recherche_est_cible(object sender, RoutedEventArgs e)
         {
             tbx_recherche.Clear();
-            search_text.Visibility= Visibility.Hidden;
+            lbl_recherche.Visibility= Visibility.Hidden;
         }
 
+        //action quand la texte box de recherche n'est plus ciblé dans l'application et que l'utilisateur recherche au moin 1 charactère
         private void tbx_recherche_nest_plus_cible(object sender, RoutedEventArgs e)
         {
             if (tbx_recherche.Text.Length < 1)
             {
-                search_text.Visibility = Visibility.Visible;
-
+                lbl_recherche.Visibility = Visibility.Visible;
             }
         }
-
+        
+        //action quand l'input de la texte box de recherche est changer
         private void tbx_recherche_texte_change(object sender, TextChangedEventArgs e)
         {
             List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_recherche.Text);
             dtg_liste_utilisateur.ItemsSource =  elevesfiltrer;
         }
+        
+        //fonction que filtre les eleves en fonction des information selectionner par l'utilisateur               Retourne une liste d'utilisateurs
         private List<_2FAR_Library.Utilisateur> FiltrerEleves(string texteRecherche)
         {
+            //verification qu'une promotion est séléctioné, si c'est le cas, recherche en fonction de la promotion 
             if (cbb_promotion.Text != "")
             {
-                Promo p = Ados.listePromotions.Where(p => p.nomPromo == cbb_promotion.Text).First();
-                List<_2FAR_Library.Utilisateur> utilisateurs = Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == p.idPromo).ToList();
+                List<_2FAR_Library.Utilisateur> utilisateurs = Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == cbb_promotion.Text).First().idPromo).ToList();
                 return utilisateurs.Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.prenomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
             Utilisateur.mailUtilisateur.ToLower().Contains(texteRecherche.ToLower()))
             .ToList();
             }
+            //sinon, recherche uniquement en fonction du champ de la texte box
             else
             return AdoUtilisateur.getAdoUtilisateur(Connexion.GetConn()).Where(Utilisateur =>
             Utilisateur.nomUtilisateur.ToLower().Contains(texteRecherche.ToLower()) ||
@@ -73,7 +81,7 @@ namespace _2FAR_Gestion
 
 
 
-
+        //action quand la selection de la liste de promotion est changer
         private void cbb_promotion_selection_change(object sender, SelectionChangedEventArgs e)
         {
             string item = (string)cbb_promotion.SelectedItem;
@@ -81,21 +89,26 @@ namespace _2FAR_Gestion
             dtg_liste_utilisateur.ItemsSource = elevesfiltrer;
         }
 
-        private List<_2FAR_Library.Utilisateur> FiltrerElevesParPromo(string item)
+        
+        //Fonction pour filtrer les éléves par promo
+        private List<_2FAR_Library.Utilisateur> FiltrerElevesParPromo(string nomDePromo)
         {
+            //si la recherche d'eleve ne retourne quelque chose, retourne les eleves de cette liste qui on la meme promo que celle passer en paramettre
             if (FiltrerEleves != null)
             {
                 List<_2FAR_Library.Utilisateur> elevesfiltrer = FiltrerEleves(tbx_recherche.Text);
-                return elevesfiltrer.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return elevesfiltrer.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
 
             }
+            // sinon si un item est selectionner dans la liste de promotion, retourne les eleves de cette liste qui on la meme promo que celle selectioné dans la liste de promo
+            else if (cbb_promotion.Text != "")
+                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
+            // sinon, retourne les eleves de cette liste qui on la meme promo que celle selectioné dans la liste de promo
             else
-            if (cbb_promotion.Text != "")
-                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
-            else
-                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == item).First().idPromo).ToList();
+                return Ados.listeUtilisateurs.Where(Utilisateur => Utilisateur.fk_id_promo == Ados.listePromotions.Where(p => p.nomPromo == nomDePromo).First().idPromo).ToList();
         }
-
+        
+        //vider tout les input
         private void remise_a_zero(object sender, EventArgs e)
         {
             if (tbx_recherche is TextBox) 
