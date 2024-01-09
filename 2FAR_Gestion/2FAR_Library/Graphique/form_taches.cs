@@ -42,7 +42,7 @@ namespace _2FAR_Library
 
         public Form_taches() 
         {   
-            // défini le fond en viole
+            // défini le fond en violet
             this.Background = (new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb")));
             // position de la form_taches
             this.HorizontalAlignment = HorizontalAlignment.Center;

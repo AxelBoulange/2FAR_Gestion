@@ -16,6 +16,7 @@ namespace _2FAR_Gestion.Content.TP
         _2FAR_Library.TP tp;
         public CreationTachesTp(_2FAR_Library.TP letp)
         {
+
             tp = letp;
 
             InitializeComponent();
