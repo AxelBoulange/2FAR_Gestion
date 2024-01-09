@@ -24,6 +24,9 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Liste des Tâches" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <Button Grid.Row="0" Grid.Column="3" Width="40" Height="40" Background="#5e17eb" Click="add_tache">
+            <iconPacks:PackIconModern Kind="Add" Foreground="White" />
+        </Button>
 
         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" >
             <StackPanel x:Name="stp_liste_tache"/>

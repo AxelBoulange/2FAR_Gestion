@@ -8,6 +8,7 @@ using _2FAR_Gestion.Content.Tache;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Linq;
+using System.Windows.Documents;
 
 namespace _2FAR_Gestion.Content.Tache
 {
@@ -24,8 +25,10 @@ namespace _2FAR_Gestion.Content.Tache
             //si il y a des taches dans le tp
             if(tp.tachesListe !=  null)
             {
+                List<_2FAR_Library.Tache> listeTriee = tp.tachesListe.OrderBy(t => t.ordreTache).ToList();
+
                 //afficher toutes les taches du tp dans la liste des taches
-                foreach(var tache in tp.tachesListe)
+                foreach (var tache in listeTriee)
                 {
                     this.stp_liste_tache.Children.Add(new Carte(tache.titreTache, tache.descriptionTache, new Dictionary<string, Action<object, EventArgs>> { { "Supprimer", supprimer } }, 15, 14, tache));
                 }
@@ -56,6 +59,11 @@ namespace _2FAR_Gestion.Content.Tache
                     Application.Current.MainWindow.Content = new MenuNavbar(new ListeTaches(leTP));
                 }
             }
+        }
+
+        private void add_tache(object o, EventArgs e)
+        {
+            Application.Current.MainWindow.Content = new MenuNavbar(new CreationTachesTp(leTP));
         }
     }
  

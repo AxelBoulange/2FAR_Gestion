@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace _2FAR_Gestion.Content.TP
 {
@@ -29,17 +30,28 @@ namespace _2FAR_Gestion.Content.TP
         public void create_taches(object o, EventArgs e) 
         {
             bool valide = false;
-            
+            bool existant = false;
             // pour chaque formulaire tache dans le stack panel
             foreach (Form_taches t in stp_tache.Children)
             {
                 t.GetFieldValues(t.GetCkb_bonus());
 
+
+                // Verifie que la tache qui va etre crée existe déja dans le tp et si elle l'ordre n'existe pas encore 
+                foreach (_2FAR_Library.Tache task in tp.tachesListe) 
+                {
+                    if (task.ordreTache == t.ordre || task.titreTache == t.intitule || task.descriptionTache == t.desc)
+                    {
+                       existant = true;
+                    }
+                }
+
                 // vérification des champs si ils sont complet et valide
                 t.ChampsComplet(t.ordre , t.intitule, t.desc, t.points);
 
-                if (t.valide == true)
+                if (t.valide == true && existant == false)
                 {
+
                     // ajoute une nouvelle tache avec les valeurs du forumulaire
                     Ados.listeTaches.Add(new _2FAR_Library.Tache(Ados.listeTaches.Last().idTache + 1, t.desc, t.checkpoint, t.ordre, t.points, t.bonus, true, tp.idTP, t.intitule ));
 
@@ -69,8 +81,8 @@ namespace _2FAR_Gestion.Content.TP
                     
                 }
                 else {
-                    // Erreur si t.valide est false
-                    MessageBoxResult result = MessageBox.Show("Erreur, les champs ne sont pas remplis ou ne respecte pas les conditions", "Vérification", MessageBoxButton.OKCancel);
+                    // Erreur si t.valide est false ou si la tache existe déja 
+                    MessageBoxResult result = MessageBox.Show("Erreur, les champs ne sont pas remplis, ne respecte pas les conditions ou existe déja", "Vérification", MessageBoxButton.OKCancel);
                     break;
 
                 };
@@ -83,6 +95,7 @@ namespace _2FAR_Gestion.Content.TP
                 if (result == MessageBoxResult.OK) {Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
                 }
             }
+
         }
 
         // ajoute un enfant formulaire au stackpane
