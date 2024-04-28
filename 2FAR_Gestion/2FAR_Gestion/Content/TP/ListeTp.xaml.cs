@@ -131,5 +131,6 @@ namespace _2FAR_Gestion
                 Application.Current.MainWindow.Content = new MenuNavbar(new StatsTpPromo(tp));
             }
         }
+       
     }
 }

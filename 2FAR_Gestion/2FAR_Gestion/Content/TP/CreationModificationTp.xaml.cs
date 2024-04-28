@@ -100,8 +100,10 @@ namespace _2FAR_Gestion
                         
                         Ados.listeAttributions.Remove(Ados.listeAttributions.Where(at => at.promotion.nomPromo == TPAttribuer.promotion.nomPromo && at.tp.idTP == TPAttribuer.tp.idTP).First());
                         Ados.listeAttributions.Add(new TPAttribuer(dtp_date.SelectedDate.Value, TPAttribuer.is_actif, Ados.listeTP.Where(Tp => Tp.idTP == TPAttribuer.tp.idTP).First(),Ados.listePromotions.Where(Promo => Promo.nomPromo == cbb_promo_tp.SelectedItem).First() ));
-                        
+
                         Application.Current.MainWindow.Content = new MenuNavbar(new ListeTp());
+                        // return est utilisé pour ne pas acceder a la page tache tp
+                        return;
                     }
                     //sinon creer le tp et l'atribution et renvoyer sur la liste de tp
                     else
@@ -109,6 +111,7 @@ namespace _2FAR_Gestion
                         Ados.listeTP.Add(new TP(Ados.listeTP.Last().idTP + 1, tbx_nom_tp.Text, tbx_description_tp.Text));
                         Ados.listeAttributions.Add(new TPAttribuer((DateTime)dtp_date.SelectedDate, true, Ados.listeTP.Last(), promoEleve));
                     }
+
                     Application.Current.MainWindow.Content = new MenuNavbar(new CreationTachesTp(Ados.listeTP.Last()));
                 }
             }

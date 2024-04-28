@@ -42,15 +42,26 @@ namespace _2FAR_Library
 
         public Form_taches() 
         {   
-            // défini le fond en viole
-            this.Background = (new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb")));
+            // défini le fond en violet
             // position de la form_taches
             this.HorizontalAlignment = HorizontalAlignment.Center;
             // épaisseur de 40 en dessus de la form_tache
             this.Margin = new Thickness(0,0,0,40);
 
 
-            
+            var myBorder = new Border();
+            myBorder.Background = (new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#5e17eb")));
+            myBorder.BorderBrush = Brushes.Black;
+            myBorder.BorderThickness = new Thickness(2);
+            myBorder.CornerRadius = new CornerRadius(45);
+            myBorder.Padding = new Thickness(115);
+            Grid.SetColumn(myBorder, 0);
+            Grid.SetColumnSpan(myBorder, 3);
+            Grid.SetRow(myBorder, 0);
+            Grid.SetRowSpan(myBorder, 7);
+            this.Children.Add(myBorder);
+
+
             for (int i = 0; i < 8; i++) //faire 8 lignes
             {
                 this.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star)});
@@ -302,6 +313,7 @@ namespace _2FAR_Library
             { 
                 return valide = false;
             }
+
             else
             {
                 return valide = true;
